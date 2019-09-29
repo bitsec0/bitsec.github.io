@@ -4,11 +4,38 @@
   
     
     <entry>
+      <title>television</title>
+      <link href="/2019/09/30/television/"/>
+      <url>/2019/09/30/television/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-hackme-television"><a href="#src-hackme-television" class="headerlink" title="[src = hackme] television"></a>[src = hackme] television</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Looks like my television was broken<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>打开是一张图片：<br><img src="./television.bmp" alt="television" title="televison"></p><p>用二进制编辑器010 Editor打开，搜索字符串：Search–&gt;Find Strings:最小长度设置为10，得到flag：<br><img src="./telestr.png" alt="telestr" title="telestr"></p><h2 id="关键字"><a href="#关键字" class="headerlink" title="[关键字]"></a>[关键字]</h2><p>图片信息隐藏，010 Editor</p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核二进制编辑器的使用，其他的二进制编辑器还有很多，比如UltraEdit，WinHex；<br>C32ASm是一款非常好用的反汇编程序，其也可以用来进行十六进制编辑</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MISC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 图片信息隐藏 </tag>
+            
+            <tag> 010 Editor </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>meow</title>
       <link href="/2019/09/29/meow/"/>
       <url>/2019/09/29/meow/</url>
       
-        <content type="html"><![CDATA[<h2 id="hackme-meow"><a href="#hackme-meow" class="headerlink" title="[hackme] meow"></a>[hackme] meow</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Pusheen is cute!<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>打开是一张图片：<br><img src="./meow.png" alt="meow"></p><p>放到KALI里面，用binwalk查看，发现里面包含多个文件：<br><img src="./binwalk.PNG" alt="meow"></p><p>用foremost进行分离，</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foremost meow.png</span><br></pre></td></tr></table></figure><p>得到两个文件夹png和zip，png文件夹下为一张图片00000000.png，zip下为一个压缩包00000094.zip，打开需要密码，因此关键是破解压缩文件夹的密码。<br>首先分析一下该zip压缩包：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -v 00000094.zip</span><br></pre></td></tr></table></figure><p>得到<br><img src="./unzip.PNG" alt="unzip"><br>看到该压缩包里包含flag文件和另外一张图片，图片的CRC32为cdad52bd.</p><p>将已经解压得到的图片00000000.png压缩比较CRC32值，发现相同，猜测是同一张图片<br><img src="./zip.PNG" alt="zip"><br>因此可考虑图片的已知明文攻击，大致原理是当你不知道一个zip的密码，但是有zip中的一个已知文件（文件大小要大于12Byte）或者已经通过其他手段知道zip加密文件中的某些内容时，因为同一个zip压缩包里的所有文件都是使用同一个加密密钥来加密的，所以可以用已知文件来找加密密钥，利用密钥来解锁其他加密文件，此时我们可以尝试用ARCHPR或者pkcrack进行明文攻击。</p><p>在这里我们使用ARCHPR进行破解，如图所示：<br><img src="./ARCHPR.PNG" alt="ARCHPR"><br>在加密的ZIP/RAR/ACE/ARJ文件处选择要破解的压缩包，攻击类型选择明文，在明文文件路径选择我们用zip压缩得到的00.zip。然后开始破解。<br>破解完成后将破解后的压缩包00000094_decrypted.zip解压（ARCHPR得到的是一个已经没有密码的压缩包），打开其中的flag文件，得到flag：<br><img src="./flag.PNG" alt="flag"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>本题考核Linux系统基本命令的使用：binwalk，foremost，unzip，zip等；<br>同时考察压缩包解压密码破解的基本方法：爆破攻击，伪加密，已知明文攻击，本题考察的是已知明文攻击，可用的工具有ARCHPR（Windows）和pkcrack（Linux）。</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="src-hackme-meow"><a href="#src-hackme-meow" class="headerlink" title="[src = hackme] meow"></a>[src = hackme] meow</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Pusheen is cute!<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>打开是一张图片：<br><img src="./meow.png" alt="meow"></p><p>放到KALI里面，用binwalk查看，发现里面包含多个文件：<br><img src="./binwalk.PNG" alt="meow"></p><p>用foremost进行分离，</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foremost meow.png</span><br></pre></td></tr></table></figure><p>得到两个文件夹png和zip，png文件夹下为一张图片00000000.png，zip下为一个压缩包00000094.zip，打开需要密码，因此关键是破解压缩文件夹的密码。<br>首先分析一下该zip压缩包：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -v 00000094.zip</span><br></pre></td></tr></table></figure><p>得到<br><img src="./unzip.PNG" alt="unzip"><br>看到该压缩包里包含flag文件和另外一张图片，图片的CRC32为cdad52bd.</p><p>将已经解压得到的图片00000000.png压缩比较CRC32值，发现相同，猜测是同一张图片<br><img src="./zip.PNG" alt="zip"><br>因此可考虑图片的已知明文攻击，大致原理是当你不知道一个zip的密码，但是有zip中的一个已知文件（文件大小要大于12Byte）或者已经通过其他手段知道zip加密文件中的某些内容时，因为同一个zip压缩包里的所有文件都是使用同一个加密密钥来加密的，所以可以用已知文件来找加密密钥，利用密钥来解锁其他加密文件，此时我们可以尝试用ARCHPR或者pkcrack进行明文攻击。</p><p>在这里我们使用ARCHPR进行破解，如图所示：<br><img src="./ARCHPR.PNG" alt="ARCHPR"><br>在加密的ZIP/RAR/ACE/ARJ文件处选择要破解的压缩包，攻击类型选择明文，在明文文件路径选择我们用zip压缩得到的00.zip。然后开始破解。<br>破解完成后将破解后的压缩包00000094_decrypted.zip解压（ARCHPR得到的是一个已经没有密码的压缩包），打开其中的flag文件，得到flag：<br><img src="./flag.PNG" alt="flag"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>本题考核Linux系统基本命令的使用：binwalk，foremost，unzip，zip等；<br>同时考察压缩包解压密码破解的基本方法：爆破攻击，伪加密，已知明文攻击，本题考察的是已知明文攻击，可用的工具有ARCHPR（Windows）和pkcrack（Linux）。</p>]]></content>
       
       
       <categories>
@@ -37,7 +64,7 @@
       <link href="/2019/09/29/r-u-kidding/"/>
       <url>/2019/09/29/r-u-kidding/</url>
       
-        <content type="html"><![CDATA[<h2 id="hackme-r-u-kidding"><a href="#hackme-r-u-kidding" class="headerlink" title="[hackme] r u kidding"></a>[hackme] r u kidding</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>EKZF{Hs’r snnn dzrx, itrs bzdrzq bhogdq}<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>比较容易判断应该是凯撒密码：根据flag格式，则EKZF应该对应FLAG，简单判断就是所有字符向后移动1位，可手动解码，但效率较低。对于这种经典的密码算法，网上有很多现成的在线解码器或离线解码器，直接解码即可，如下图基于<a href="http://ctf.ssleye.com/" target="_blank" rel="noopener">http://ctf.ssleye.com/</a> 在线工具平台的凯撒密码工具在线解密。</p><p><img src="./i.PNG" alt="i"></p><p>当然也可以自己编程解决，再次不再赘述。</p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对古典密码的理解，凯撒密码是最为古老的密码算法之一</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="src-hackme-r-u-kidding"><a href="#src-hackme-r-u-kidding" class="headerlink" title="[src = hackme] r u kidding"></a>[src = hackme] r u kidding</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>EKZF{Hs’r snnn dzrx, itrs bzdrzq bhogdq}<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>比较容易判断应该是凯撒密码：根据flag格式，则EKZF应该对应FLAG，简单判断就是所有字符向后移动1位，可手动解码，但效率较低。对于这种经典的密码算法，网上有很多现成的在线解码器或离线解码器，直接解码即可，如下图基于<a href="http://ctf.ssleye.com/" target="_blank" rel="noopener">http://ctf.ssleye.com/</a> 在线工具平台的凯撒密码工具在线解密。</p><p><img src="./i.PNG" alt="i"></p><p>当然也可以自己编程解决，再次不再赘述。</p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对古典密码的理解，凯撒密码是最为古老的密码算法之一</p>]]></content>
       
       
       <categories>
@@ -64,7 +91,7 @@
       <link href="/2019/09/29/easy/"/>
       <url>/2019/09/29/easy/</url>
       
-        <content type="html"><![CDATA[<h2 id="hackme-easy"><a href="#hackme-easy" class="headerlink" title="[hackme] easy"></a>[hackme] easy</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>526b78425233745561476c7a49476c7a4947566863336b7349484a705a3268305033303d<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目给出了一段16进制数，使用python3的bytes.fromhex()进行转化发现是base64编码。<br>直接python脚本对其进行base64解码得到flag：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">c =<span class="string">"526b78425233745561476c7a49476c7a4947566863336b7349484a705a3268305033303d"</span></span><br><span class="line">print(base64.b64decode(bytes.fromhex(c)))</span><br></pre></td></tr></table></figure><p>程序输出：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">b'FLAG&#123;This is easy, right?&#125;'</span></span><br></pre></td></tr></table></figure><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对编码的理解，16进制编码以及使用非常之多的base64，还有基于python编写脚本的能力</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="src-hackme-easy"><a href="#src-hackme-easy" class="headerlink" title="[src = hackme] easy"></a>[src = hackme] easy</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>526b78425233745561476c7a49476c7a4947566863336b7349484a705a3268305033303d<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目给出了一段16进制数，使用python3的bytes.fromhex()进行转化发现是base64编码。<br>直接python脚本对其进行base64解码得到flag：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">c =<span class="string">"526b78425233745561476c7a49476c7a4947566863336b7349484a705a3268305033303d"</span></span><br><span class="line">print(base64.b64decode(bytes.fromhex(c)))</span><br></pre></td></tr></table></figure><p>程序输出：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">b'FLAG&#123;This is easy, right?&#125;'</span></span><br></pre></td></tr></table></figure><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对编码的理解，16进制编码以及使用非常之多的base64，还有基于python编写脚本的能力</p>]]></content>
       
       
       <categories>
@@ -93,7 +120,7 @@
       <link href="/2019/09/29/corgi-can-fly/"/>
       <url>/2019/09/29/corgi-can-fly/</url>
       
-        <content type="html"><![CDATA[<h2 id="hackme-corgi-can-fly"><a href="#hackme-corgi-can-fly" class="headerlink" title="[hackme] corgi can fly"></a>[hackme] corgi can fly</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Corgi is cute, right?<br> <a id="more"></a><br>Pillow (Python) and Bitmap (.NET) are your friends.</p><p>(Maybe you can try stegsolve)</p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开显示一张图片，典型是一个图片信息隐藏题目：</p><img src="./corgi-can-fly.png" width="400"><p>题目描述已经提示了使用用stegsolve，因此用图片查看工具StegSolve工具打开并查看得到二维码，扫码得到flag：<br><img src="./erweima.PNG" width="400"></p><h3 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h3><p>StegSolve是一款查看图片隐写的工具，在较为简单的图片隐写题目中常用。关于该工具的使用和原理可参考：<a href="https://www.cnblogs.com/cat47/p/11483478.html" target="_blank" rel="noopener">https://www.cnblogs.com/cat47/p/11483478.html</a></p>]]></content>
+        <content type="html"><![CDATA[<h2 id="src-hackme-corgi-can-fly"><a href="#src-hackme-corgi-can-fly" class="headerlink" title="[src = hackme] corgi can fly"></a>[src = hackme] corgi can fly</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Corgi is cute, right?<br> <a id="more"></a><br>Pillow (Python) and Bitmap (.NET) are your friends.</p><p>(Maybe you can try stegsolve)</p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开显示一张图片，典型是一个图片信息隐藏题目：</p><img src="./corgi-can-fly.png" width="400"><p>题目描述已经提示了使用用stegsolve，因此用图片查看工具StegSolve工具打开并查看得到二维码，扫码得到flag：<br><img src="./erweima.PNG" width="400"></p><h3 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h3><p>StegSolve是一款查看图片隐写的工具，在较为简单的图片隐写题目中常用。关于该工具的使用和原理可参考：<a href="https://www.cnblogs.com/cat47/p/11483478.html" target="_blank" rel="noopener">https://www.cnblogs.com/cat47/p/11483478.html</a></p>]]></content>
       
       
       <categories>
