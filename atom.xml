@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-29T06:18:17.743Z</updated>
+  <updated>2019-09-29T06:26:24.714Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,16 +21,15 @@
     <link href="http://yoursite.com/2019/09/29/corgi-can-fly/"/>
     <id>http://yoursite.com/2019/09/29/corgi-can-fly/</id>
     <published>2019-09-29T06:14:41.000Z</published>
-    <updated>2019-09-29T06:18:17.743Z</updated>
+    <updated>2019-09-29T06:26:24.714Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="hackme——MISC——corgi-can-fly"><a href="#hackme——MISC——corgi-can-fly" class="headerlink" title="hackme——MISC——corgi can fly"></a>hackme——MISC——corgi can fly</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Corgi is cute, right?</p><p>Pillow (Python) and Bitmap (.NET) are your friends.</p><p>(Maybe you can try stegsolve)</p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开显示一张图片，典型是一个图片信息隐藏题目：<br><img src="./corgi-can-fly.png" alt="corgi" title="corgi can fly"></p><p>题目描述已经提示了使用用stegsolve，因此用图片查看工具StegSolve工具打开并查看得到二维码，扫码得到flag：<br><img src="./erweima.PNG" alt="corgi"></p><h3 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h3><p>StegSolve是一款查看图片隐写的工具，在较为简单的图片隐写题目中常用。关于该工具的使用和原理可参考：<a href="https://www.cnblogs.com/cat47/p/11483478.html" target="_blank" rel="noopener">https://www.cnblogs.com/cat47/p/11483478.html</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="hackme——MISC——corgi-can-fly"><a href="#hackme——MISC——corgi-can-fly" class="headerlink" title="hackme——MISC——corgi can fly"></a>hackme——MISC——corgi can fly</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Corgi is cute, right?</p><p>Pillow (Python) and Bitmap (.NET) are your friends.</p><p>(Maybe you can try stegsolve)<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开显示一张图片，典型是一个图片信息隐藏题目：<br><img src="./corgi-can-fly.png" alt="corgi" title="corgi can fly"></p><p>题目描述已经提示了使用用stegsolve，因此用图片查看工具StegSolve工具打开并查看得到二维码，扫码得到flag：<br><img src="./erweima.PNG" alt="corgi"></p><h3 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h3><p>StegSolve是一款查看图片隐写的工具，在较为简单的图片隐写题目中常用。关于该工具的使用和原理可参考：<a href="https://www.cnblogs.com/cat47/p/11483478.html" target="_blank" rel="noopener">https://www.cnblogs.com/cat47/p/11483478.html</a></p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h2 id=&quot;hackme——MISC——corgi-can-fly&quot;&gt;&lt;a href=&quot;#hackme——MISC——corgi-can-fly&quot; class=&quot;headerlink&quot; title=&quot;hackme——MISC——corgi can fly&quot;&gt;&lt;/a&gt;hackm
-      
+      &lt;h2 id=&quot;hackme——MISC——corgi-can-fly&quot;&gt;&lt;a href=&quot;#hackme——MISC——corgi-can-fly&quot; class=&quot;headerlink&quot; title=&quot;hackme——MISC——corgi can fly&quot;&gt;&lt;/a&gt;hackme——MISC——corgi can fly&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Corgi is cute, right?&lt;/p&gt;
+&lt;p&gt;Pillow (Python) and Bitmap (.NET) are your friends.&lt;/p&gt;
+&lt;p&gt;(Maybe you can try stegsolve)&lt;br&gt;
     
     </summary>
     
@@ -39,28 +38,6 @@
     
     
       <category term="图片信息隐藏，StegSolve，MISC" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F%EF%BC%8CStegSolve%EF%BC%8CMISC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2019/09/29/hello-world/"/>
-    <id>http://yoursite.com/2019/09/29/hello-world/</id>
-    <published>2019-09-29T01:07:00.341Z</published>
-    <updated>2019-09-29T01:07:00.341Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
-    
     
   </entry>
   
