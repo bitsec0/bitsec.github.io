@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>meow</title>
+      <link href="/2019/09/29/meow/"/>
+      <url>/2019/09/29/meow/</url>
+      
+        <content type="html"><![CDATA[<h2 id="hackme-meow"><a href="#hackme-meow" class="headerlink" title="[hackme] meow"></a>[hackme] meow</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Pusheen is cute!<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>打开是一张图片：<br><img src="./meow.png" alt="meow" title="meow"></p><p>放到KALI里面，用binwalk查看，发现里面包含多个文件：<br><img src="./binwalk.PNG" alt="meow" title="binwalk"></p><p>用foremost进行分离，</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foremost meow.png</span><br></pre></td></tr></table></figure><p>得到两个文件夹png和zip，png文件夹下为一张图片00000000.png，zip下为一个压缩包00000094.zip，打开需要密码，因此关键是破解压缩文件夹的密码。<br>首先分析一下该zip压缩包：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -v 00000094.zip</span><br></pre></td></tr></table></figure><p>得到<br><img src="./unzip.png" alt="unzip" title="unzip"><br>看到该压缩包里包含flag文件和另外一张图片，图片的CRC32为cdad52bd.</p><p>将已经解压得到的图片00000000.png压缩比较CRC32值，发现相同，猜测是同一张图片<br><img src="./zip.png" alt="zip" title="zip"><br>因此可考虑图片的已知明文攻击，大致原理是当你不知道一个zip的密码，但是有zip中的一个已知文件（文件大小要大于12Byte）或者已经通过其他手段知道zip加密文件中的某些内容时，因为同一个zip压缩包里的所有文件都是使用同一个加密密钥来加密的，所以可以用已知文件来找加密密钥，利用密钥来解锁其他加密文件，此时我们可以尝试用ARCHPR或者pkcrack进行明文攻击。</p><p>在这里我们使用ARCHPR进行破解，如图所示：<br><img src="./ARCHPR.PNG" alt="ARCHPR" title="ARCHPR"><br>在加密的ZIP/RAR/ACE/ARJ文件处选择要破解的压缩包，攻击类型选择明文，在明文文件路径选择我们用zip压缩得到的00.zip。然后开始破解。<br>破解完成后将破解后的压缩包00000094_decrypted.zip解压（ARCHPR得到的是一个已经没有密码的压缩包），打开其中的flag文件，得到flag：<br><img src="./flag.PNG" alt="flag" title="flag"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>本题考核Linux系统基本命令的使用：binwalk，foremost，unzip，zip等；<br>同时考察压缩包解压密码破解的基本方法：爆破攻击，伪加密，已知明文攻击，本题考察的是已知明文攻击，可用的工具有ARCHPR（Windows）和pkcrack（Linux）。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MISC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 信息隐藏 </tag>
+            
+            <tag> pkcrack </tag>
+            
+            <tag> APCHPR </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>r-u-kidding</title>
       <link href="/2019/09/29/r-u-kidding/"/>
       <url>/2019/09/29/r-u-kidding/</url>
