@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-30T00:54:37.165Z</updated>
+  <updated>2019-09-30T01:06:07.772Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>classic cipher 2</title>
+    <link href="http://yoursite.com/2019/09/30/classic-cipher-2/"/>
+    <id>http://yoursite.com/2019/09/30/classic-cipher-2/</id>
+    <published>2019-09-30T00:58:21.000Z</published>
+    <updated>2019-09-30T01:06:07.772Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-hackme-classic-cipher-2"><a href="#src-hackme-classic-cipher-2" class="headerlink" title="[src = hackme] classic cipher 2"></a>[src = hackme] classic cipher 2</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Solve this vigenere cipher</span><br></pre></td></tr></table></figure> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目给出了一段密文，且提示是维吉尼亚（vigenere）密码算法：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V KGIFEI WCTPK MJ C SNMEF FF TYQDJLJ CIJNYPG YNQ CCMMBGNL WRGCNMJ AVXY TCZBLWRP CUFIUV LGWSQ KSNTI EFMIG MIY ERE OWJCXLTGBNPOVR WRYEM VHVCKC NOH DCAEU THQNJI MJ CW GTYDVTTMFIDLR IRGZVZKH GESPGAXKI YKSGPVA KHG CEOBBX TVUUXVQL IF GPLWZSLER AVDMQHYGIU XQ ZTZXRWRNUIWI CCOWDS AFIHYHM NP GTNLTYF QEMBZRCXO ENS BTVVCBTK VVUTNVVCETU SR PFVNTS QHH GJC UAIECV ALAMXS EKMLORV ARW NQKPRX KN FBR FZEIY FXU FJ NEI UPFQ UOEKTLY QF TBCUCXV ENIEI YI CDDPHVF TUF VGJTTSGWJMSJ SV JVBJGBVTTMF PAS WTUIROMX VBWR VGKDBRKGD GIEV YET PEWICW ZRLYRGGB TUE OGKP OHXG A HYPZZL BJ AYNG GBWY FECMIVVD VRI NJRHYIDM WHRNLVED ASZVIGB MCNZ LU AVXY AJII OI YCD NEHKEG VRI GSYRRXYW JYCGR BF EFW BSBEXSKNZ BUWFMEK DG IOI TJES B RWDBGB SI DYWUMDCW FVYFS HLTW ASIW MHCD OPKC VRMIPBTK XYG DVTL LLLKK GKJJI JEYX XUCR SUE SYV MSTXG A EKZAGV FECEF II JEIFIAJW TVSVKYUBLY NLUH WUG UAF A NFATV IG MHG C DV TIJWGERMG JSCWMAJWV UOTYXKZ INCKQFPRP URBTP MX I UAXLAT MJVZEVRZRI ICJLFXIRT HKWFGBMQH DWFQ SUVQKLIF VPPKQGN MAE HVVO NEF RZRG EDYHJ CNQ ZSW EEGN XR BBI TYHFCOTYCRS EM XTSG TGD HVVO NEF WGEEMH HRU CLY JR WGPGBGDTC YYI RCK SQMD EARC AV ZOEEYYYJLZLR GRIUIG ZECCDJJPN SE KXXUPBZTIT NS AGU YBRVCJA TY ZBLOYMMY WGIRO JWJZI ZVS NO MPKRKMEWF ATEGEWXVQL TUAE RSSWS TZEU DJ XXICEII CVS JSEVAVOW BFWKO PRUQ TW KQLPVE PAJ OC QDQYHMEY EYYLRIQ IXKU KGVYKQNF SSORIPO EQDFTMMUM TNTKENSLL KQU CAXEUO JTOZR SZP XQCLKRT AAE TNVNVI SI CJFTO FYTCGP RRCTNWMVIM MHG PGIM MF ZZKGVTYI TKPUFV ERN DO GUBAPVH RS JEGOURNNW SVSLRLIU KOBGGX ETGQZSPRX VO EPWC TATNMQJ RMV SHCKVPYL PAPQSZ KAETD WXGQQI UMJ FTWIOII CLRYW CMICDSUT QFCET XMQ PMT POYRSQF PBXCGC JN GRPLFZA BWL WCKGUU EPTHQFC IMYAFV SIQRU DRBM EFW EGRVXSVOMANMEI JEWKT JEIFIAJ ACJ ORZSVFB YF YICRT CLCUOGGWA AN ABS UKGIJ MA XYI U KPYHZPIF EEWXHVOV VBGI KLQN XUG MRVGTLST JEVBPG SIKRYQIU AJWAL PVVTHDI NVAXOW ZIGHY AULI ZGYNG TZ ZW TAFMXD DI OPK WGID EPL THXVP WVUL VYE HSRJFPX TSTXPRF CGTS LLV QLAEBAP YGQBI BMC FQBISIU EARTET URGCWLOEX RVU HSJ RPOQUNCV IFD FTRMOOMJ FL QRRA KDTTRPIRT XJV TTKHHNYWB FHURQU AAEDTLAA UAXLAT MVZJMAMJ EPL IOI FTITJRCC CCOWDS BWVWICRT CPE NLW ADIAMXW TQ NVBK XB JVFTCPYC  KJOHHL VYEA GIUF MSCC HYKVUREEEO BWKSDXL LCDZZ GRQ QFVG BWHR R FOMFR XRRKOXLFQ TW FENXYGB CNROGFQK DKXSUSIO GVR EMEKTPIPV VOQBC YZTJ FEUJMZJ MDAVRFGEATD KSVQ VTKICDDWTW BJ KLG APSEU GXVTX HFR GHEPQJJ SC JITCKLG N CLCKIJ STEAF GDBN KEMCPGL ROMTMEA TXGRK QB WHBDTFH SYVGCGN ZEIGUIF RXLTCEMITXF QRC KUEYSMKSR PR KKEOC WXDF FJ WKVWGKRUGIYE LWJTBELC COZOTF JFV EZDBXFPS BS GQKILK GKFCXV JEL XUG NAEMPQSV ZETETJ MJVIIERJIFQI ALVTE VT MPYETORW SGXB SV CRSGATVOY ZQ ASLFHNGVGI HEPXVVKI DJGRUIBOENCY HYYQE GS IEM YKT HPOZ CCYUSWD HK IOZMWVIEPP ACAWLH VIGFIINCS VRMV JQ F TSDWIEP UIGH XYFG KIFBLCB YZKWFMEKU BWHX RTE RNYNJIHSIG XGYY IWAW GJMUTH RCFMJAEEY VRZ XN PRZVP KA IOSLIHG US DV AESHLD CSFYWB XB MGLY TSMKM TAVMETSV VKZRVKLGTTZW CCTRS ZGISKYRV PD YYI HYGVRC CNLW YL TWALM FQB WZOISPP GQWZLH TQDQMIF VGIC SU QYXKIKLMMGB ETGD PWKAPXL MCI JUOX GLV IIO PUH GTOQVGG R CCOWDS TNEEYAVRVRE ZAYW NIJITMIQXN WL XUMJ WCTPK IOKSG ZSILRV SW VPKJKMCYW FWZSGIESLMV FHK TJO ZOMW GS DEKVIHME C CEFEOP TGHXXSC FEH ENLRTQ CNLW DGZ MSBGG OKTWTRNMJI QQA HRU XIAFKCI</span><br></pre></td></tr></table></figure><p>在线工具很多，直接在线解码即可。<a href="https://www.guballa.de/vigenere-solver" target="_blank" rel="noopener">https://www.guballa.de/vigenere-solver</a>就是一个不错得到平台，不过这里需要对Key Length设置的长一些。在得到的Result中搜索FLAG字符串，得到flag：<br><img src="./vigenere.PNG" alt="classcipher1"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对经典密码算法维吉尼亚的理解，建议找一本基础密码学的书来学习一下密码学的基本原理！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;src-hackme-classic-cipher-2&quot;&gt;&lt;a href=&quot;#src-hackme-classic-cipher-2&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] classic cipher 2&quot;&gt;&lt;/a&gt;[src = hackme] classic cipher 2&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Solve this vigenere cipher&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
+    
+    
+      <category term="古典密码" scheme="http://yoursite.com/tags/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81/"/>
+    
+      <category term="substitution cipher" scheme="http://yoursite.com/tags/substitution-cipher/"/>
+    
+      <category term="vigenere" scheme="http://yoursite.com/tags/vigenere/"/>
+    
+  </entry>
   
   <entry>
     <title>classic cipher 1</title>
