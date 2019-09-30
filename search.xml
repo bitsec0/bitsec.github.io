@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>hide and seek</title>
+      <link href="/2019/09/30/hide-and-seek/"/>
+      <url>/2019/09/30/hide-and-seek/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-hackme-hide-and-seek"><a href="#src-hackme-hide-and-seek" class="headerlink" title="[src = hackme] hide and seek"></a>[src = hackme] hide and seek</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Can you see me? I’m so close to you but you can’t see me.</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击题目，跳转到网站主页。对于Web类型的题目，开始的时候查看一下网页源代码是很有必要的。右键–&gt;查看网页源代码。然后搜索FLAG，在页面最后找到flag：<br><img src="./seek.PNG" alt="seek"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>查看网页源代码是一个好习惯！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WEB </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> WEB </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>easy AES</title>
       <link href="/2019/09/30/easy-AES/"/>
       <url>/2019/09/30/easy-AES/</url>

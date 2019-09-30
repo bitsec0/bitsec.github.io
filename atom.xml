@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-30T01:50:36.650Z</updated>
+  <updated>2019-09-30T02:03:55.935Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>hide and seek</title>
+    <link href="http://yoursite.com/2019/09/30/hide-and-seek/"/>
+    <id>http://yoursite.com/2019/09/30/hide-and-seek/</id>
+    <published>2019-09-30T01:58:55.000Z</published>
+    <updated>2019-09-30T02:03:55.935Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-hackme-hide-and-seek"><a href="#src-hackme-hide-and-seek" class="headerlink" title="[src = hackme] hide and seek"></a>[src = hackme] hide and seek</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Can you see me? I’m so close to you but you can’t see me.</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击题目，跳转到网站主页。对于Web类型的题目，开始的时候查看一下网页源代码是很有必要的。右键–&gt;查看网页源代码。然后搜索FLAG，在页面最后找到flag：<br><img src="./seek.PNG" alt="seek"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>查看网页源代码是一个好习惯！！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;src-hackme-hide-and-seek&quot;&gt;&lt;a href=&quot;#src-hackme-hide-and-seek&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] hide and seek&quot;&gt;&lt;/a&gt;[src = hackme] hide and seek&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;Can you see me? I’m so close to you but you can’t see me.&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
+    
+    
+      <category term="WEB" scheme="http://yoursite.com/tags/WEB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>easy AES</title>
     <link href="http://yoursite.com/2019/09/30/easy-AES/"/>
     <id>http://yoursite.com/2019/09/30/easy-AES/</id>
     <published>2019-09-30T01:26:23.000Z</published>
-    <updated>2019-09-30T01:50:36.650Z</updated>
+    <updated>2019-09-30T01:51:14.615Z</updated>
     
     <content type="html"><![CDATA[<h2 id="src-hackme-easy-AES"><a href="#src-hackme-easy-AES" class="headerlink" title="[src = hackme] easy AES"></a>[src = hackme] easy AES</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Can you encrypt things with AES?<br>Tips: What is symmetric cipher?</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目给出一个压缩包，解压后是一段py代码。我们在代码行增加注释。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES  <span class="comment"># pip3 install pycrypto</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(data)</span>:</span></span><br><span class="line">    c = AES.new(<span class="string">b'Hello, World...!'</span>)  <span class="comment">#AES.new用第一个参数作为秘钥生产AES对象</span></span><br><span class="line">    plain_text = bytes.fromhex(input(<span class="string">'What is your plain text? '</span>))   <span class="comment">#输入明文</span></span><br><span class="line">    <span class="keyword">if</span> c.encrypt(plain_text) != <span class="string">b'Good Plain Text!'</span>:  <span class="comment">#基于上面的AES加密对象加密输入的明文，判断得到的米文娜是否为b'Good Plain Text!'</span></span><br><span class="line">        print(<span class="string">'Bad plain text'</span>)</span><br><span class="line">        exit()</span><br><span class="line"></span><br><span class="line">    c2 = AES.new(plain_text[::<span class="number">-1</span>], mode=AES.MODE_CBC, IV=<span class="string">b'1234567887654321'</span>)  <span class="comment">#用输入的plain text作为秘钥生产AES对象</span></span><br><span class="line"></span><br><span class="line">    decrypted = c2.decrypt(data)  <span class="comment">#用生产的AES对象解密data</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'output.jpg'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> fout:   <span class="comment">#解密得到的数据写入文件output.jpg</span></span><br><span class="line">        fout.write(decrypted)</span><br><span class="line"></span><br><span class="line">main(base64.b64decode(<span class="string">'71CyOAtf3umZOhg5JeH8XQieCIfO/mVdmJ08HZ0he11LIUQ+</span></span><br><span class="line"><span class="string">......后面是一段密文，省略......</span></span><br></pre></td></tr></table></figure><p>整个过程就清晰了，分两个阶段：<br>首先输入一段明文，使用生产的c这个AES对象加密，要求加密结果为b’Good Plain Text!’，因此可反向思维，明文就是b’Good Plain Text!’基于加密对象c的解密结果。<br>第二个阶段使用第一个阶段的plain text作为密钥解密data，并写入到output.jpg文件中。</p><p>因此可以使用下面的结题脚本：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line">c = AES.new(<span class="string">b'Hello, World...!'</span>)</span><br><span class="line">plain_text = c.decrypt(<span class="string">b'Good Plain Text!'</span>)</span><br><span class="line">c2 = AES.new(plain_text[::<span class="number">-1</span>], mode=AES.MODE_CBC, IV=<span class="string">b'1234567887654321'</span>)</span><br><span class="line">data = base64.b64decode(<span class="string">'71CyOAtf3umZOhg5JeH8XQieCIfO/mVdmJ08HZ0he11LIUQ+</span></span><br><span class="line"><span class="string">......后面是一段密文，省略......</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">decrypted = c2.decrypt(data)</span></span><br><span class="line"><span class="string">with open('</span>output.jpg<span class="string">', '</span>w<span class="string">b') as fout:</span></span><br><span class="line"><span class="string">    fout.write(decrypted)</span></span><br></pre></td></tr></table></figure><p>程序输出为图片,里面包含flag：<br><img src="./output.jpg" alt="aes"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对对称加密算法AES的理解以及python中密码学API的使用，遇到没有使用过的API查阅文档也是一个好习惯！<br>建议：本题其实不需要深入理解AES算法，但是AES算法是一个非常重要的对称加密算法，建议查阅密码学书籍进行深入理解，其实下面的API调用的参数就需要理解AES的工作模式（CBC），分组密码共有5种工作模式，这是其中一种，后面的IV的作用是什么？读者查阅资料来理解。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c2 = AES.new(plain_text[::<span class="number">-1</span>], mode=AES.MODE_CBC, IV=<span class="string">b'1234567887654321'</span>)</span><br></pre></td></tr></table></figure>]]></content>
     
