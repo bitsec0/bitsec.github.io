@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>classic cipher 1</title>
+      <link href="/2019/09/30/classic-cipher-1/"/>
+      <url>/2019/09/30/classic-cipher-1/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-hackme-classic-cipher-1"><a href="#src-hackme-classic-cipher-1" class="headerlink" title="[src = hackme] classic cipher 1"></a>[src = hackme] classic cipher 1</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MTHJ&#123;CWTNXRJCUBCGXGUGXWREXIPOYAOEYFIGXWRXCHTKHFCOHCFDUCGTXZOHIXOEOWMEHZO&#125;</span><br><span class="line">Solve this substitution cipher</span><br></pre></td></tr></table></figure> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目提示是代换密码（substitution cipher），代换密码的种类并不多，在线工具很多，直接在线解码即可。<a href="https://quipqiup.com/" target="_blank" rel="noopener">https://quipqiup.com/</a>就是一个不错得到平台，根据flag的特点：MTHJ应该对应FLAG，可以作为clues使用。<br>即可得到flag：</p><p><img src="./classiccipher1.PNG" alt="classcipher1"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对经典密码算法的理解，建议找一本基础密码学的书来学习一下密码学的基本原理！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CRYPTO </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 古典密码 </tag>
+            
+            <tag> substitution cipher </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>not hard</title>
       <link href="/2019/09/30/not-hard/"/>
       <url>/2019/09/30/not-hard/</url>

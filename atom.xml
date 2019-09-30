@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-30T00:17:53.249Z</updated>
+  <updated>2019-09-30T00:54:37.165Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>classic cipher 1</title>
+    <link href="http://yoursite.com/2019/09/30/classic-cipher-1/"/>
+    <id>http://yoursite.com/2019/09/30/classic-cipher-1/</id>
+    <published>2019-09-30T00:44:15.000Z</published>
+    <updated>2019-09-30T00:54:37.165Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-hackme-classic-cipher-1"><a href="#src-hackme-classic-cipher-1" class="headerlink" title="[src = hackme] classic cipher 1"></a>[src = hackme] classic cipher 1</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MTHJ&#123;CWTNXRJCUBCGXGUGXWREXIPOYAOEYFIGXWRXCHTKHFCOHCFDUCGTXZOHIXOEOWMEHZO&#125;</span><br><span class="line">Solve this substitution cipher</span><br></pre></td></tr></table></figure> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目提示是代换密码（substitution cipher），代换密码的种类并不多，在线工具很多，直接在线解码即可。<a href="https://quipqiup.com/" target="_blank" rel="noopener">https://quipqiup.com/</a>就是一个不错得到平台，根据flag的特点：MTHJ应该对应FLAG，可以作为clues使用。<br>即可得到flag：</p><p><img src="./classiccipher1.PNG" alt="classcipher1"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对经典密码算法的理解，建议找一本基础密码学的书来学习一下密码学的基本原理！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;src-hackme-classic-cipher-1&quot;&gt;&lt;a href=&quot;#src-hackme-classic-cipher-1&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] classic cipher 1&quot;&gt;&lt;/a&gt;[src = hackme] classic cipher 1&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;MTHJ&amp;#123;CWTNXRJCUBCGXGUGXWREXIPOYAOEYFIGXWRXCHTKHFCOHCFDUCGTXZOHIXOEOWMEHZO&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Solve this substitution cipher&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
+    
+    
+      <category term="古典密码" scheme="http://yoursite.com/tags/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81/"/>
+    
+      <category term="substitution cipher" scheme="http://yoursite.com/tags/substitution-cipher/"/>
+    
+  </entry>
+  
+  <entry>
     <title>not hard</title>
     <link href="http://yoursite.com/2019/09/30/not-hard/"/>
     <id>http://yoursite.com/2019/09/30/not-hard/</id>
     <published>2019-09-29T23:57:41.000Z</published>
-    <updated>2019-09-30T00:17:53.249Z</updated>
+    <updated>2019-09-30T00:44:44.953Z</updated>
     
     <content type="html"><![CDATA[<h2 id="src-hackme-not-hard"><a href="#src-hackme-not-hard" class="headerlink" title="[src = hackme] not hard"></a>[src = hackme] not hard</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Nm@rmLsBy&#123;Nm5u-K&#123;iZKPgPMzS2I*lPc%_SMOjQ#O;uV&#123;MM*?PPFhk|Hd;hVPFhq&#123;HaAH&lt;</span><br><span class="line">Tips: pydoc3 base64</span><br></pre></td></tr></table></figure> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目给出了一段编码，题目提示base64，但显然不是base64编码，通过pydoc查看base64库函数，发现其与base85接近。<br><img src="./base64.PNG" alt="base64"></p><p>直接python脚本对其进行base85解码得到</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">b'IZGECR33IRXSA6LPOUQGW3TPO4QGEYLTMUZTEIDFNZRW6ZDJNZTT67I='</span></span><br></pre></td></tr></table></figure><p>发现是base32编码，再次解码得到flag。</p><p>完整解题脚本如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">c=base64.b85decode(<span class="string">"Nm@rmLsBy&#123;Nm5u-K&#123;iZKPgPMzS2I*lPc%_SMOjQ#O;uV&#123;MM*?PPFhk|Hd;hVPFhq&#123;HaAH&lt;"</span>)</span><br><span class="line">print(c)</span><br><span class="line">print(base64.b32decode(c))</span><br></pre></td></tr></table></figure><p>脚本输出flag：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">b'FLAG&#123;Do you know base32 encoding?&#125;'</span></span><br></pre></td></tr></table></figure><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对base编码家族的理解，遇到问题查阅文档也是一个好习惯！</p>]]></content>
     
