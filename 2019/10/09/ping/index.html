@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/10/09/ping/ping.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/10/09/ping/ping1.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/10/09/ping/ping2.PNG">
-<meta property="og:updated_time" content="2019-10-09T09:15:18.932Z">
+<meta property="og:updated_time" content="2019-10-09T09:17:53.504Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ping">
 <meta name="twitter:description" content="[src = hackme] ping题目描述Can you ping 127.0.0.1?">
@@ -360,7 +360,6 @@
  <a id="more"></a>
 <h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击题目，跳转到题目页面。网页如下：</p>
 <p><img src="./ping.PNG" alt="ping"></p>
-<p>点击Introduction时，URL变为：<a href="https://hackme.inndy.tw/lfi/?page=pages/intro" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/intro</a></p>
 <p>可以看到页面进行了黑名单过滤，常用的|管道符，cat，cp等命令都被过滤掉了，所以无法进行简单的命令执行，如输入“|ls”会显示：“| not allowed”；哪如何绕过黑名单哪？</p>
 <p>这时如果对Linux基本命令熟悉的话会想到反引号<code>；反引号主要用来引用一些函数、命令输出等，执行时系统会尝试将反引号中的内容当作一个命令执行。
 要想得到flag，我们需要先看一下当前目录下有没有flag相关文件，可以用ls命令（本题并没有过滤ls），所以输入</code>ls`，页面输出：<br><img src="./ping1.PNG" alt="ping1"></p>
