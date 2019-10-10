@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-10T01:30:10.890Z</updated>
+  <updated>2019-10-10T02:46:35.126Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>catflag</title>
+    <link href="http://yoursite.com/2019/10/10/catflag/"/>
+    <id>http://yoursite.com/2019/10/10/catflag/</id>
+    <published>2019-10-10T02:40:14.000Z</published>
+    <updated>2019-10-10T02:46:35.126Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-hackme-catflag"><a href="#src-hackme-catflag" class="headerlink" title="[src = hackme] catflag"></a>[src = hackme] catflag</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc hackme.inndy.tw 7709</span><br></pre></td></tr></table></figure><p>Try using nc connect to server!</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目已经说得很清楚，直接nc链接然后cat flag即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~$ nc hackme.inndy.tw 7709</span><br><span class="line">plz capture the flag after 5 seconds...</span><br><span class="line">plz capture the flag after 4 seconds...</span><br><span class="line">plz capture the flag after 3 seconds...</span><br><span class="line">plz capture the flag after 2 seconds...</span><br><span class="line">plz capture the flag after 1 seconds...</span><br><span class="line">cat flag</span><br><span class="line">FLAG&#123;cat flag? dog flag!&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;src-hackme-catflag&quot;&gt;&lt;a href=&quot;#src-hackme-catflag&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] catflag&quot;&gt;&lt;/a&gt;[src = hackme] catflag&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;nc hackme.inndy.tw 7709&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;Try using nc connect to server!&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="PWN" scheme="http://yoursite.com/categories/PWN/"/>
+    
+    
+      <category term="nc" scheme="http://yoursite.com/tags/nc/"/>
+    
+      <category term="cat" scheme="http://yoursite.com/tags/cat/"/>
+    
+  </entry>
   
   <entry>
     <title>scoreboard</title>
@@ -206,9 +233,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
       <category term="AES" scheme="http://yoursite.com/tags/AES/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
@@ -283,9 +310,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
     
   </entry>
   
@@ -385,9 +412,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
     
   </entry>
   

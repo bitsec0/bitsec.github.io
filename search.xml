@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>catflag</title>
+      <link href="/2019/10/10/catflag/"/>
+      <url>/2019/10/10/catflag/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-hackme-catflag"><a href="#src-hackme-catflag" class="headerlink" title="[src = hackme] catflag"></a>[src = hackme] catflag</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc hackme.inndy.tw 7709</span><br></pre></td></tr></table></figure><p>Try using nc connect to server!</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目已经说得很清楚，直接nc链接然后cat flag即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~$ nc hackme.inndy.tw 7709</span><br><span class="line">plz capture the flag after 5 seconds...</span><br><span class="line">plz capture the flag after 4 seconds...</span><br><span class="line">plz capture the flag after 3 seconds...</span><br><span class="line">plz capture the flag after 2 seconds...</span><br><span class="line">plz capture the flag after 1 seconds...</span><br><span class="line">cat flag</span><br><span class="line">FLAG&#123;cat flag? dog flag!&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> PWN </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nc </tag>
+            
+            <tag> cat </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>scoreboard</title>
       <link href="/2019/10/10/scoreboard/"/>
       <url>/2019/10/10/scoreboard/</url>
@@ -201,9 +228,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> AES </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
@@ -284,9 +311,9 @@
       
         <tags>
             
-            <tag> base64 </tag>
-            
             <tag> python </tag>
+            
+            <tag> base64 </tag>
             
         </tags>
       
@@ -394,9 +421,9 @@
       
         <tags>
             
-            <tag> base64 </tag>
-            
             <tag> python </tag>
+            
+            <tag> base64 </tag>
             
         </tags>
       
