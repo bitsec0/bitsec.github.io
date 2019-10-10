@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Commnd Execution,">
+  <meta name="keywords" content="HTTP,">
 
 
 
@@ -79,22 +79,20 @@
 
 
 
-<meta name="description" content="[src = hackme] ping题目描述Can you ping 127.0.0.1?">
-<meta name="keywords" content="Commnd Execution">
+<meta name="description" content="[src = hackme] scoreboard题目描述DO NOT ATTACK or SCAN scoreboard, you don’t need to do that.">
+<meta name="keywords" content="HTTP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ping">
-<meta property="og:url" content="http://yoursite.com/2019/10/09/ping/index.html">
+<meta property="og:title" content="scoreboard">
+<meta property="og:url" content="http://yoursite.com/2019/10/10/scoreboard/index.html">
 <meta property="og:site_name" content="BitSec&#39;s Blog">
-<meta property="og:description" content="[src = hackme] ping题目描述Can you ping 127.0.0.1?">
+<meta property="og:description" content="[src = hackme] scoreboard题目描述DO NOT ATTACK or SCAN scoreboard, you don’t need to do that.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/10/09/ping/ping.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/10/09/ping/ping1.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/10/09/ping/ping2.PNG">
-<meta property="og:updated_time" content="2019-10-09T09:17:53.504Z">
+<meta property="og:image" content="http://yoursite.com/2019/10/10/scoreboard/scoreboard.PNG">
+<meta property="og:updated_time" content="2019-10-10T01:30:10.890Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ping">
-<meta name="twitter:description" content="[src = hackme] ping题目描述Can you ping 127.0.0.1?">
-<meta name="twitter:image" content="http://yoursite.com/2019/10/09/ping/ping.PNG">
+<meta name="twitter:title" content="scoreboard">
+<meta name="twitter:description" content="[src = hackme] scoreboard题目描述DO NOT ATTACK or SCAN scoreboard, you don’t need to do that.">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/10/scoreboard/scoreboard.PNG">
 
 
 
@@ -124,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/09/ping/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/10/scoreboard/">
 
 
 
 
 
-  <title>ping | BitSec's Blog</title>
+  <title>scoreboard | BitSec's Blog</title>
   
 
 
@@ -267,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/ping/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/scoreboard/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="BitSec">
@@ -284,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ping</h1>
+          <h1 class="post-title" itemprop="name headline">scoreboard</h1>
         
 
         <div class="post-meta">
@@ -296,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-09T16:48:34+08:00">
-                2019-10-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-10T09:25:41+08:00">
+                2019-10-10
               </time>
             
 
@@ -356,16 +354,11 @@
       
 
       
-        <h2 id="src-hackme-ping"><a href="#src-hackme-ping" class="headerlink" title="[src = hackme] ping"></a>[src = hackme] ping</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Can you ping 127.0.0.1?</p>
+        <h2 id="src-hackme-scoreboard"><a href="#src-hackme-scoreboard" class="headerlink" title="[src = hackme] scoreboard"></a>[src = hackme] scoreboard</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>DO NOT ATTACK or SCAN scoreboard, you don’t need to do that.</p>
  <a id="more"></a>
-<h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击题目，跳转到题目页面。网页如下：</p>
-<p><img src="./ping.PNG" alt="ping"></p>
-<p>可以看到页面进行了黑名单过滤，常用的|管道符，cat，cp等命令都被过滤掉了，所以无法进行简单的命令执行，如输入“|ls”会显示：“| not allowed”；哪如何绕过黑名单哪？</p>
-<p>这时如果对Linux基本命令熟悉的话会想到反引号<code>；反引号主要用来引用一些函数、命令输出等，执行时系统会尝试将反引号中的内容当作一个命令执行。
-要想得到flag，我们需要先看一下当前目录下有没有flag相关文件，可以用ls命令（本题并没有过滤ls），所以输入</code>ls`，页面输出：<br><img src="./ping1.PNG" alt="ping1"></p>
-<p>可以看到目录下有flag.php，index.php两个文件，flag.php里面应该包含了flag。常见的思路是使用cat命令查看该文件的内容，但是黑名单过滤了cat命令。那就需要考虑linux系统还有哪些可以查看文件内容，但又没有在黑名单的命令可用。其中sort就是其中一个。sort将文件的每一行作为一个单位，相互比较，比较原则是从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。<br>但是sort命令后面需要跟文件名，但flag被过滤，所以<code>sort flag.php</code>行不通。</p>
-<p>哪这么办哪？可以想到Linux系统的通配符。输入<code>sort ????????</code>，可以得到flag。<br><img src="./ping2.PNG" alt="ping2"></p>
-<h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考察了命令执行（Commnd Execution）漏洞的利用，主要考察了命令执行的基本原理，如何绕过过滤。其中一些常用的Linux系统命令的使用要熟悉，比如ls，cat，sort等。</p>
+<h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>提示不用抓包，前面已经看过网页源代码和其中的js文件，在本页面还有flag的话考虑是否在HTTP的header里面，因此直接火狐浏览器–&gt;F12. 刷新<a href="https://hackme.inndy.tw/scoreboard/" target="_blank" rel="noopener">https://hackme.inndy.tw/scoreboard/</a>页面，在响应头发现flag：</p>
+<p><img src="./scoreboard.PNG" alt="scoreboard"></p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对HTTP协议的理解，掌握查看HTTP请求头和响应头的方法。</p>
 
       
     </div>
@@ -383,7 +376,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Commnd-Execution/" rel="tag"># Commnd Execution</a>
+            <a href="/tags/HTTP/" rel="tag"># HTTP</a>
           
         </div>
       
@@ -396,8 +389,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/30/LFI/" rel="next" title="LFI">
-                <i class="fa fa-chevron-left"></i> LFI
+              <a href="/2019/10/10/helloworld/" rel="next" title="helloworld">
+                <i class="fa fa-chevron-left"></i> helloworld
               </a>
             
           </div>
@@ -405,10 +398,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/10/helloworld/" rel="prev" title="helloworld">
-                helloworld <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -578,7 +567,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#src-hackme-ping"><span class="nav-number">1.</span> <span class="nav-text">[src = hackme] ping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">2.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WP"><span class="nav-number">3.</span> <span class="nav-text">WP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">4.</span> <span class="nav-text">[知识点]</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#src-hackme-scoreboard"><span class="nav-number">1.</span> <span class="nav-text">[src = hackme] scoreboard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">2.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WP"><span class="nav-number">3.</span> <span class="nav-text">WP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">4.</span> <span class="nav-text">[知识点]</span></a></li></ol></div>
             
 
           </div>
