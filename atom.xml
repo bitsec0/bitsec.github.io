@@ -206,9 +206,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="AES" scheme="http://yoursite.com/tags/AES/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="AES" scheme="http://yoursite.com/tags/AES/"/>
     
   </entry>
   
@@ -283,9 +283,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
       <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
@@ -385,9 +385,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
       <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
