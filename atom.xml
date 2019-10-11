@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-11T02:30:45.538Z</updated>
+  <updated>2019-10-11T02:31:32.629Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/10/11/simple-rev/"/>
     <id>http://yoursite.com/2019/10/11/simple-rev/</id>
     <published>2019-10-11T02:26:47.000Z</published>
-    <updated>2019-10-11T02:30:45.538Z</updated>
+    <updated>2019-10-11T02:31:32.629Z</updated>
     
     <content type="html"><![CDATA[<h2 id="src-hackme-simple-rev"><a href="#src-hackme-simple-rev" class="headerlink" title="[src = hackme] simple-rev"></a>[src = hackme] simple-rev</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>A little bit harder</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>直接IDA–&gt;F5，得到：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> checking[<span class="number">64</span>]; <span class="comment">// [esp+Ch] [ebp-8Ch]</span></span><br><span class="line">  <span class="keyword">char</span> buffer[<span class="number">64</span>]; <span class="comment">// [esp+4Ch] [ebp-4Ch]</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [esp+8Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"What is flag? "</span>);</span><br><span class="line">  fgets(buffer, <span class="number">63</span>, <span class="built_in">stdin</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; buffer[i]; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( buffer[i] == <span class="number">10</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      buffer[i] = <span class="number">0</span>;</span><br><span class="line">      checking[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      checking[i] = buffer[i] + <span class="number">1</span>;  <span class="comment">//简单的移位，只需要反向移位即可得到flag</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">strcmp</span>(checking, <span class="string">"UIJT.JT.ZPVS.GMBH"</span>) )</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"FLAG&#123;%s&#125;\n"</span>, buffer);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Try hard."</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>用python解决：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"UIJT.JT.ZPVS.GMBH"</span></span><br><span class="line">r = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">    r += chr(ord(i) - <span class="number">1</span>)</span><br><span class="line">print(r)</span><br></pre></td></tr></table></figure><p>输出flag。</p>]]></content>
     
@@ -36,6 +36,8 @@
     
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="IDA" scheme="http://yoursite.com/tags/IDA/"/>
     
       <category term="RE" scheme="http://yoursite.com/tags/RE/"/>
     
