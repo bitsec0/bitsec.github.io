@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-11T02:31:32.629Z</updated>
+  <updated>2019-10-11T07:17:26.066Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>passthis</title>
+    <link href="http://yoursite.com/2019/10/11/passthis/"/>
+    <id>http://yoursite.com/2019/10/11/passthis/</id>
+    <published>2019-10-11T07:03:19.000Z</published>
+    <updated>2019-10-11T07:17:26.066Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-hackme-passthis"><a href="#src-hackme-passthis" class="headerlink" title="[src = hackme] passthis"></a>[src = hackme] passthis</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>You should be able to pass this</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>直接IDA–&gt;F5，得到一大段代码，仔细查看，有用的就是下面部分：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"Let me check your flag: "</span>, v9);</span><br><span class="line">fgets(v10, <span class="number">1023</span>, (FILE *)iob[<span class="number">0</span>]._ptr);</span><br><span class="line">  <span class="keyword">if</span> ( v10[<span class="number">0</span>] &gt; <span class="number">0xD</span>u )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( v10[<span class="number">0</span>] == <span class="string">'F'</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v4 = <span class="number">0</span>;</span><br><span class="line">      v5 = <span class="number">9217</span>;</span><br><span class="line">      <span class="keyword">do</span></span><br><span class="line">      &#123;</span><br><span class="line">        v6 = (<span class="keyword">unsigned</span> __int8)v10[++v4];</span><br><span class="line">        <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> __int8)v6 &lt;= <span class="number">0xD</span>u )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="keyword">if</span> ( _bittest(&amp;v5, v6) )</span><br><span class="line">            <span class="keyword">goto</span> LABEL_9;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span> ( ((<span class="keyword">unsigned</span> __int8)byte_404040[v4] ^ (<span class="keyword">unsigned</span> __int8)v6) == <span class="number">0x87</span>u );</span><br><span class="line">    &#125;</span><br><span class="line">......（省略）</span><br><span class="line">LABEL_9:</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Good flag ;)"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure><p>其中v10这个数组就是flag，首先判断其首字母是不是‘F’，如果是的话进入循环，我们看到，需要输入的flag满足while的条件，然后才有机会挑战到LABEL_9，(即 goto LABEL_9;)  。所以关键是while里面的循环做了什么操作。其实可以看出，while的条件就是将byte_404040数组里面的每个字节跟flag数组V10的每个字节（在循环中被赋值给v6）进行XOR操作要求结果是0x87u。</p><p>所以根据XOR的性质，v6=byte_404040[v4]^0x87u即可，所以从程序的hex-view中把byte_404040数组的内容取出来，然后使用python写下面脚本：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a=[<span class="number">0xC1</span>,<span class="number">0xCB</span>,<span class="number">0xC6</span>,<span class="number">0xC0</span>,<span class="number">0xFC</span>,<span class="number">0xC9</span>,<span class="number">0xE8</span>,<span class="number">0xAB</span>,<span class="number">0xA7</span>,<span class="number">0xDE</span>,<span class="number">0xE8</span>,<span class="number">0xF2</span>,<span class="number">0xA7</span>,<span class="number">0xF4</span>,<span class="number">0xEF</span>,<span class="number">0xE8</span>,<span class="number">0xF2</span>,<span class="number">0xEB</span>,<span class="number">0xE3</span>,<span class="number">0xA7</span>,<span class="number">0xE9</span>,<span class="number">0xE8</span>,<span class="number">0xF3</span>,<span class="number">0xA7</span>,<span class="number">0xF7</span>,<span class="number">0xE6</span>,<span class="number">0xF4</span>,<span class="number">0xF4</span>,<span class="number">0xA7</span>,<span class="number">0xF3</span>,<span class="number">0xEF</span>,<span class="number">0xE2</span>,<span class="number">0xA7</span>,<span class="number">0xE1</span>,<span class="number">0xEB</span>,<span class="number">0xE6</span>,<span class="number">0xE0</span>,<span class="number">0xFA</span>,<span class="number">0x00</span>]</span><br><span class="line"></span><br><span class="line">flag=<span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    flag+=chr(i^<span class="number">0x87</span>)</span><br><span class="line"></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure><p>运行输出flag。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;src-hackme-passthis&quot;&gt;&lt;a href=&quot;#src-hackme-passthis&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] passthis&quot;&gt;&lt;/a&gt;[src = hackme] passthis&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;You should be able to pass this&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="RE" scheme="http://yoursite.com/categories/RE/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="IDA" scheme="http://yoursite.com/tags/IDA/"/>
+    
+      <category term="RE" scheme="http://yoursite.com/tags/RE/"/>
+    
+  </entry>
   
   <entry>
     <title>simple-rev</title>
@@ -291,9 +318,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="AES" scheme="http://yoursite.com/tags/AES/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="AES" scheme="http://yoursite.com/tags/AES/"/>
     
   </entry>
   
@@ -368,9 +395,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
       <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
@@ -470,9 +497,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
       <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
