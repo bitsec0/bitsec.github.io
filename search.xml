@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>pyyy</title>
+      <link href="/2019/10/11/pyyy/"/>
+      <url>/2019/10/11/pyyy/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-hackme-pyyy"><a href="#src-hackme-pyyy" class="headerlink" title="[src = hackme] pyyy"></a>[src = hackme] pyyy</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Can you pass the challenage?</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>下载题目文件为一个pyc文件（python字节码文件，有python虚拟机解释执行），因此首先需要反编译，这里我们使用uncompyle6来反编译。</p><p>如果没有安装，可以使用下面的命令安装：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install uncompyle6</span><br></pre></td></tr></table></figure><p>安装成功后使用该工具反编译题目给定的pyc文件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uncompyle6 pyyy.pyc &gt; pyyy.py</span><br></pre></td></tr></table></figure><p>反编译后的结果保存为python源代码文件pyyy.py。打开阅读发现有有大片数据，关键代码在一个用户输入的位置，源代码对l和c进行比较，如果输入的c与l不相等，就退出了，再读代码发现程序的结果实际跟输入没有关系，所以直接注释掉输入和判断语句执行，就得到flag。注释部分(代码中带#部分)如下所示：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, f <span class="keyword">in</span> enumerate(F):</span><br><span class="line">    n = pow(f, m, g)</span><br><span class="line">    this_is = <span class="string">'Y-Combinator'</span></span><br><span class="line">    l = (<span class="keyword">lambda</span> f: (<span class="keyword">lambda</span> x: x(x))(<span class="keyword">lambda</span> y: f(<span class="keyword">lambda</span> *args: y(y)(*args))))(<span class="keyword">lambda</span> f: <span class="keyword">lambda</span> x: <span class="number">1</span> <span class="keyword">if</span> x &lt; <span class="number">2</span> <span class="keyword">else</span> f(x - <span class="number">1</span>) * x % n)(g % <span class="number">27777</span>)</span><br><span class="line">    <span class="comment"># c = raw_input('Channenge #%d:' % i)</span></span><br><span class="line">    <span class="comment"># if int(c) != l:</span></span><br><span class="line">    <span class="comment">#     print 'Wrong~'</span></span><br><span class="line">    <span class="comment">#     exit()</span></span><br><span class="line">    z.append(l)</span><br></pre></td></tr></table></figure><p>然后运行得flag：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~/hackme/pyyy$ python pyyy.py</span><br><span class="line">flag is FLAG&#123;VBXDVV4jkVVS4hVVj7NVV1heVVX1jVVh&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> RE </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> RE </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>passthis</title>
       <link href="/2019/10/11/passthis/"/>
       <url>/2019/10/11/passthis/</url>
@@ -317,9 +344,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> AES </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
@@ -400,9 +427,9 @@
       
         <tags>
             
-            <tag> base64 </tag>
-            
             <tag> python </tag>
+            
+            <tag> base64 </tag>
             
         </tags>
       
@@ -510,9 +537,9 @@
       
         <tags>
             
-            <tag> base64 </tag>
-            
             <tag> python </tag>
+            
+            <tag> base64 </tag>
             
         </tags>
       

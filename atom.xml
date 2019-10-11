@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-11T07:17:26.066Z</updated>
+  <updated>2019-10-11T11:09:57.709Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>pyyy</title>
+    <link href="http://yoursite.com/2019/10/11/pyyy/"/>
+    <id>http://yoursite.com/2019/10/11/pyyy/</id>
+    <published>2019-10-11T10:59:48.000Z</published>
+    <updated>2019-10-11T11:09:57.709Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-hackme-pyyy"><a href="#src-hackme-pyyy" class="headerlink" title="[src = hackme] pyyy"></a>[src = hackme] pyyy</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Can you pass the challenage?</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>下载题目文件为一个pyc文件（python字节码文件，有python虚拟机解释执行），因此首先需要反编译，这里我们使用uncompyle6来反编译。</p><p>如果没有安装，可以使用下面的命令安装：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install uncompyle6</span><br></pre></td></tr></table></figure><p>安装成功后使用该工具反编译题目给定的pyc文件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uncompyle6 pyyy.pyc &gt; pyyy.py</span><br></pre></td></tr></table></figure><p>反编译后的结果保存为python源代码文件pyyy.py。打开阅读发现有有大片数据，关键代码在一个用户输入的位置，源代码对l和c进行比较，如果输入的c与l不相等，就退出了，再读代码发现程序的结果实际跟输入没有关系，所以直接注释掉输入和判断语句执行，就得到flag。注释部分(代码中带#部分)如下所示：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, f <span class="keyword">in</span> enumerate(F):</span><br><span class="line">    n = pow(f, m, g)</span><br><span class="line">    this_is = <span class="string">'Y-Combinator'</span></span><br><span class="line">    l = (<span class="keyword">lambda</span> f: (<span class="keyword">lambda</span> x: x(x))(<span class="keyword">lambda</span> y: f(<span class="keyword">lambda</span> *args: y(y)(*args))))(<span class="keyword">lambda</span> f: <span class="keyword">lambda</span> x: <span class="number">1</span> <span class="keyword">if</span> x &lt; <span class="number">2</span> <span class="keyword">else</span> f(x - <span class="number">1</span>) * x % n)(g % <span class="number">27777</span>)</span><br><span class="line">    <span class="comment"># c = raw_input('Channenge #%d:' % i)</span></span><br><span class="line">    <span class="comment"># if int(c) != l:</span></span><br><span class="line">    <span class="comment">#     print 'Wrong~'</span></span><br><span class="line">    <span class="comment">#     exit()</span></span><br><span class="line">    z.append(l)</span><br></pre></td></tr></table></figure><p>然后运行得flag：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~/hackme/pyyy$ python pyyy.py</span><br><span class="line">flag is FLAG&#123;VBXDVV4jkVVS4hVVj7NVV1heVVX1jVVh&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;src-hackme-pyyy&quot;&gt;&lt;a href=&quot;#src-hackme-pyyy&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] pyyy&quot;&gt;&lt;/a&gt;[src = hackme] pyyy&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;Can you pass the challenage?&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="RE" scheme="http://yoursite.com/categories/RE/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="RE" scheme="http://yoursite.com/tags/RE/"/>
+    
+  </entry>
   
   <entry>
     <title>passthis</title>
@@ -318,9 +343,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
       <category term="AES" scheme="http://yoursite.com/tags/AES/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
@@ -395,9 +420,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
     
   </entry>
   
@@ -497,36 +522,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
-  </entry>
-  
-  <entry>
-    <title>corgi-can-fly</title>
-    <link href="http://yoursite.com/2019/09/29/corgi-can-fly/"/>
-    <id>http://yoursite.com/2019/09/29/corgi-can-fly/</id>
-    <published>2019-09-29T06:14:41.000Z</published>
-    <updated>2019-09-29T22:42:16.447Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-corgi-can-fly"><a href="#src-hackme-corgi-can-fly" class="headerlink" title="[src = hackme] corgi can fly"></a>[src = hackme] corgi can fly</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Corgi is cute, right?<br> <a id="more"></a><br>Pillow (Python) and Bitmap (.NET) are your friends.</p><p>(Maybe you can try stegsolve)</p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开显示一张图片，典型是一个图片信息隐藏题目：</p><img src="./corgi-can-fly.png" width="400"><p>题目描述已经提示了使用用stegsolve，因此用图片查看工具StegSolve工具打开并查看得到二维码，扫码得到flag：<br><img src="./erweima.PNG" width="400"></p><h3 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h3><p>StegSolve是一款查看图片隐写的工具，在较为简单的图片隐写题目中常用。关于该工具的使用和原理可参考：<a href="https://www.cnblogs.com/cat47/p/11483478.html" target="_blank" rel="noopener">https://www.cnblogs.com/cat47/p/11483478.html</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-corgi-can-fly&quot;&gt;&lt;a href=&quot;#src-hackme-corgi-can-fly&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] corgi can fly&quot;&gt;&lt;/a&gt;[src = hackme] corgi can fly&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Corgi is cute, right?&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="MISC" scheme="http://yoursite.com/categories/MISC/"/>
-    
-    
-      <category term="图片信息隐藏" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F/"/>
-    
-      <category term="StegSolve" scheme="http://yoursite.com/tags/StegSolve/"/>
-    
-      <category term="MISC" scheme="http://yoursite.com/tags/MISC/"/>
+      <category term="base64" scheme="http://yoursite.com/tags/base64/"/>
     
   </entry>
   
