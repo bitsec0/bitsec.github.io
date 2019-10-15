@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>whereisflag</title>
+      <link href="/2019/10/15/whereisflag/"/>
+      <url>/2019/10/15/whereisflag/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-hackme-where-is-flag"><a href="#src-hackme-where-is-flag" class="headerlink" title="[src = hackme] where is flag"></a>[src = hackme] where is flag</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Do you know regular expression?<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开题目，下载一个压缩包，解压得到一个flag文件，打开发现大量字符，其中包含大量FLAG。根据题目提示，应该是要进行正则表达式匹配。</p><p><img src="./whereisflag.PNG" alt="flag"></p><h3 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h3><p>本题考察正则表达式的使用。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MISC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MISC </tag>
+            
+            <tag> regular expression </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>loginasadmin</title>
       <link href="/2019/10/12/loginasadmin/"/>
       <url>/2019/10/12/loginasadmin/</url>

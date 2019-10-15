@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-12T02:37:41.325Z</updated>
+  <updated>2019-10-15T06:50:41.551Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>whereisflag</title>
+    <link href="http://yoursite.com/2019/10/15/whereisflag/"/>
+    <id>http://yoursite.com/2019/10/15/whereisflag/</id>
+    <published>2019-10-15T06:46:09.000Z</published>
+    <updated>2019-10-15T06:50:41.551Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-hackme-where-is-flag"><a href="#src-hackme-where-is-flag" class="headerlink" title="[src = hackme] where is flag"></a>[src = hackme] where is flag</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Do you know regular expression?<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开题目，下载一个压缩包，解压得到一个flag文件，打开发现大量字符，其中包含大量FLAG。根据题目提示，应该是要进行正则表达式匹配。</p><p><img src="./whereisflag.PNG" alt="flag"></p><h3 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h3><p>本题考察正则表达式的使用。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;src-hackme-where-is-flag&quot;&gt;&lt;a href=&quot;#src-hackme-where-is-flag&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] where is flag&quot;&gt;&lt;/a&gt;[src = hackme] where is flag&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Do you know regular expression?&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="MISC" scheme="http://yoursite.com/categories/MISC/"/>
+    
+    
+      <category term="MISC" scheme="http://yoursite.com/tags/MISC/"/>
+    
+      <category term="regular expression" scheme="http://yoursite.com/tags/regular-expression/"/>
+    
+  </entry>
   
   <entry>
     <title>loginasadmin</title>
@@ -498,31 +523,6 @@
       <category term="pkcrack" scheme="http://yoursite.com/tags/pkcrack/"/>
     
       <category term="APCHPR" scheme="http://yoursite.com/tags/APCHPR/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>r-u-kidding</title>
-    <link href="http://yoursite.com/2019/09/29/r-u-kidding/"/>
-    <id>http://yoursite.com/2019/09/29/r-u-kidding/</id>
-    <published>2019-09-29T12:37:14.000Z</published>
-    <updated>2019-09-29T22:42:44.627Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-r-u-kidding"><a href="#src-hackme-r-u-kidding" class="headerlink" title="[src = hackme] r u kidding"></a>[src = hackme] r u kidding</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>EKZF{Hs’r snnn dzrx, itrs bzdrzq bhogdq}<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>比较容易判断应该是凯撒密码：根据flag格式，则EKZF应该对应FLAG，简单判断就是所有字符向后移动1位，可手动解码，但效率较低。对于这种经典的密码算法，网上有很多现成的在线解码器或离线解码器，直接解码即可，如下图基于<a href="http://ctf.ssleye.com/" target="_blank" rel="noopener">http://ctf.ssleye.com/</a> 在线工具平台的凯撒密码工具在线解密。</p><p><img src="./i.PNG" alt="i"></p><p>当然也可以自己编程解决，再次不再赘述。</p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对古典密码的理解，凯撒密码是最为古老的密码算法之一</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-r-u-kidding&quot;&gt;&lt;a href=&quot;#src-hackme-r-u-kidding&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] r u kidding&quot;&gt;&lt;/a&gt;[src = hackme] r u kidding&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;EKZF{Hs’r snnn dzrx, itrs bzdrzq bhogdq}&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="CRYPTO" scheme="http://yoursite.com/categories/CRYPTO/"/>
-    
-    
-      <category term="CRYPTO" scheme="http://yoursite.com/tags/CRYPTO/"/>
-    
-      <category term="凯撒" scheme="http://yoursite.com/tags/%E5%87%AF%E6%92%92/"/>
     
   </entry>
   
