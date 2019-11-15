@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/10/12/loginasadmin/</loc>
+    
+    <lastmod>2019-11-15T08:09:23.340Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/10/09/ping/</loc>
     
     <lastmod>2019-11-15T06:43:59.072Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://yoursite.com/2019/10/15/whereisflag/</loc>
     
     <lastmod>2019-10-15T06:50:41.551Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/10/12/loginasadmin/</loc>
-    
-    <lastmod>2019-10-12T02:37:41.325Z</lastmod>
     
   </url>
   
