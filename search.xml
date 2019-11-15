@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>dafuq-manager-1</title>
+      <link href="/2019/11/15/dafuq-manager-1/"/>
+      <url>/2019/11/15/dafuq-manager-1/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-hackme-dafuq-manager-系列"><a href="#src-hackme-dafuq-manager-系列" class="headerlink" title="[src = hackme] dafuq-manager 系列"></a>[src = hackme] dafuq-manager 系列</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>dafuq-manager 1：Login as guest and find flag 1<br>dafuq-manager 2：Login as admin, code review and get flag 2<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><h3 id="dafuq-manager-1"><a href="#dafuq-manager-1" class="headerlink" title="dafuq-manager 1"></a>dafuq-manager 1</h3><p>首先根据提示以guest用户登录，看到一个文件列表，发现里面有一个see-me-if-you-need-tips.txt文件，打开提示：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Do you know cookie? Create a cookie named `<span class="built_in">help</span>` with value `me`!</span><br></pre></td></tr></table></figure><p>要我们修改cookie，按照要求通过Firefox的Tamper data插件截获并修改插件得到弹窗提示：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Very good. You know how to create cookie. How about tamper a cookie?</span><br></pre></td></tr></table></figure><p>说明思路正确，我们去查看原来对cookie，发现里面有一个“show_hidden=no”，我们将其改为yes，刷新页面，发现多了两个文件：<br>“.good.job.here.is.your.hidden.flag-1.txt”和“.where-is-flag-2-please-tell-me.txt”。</p><p>其中第一个文件中包含flag。第二个文件内容为“Try to login as admin! and you will get flag2”</p><h3 id="dafuq-manager-2"><a href="#dafuq-manager-2" class="headerlink" title="dafuq-manager 2"></a>dafuq-manager 2</h3><p>文件目录下还有一个文件为“source-code-in-dafuqManager.7z-please-download-it.txt”。意思是下载源码，所以这是典型对代码审计题目。</p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>Cookie</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WEB </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> cookie </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>rop</title>
       <link href="/2019/10/15/rop/"/>
       <url>/2019/10/15/rop/</url>
