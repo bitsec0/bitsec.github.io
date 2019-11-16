@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/10/12/loginasadmin/</loc>
+    
+    <lastmod>2019-11-16T03:41:00.746Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/11/16/NewsCenter/</loc>
     
-    <lastmod>2019-11-16T03:32:06.915Z</lastmod>
+    <lastmod>2019-11-16T03:33:03.541Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>http://yoursite.com/2019/11/15/view-source/</loc>
     
     <lastmod>2019-11-15T11:02:59.576Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/10/12/loginasadmin/</loc>
-    
-    <lastmod>2019-11-15T09:58:32.765Z</lastmod>
     
   </url>
   
