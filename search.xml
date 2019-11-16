@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>isc-06</title>
+      <link href="/2019/11/16/isc-06/"/>
+      <url>/2019/11/16/isc-06/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-攻防世界-isc-06"><a href="#src-攻防世界-isc-06" class="headerlink" title="[src = 攻防世界] isc-06"></a>[src = 攻防世界] isc-06</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>云平台报表中心收集了设备管理基础服务的数据，但是数据被删除了，只有一处留下了入侵者的痕迹。<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>进入题目，发现只有报表中心可以打开，发现一个列表页面。URL中有?id=1。可能是SQL注入。但测试发现不是。题目提示数据被删除，但留下了一点痕迹。所以考虑id为某个值对数据被保留，其他被删除了。所以考虑爆破id字段。</p><p>用Burp抓包，并对id字段进行爆破，讲payload type设置为Numbers，如图：</p><p><img src="./isc1.PNG" alt="isc"></p><p>爆破到id=2333时得到flag。</p><p><img src="./isc2.PNG" alt="isc"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WEB </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 爆破 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>cat</title>
       <link href="/2019/11/16/cat/"/>
       <url>/2019/11/16/cat/</url>
@@ -521,9 +546,9 @@
       
         <tags>
             
-            <tag> AES </tag>
-            
             <tag> python </tag>
+            
+            <tag> AES </tag>
             
         </tags>
       
@@ -604,9 +629,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> base64 </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
@@ -714,9 +739,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> base64 </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
