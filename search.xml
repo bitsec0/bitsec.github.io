@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>lottery</title>
+      <link href="/2019/11/16/lottery/"/>
+      <url>/2019/11/16/lottery/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-攻防世界-isc-06"><a href="#src-攻防世界-isc-06" class="headerlink" title="[src = 攻防世界] isc-06"></a>[src = 攻防世界] isc-06</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3> <a id="more"></a><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开界面我们知道，要拿到flag，就要赢到足够的钱，其实一开始我以为可以找到一个地方直接修改余额什么的，把网页源代码中的文件看了几个都没发现突破口……</p><p>尝试了一下robots.txt，想看看有没有什么文件，然后发现了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: /.git/</span><br></pre></td></tr></table></figure><p>应该是git源码泄露，下载GitHack（<a href="https://github.com/lijiejie/GitHack）" target="_blank" rel="noopener">https://github.com/lijiejie/GitHack）</a>，并进行源码下载。（其实本题还提供了源码附件，直接下载就可以了）</p><p>发现在源码api.php中买彩票对关键代码：</p><p><img src="./lottery2.PNG" alt="lottery"></p><p>可以看到$numbers 来自用户json输入 {“action”:”buy”,”numbers”:”1122334”}，没有检查数据类型。 $win_numbers 是随机生成的数字字符串。</p><p>使用 PHP 弱类型松散比较，以”1”为例，和TRUE,1,”1”相等。 由于 json 支持布尔型数据，因此可以抓包改包，构造数据：</p><p>原来数据包为：</p><p><img src="./lottery3.PNG" alt="lottery"></p><p>修改后为：</p><p><img src="./lottery4.PNG" alt="lottery"></p><p>经过2-3次对购买彩票，就可以达到购买flag的余额。直接购买就得到flag：</p><p><img src="./lottery5.PNG" alt="lottery"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WEB </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 代码审计，源码泄露 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>isc-06</title>
       <link href="/2019/11/16/isc-06/"/>
       <url>/2019/11/16/isc-06/</url>
