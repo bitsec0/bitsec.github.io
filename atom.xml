@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-16T05:08:40.039Z</updated>
+  <updated>2019-11-16T05:11:20.871Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,13 +21,13 @@
     <link href="http://yoursite.com/2019/11/16/lottery/"/>
     <id>http://yoursite.com/2019/11/16/lottery/</id>
     <published>2019-11-16T04:48:50.000Z</published>
-    <updated>2019-11-16T05:08:40.039Z</updated>
+    <updated>2019-11-16T05:11:20.871Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="src-攻防世界-isc-06"><a href="#src-攻防世界-isc-06" class="headerlink" title="[src = 攻防世界] isc-06"></a>[src = 攻防世界] isc-06</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3> <a id="more"></a><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开界面我们知道，要拿到flag，就要赢到足够的钱，其实一开始我以为可以找到一个地方直接修改余额什么的，把网页源代码中的文件看了几个都没发现突破口……</p><p>尝试了一下robots.txt，想看看有没有什么文件，然后发现了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: /.git/</span><br></pre></td></tr></table></figure><p>应该是git源码泄露，下载GitHack（<a href="https://github.com/lijiejie/GitHack）" target="_blank" rel="noopener">https://github.com/lijiejie/GitHack）</a>，并进行源码下载。（其实本题还提供了源码附件，直接下载就可以了）</p><p>发现在源码api.php中买彩票对关键代码：</p><p><img src="./lottery2.PNG" alt="lottery"></p><p>可以看到$numbers 来自用户json输入 {“action”:”buy”,”numbers”:”1122334”}，没有检查数据类型。 $win_numbers 是随机生成的数字字符串。</p><p>使用 PHP 弱类型松散比较，以”1”为例，和TRUE,1,”1”相等。 由于 json 支持布尔型数据，因此可以抓包改包，构造数据：</p><p>原来数据包为：</p><p><img src="./lottery3.PNG" alt="lottery"></p><p>修改后为：</p><p><img src="./lottery4.PNG" alt="lottery"></p><p>经过2-3次对购买彩票，就可以达到购买flag的余额。直接购买就得到flag：</p><p><img src="./lottery5.PNG" alt="lottery"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-lottery"><a href="#src-攻防世界-lottery" class="headerlink" title="[src = 攻防世界] lottery"></a>[src = 攻防世界] lottery</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3> <a id="more"></a><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开界面我们知道，要拿到flag，就要赢到足够的钱，其实一开始我以为可以找到一个地方直接修改余额什么的，把网页源代码中的文件看了几个都没发现突破口……</p><p>尝试了一下robots.txt，想看看有没有什么文件，然后发现了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: /.git/</span><br></pre></td></tr></table></figure><p>应该是git源码泄露，下载GitHack（<a href="https://github.com/lijiejie/GitHack）" target="_blank" rel="noopener">https://github.com/lijiejie/GitHack）</a>，并进行源码下载。（其实本题还提供了源码附件，直接下载就可以了）</p><p>发现在源码api.php中买彩票对关键代码：</p><p><img src="./lottery2.PNG" alt="lottery"></p><p>可以看到$numbers 来自用户json输入 {“action”:”buy”,”numbers”:”1122334”}，没有检查数据类型。 $win_numbers 是随机生成的数字字符串。</p><p>使用 PHP 弱类型松散比较，以”1”为例，和TRUE,1,”1”相等。 由于 json 支持布尔型数据，因此可以抓包改包，构造数据：</p><p>原来数据包为：</p><p><img src="./lottery3.PNG" alt="lottery"></p><p>修改后为：</p><p><img src="./lottery4.PNG" alt="lottery"></p><p>经过2-3次对购买彩票，就可以达到购买flag的余额。直接购买就得到flag：</p><p><img src="./lottery5.PNG" alt="lottery"></p>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;src-攻防世界-isc-06&quot;&gt;&lt;a href=&quot;#src-攻防世界-isc-06&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] isc-06&quot;&gt;&lt;/a&gt;[src = 攻防世界] isc-06&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;
+      &lt;h2 id=&quot;src-攻防世界-lottery&quot;&gt;&lt;a href=&quot;#src-攻防世界-lottery&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] lottery&quot;&gt;&lt;/a&gt;[src = 攻防世界] lottery&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;
     
     </summary>
     
@@ -67,13 +67,13 @@
     <link href="http://yoursite.com/2019/11/16/cat/"/>
     <id>http://yoursite.com/2019/11/16/cat/</id>
     <published>2019-11-16T03:43:40.000Z</published>
-    <updated>2019-11-16T04:25:51.850Z</updated>
+    <updated>2019-11-16T05:12:04.380Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="src-攻防世界-NewsCenter"><a href="#src-攻防世界-NewsCenter" class="headerlink" title="[src = 攻防世界] NewsCenter"></a>[src = 攻防世界] NewsCenter</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>抓住那只猫<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>首先按照题目要求，输入一个任意域名，发现没有反应，输入一个IP地址，显示了PING命令对结果。初步考虑命令执行。<br>输入“127.0.0.1|ls”，提示“Invalid URL”，看来增加了过滤，直接执行命令不可行。</p><p>在URL的传参处?url=这里，我们传递个%79发现传递之后变成了?url=w，看来是可以传递url编码，系统会接受并进行解析，于是我们传递%80会出现报错，url编码使用的是16进制，80也就是128，ASCII码是从0-127，所以这个时候会报错。url编码表可以参考<a href="http://www.w3school.com.cn/tags/html_ref_urlencode.html" target="_blank" rel="noopener">http://www.w3school.com.cn/tags/html_ref_urlencode.html</a></p><p>在报错信息里面发现这个应用的整体架构：我们给php发出请求，php把请求发送给本地部署的django，然后得到结果。而且从报错页面发现了database信息：/opt/api/database.sqlite3</p><p>由于django本地部署，而且php使用的cURL组件，所以这里，我们使用前面讲的php的cURL文件上传，但需要以@开头。</p><p><img src="./cat1.png" alt="cat"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?url=@/opt/api/database.sqlite3</span><br></pre></td></tr></table></figure><p>然后在报错也没搜索CTF得到flag。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-cat"><a href="#src-攻防世界-cat" class="headerlink" title="[src = 攻防世界] cat"></a>[src = 攻防世界] cat</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>抓住那只猫<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>首先按照题目要求，输入一个任意域名，发现没有反应，输入一个IP地址，显示了PING命令对结果。初步考虑命令执行。<br>输入“127.0.0.1|ls”，提示“Invalid URL”，看来增加了过滤，直接执行命令不可行。</p><p>在URL的传参处?url=这里，我们传递个%79发现传递之后变成了?url=w，看来是可以传递url编码，系统会接受并进行解析，于是我们传递%80会出现报错，url编码使用的是16进制，80也就是128，ASCII码是从0-127，所以这个时候会报错。url编码表可以参考<a href="http://www.w3school.com.cn/tags/html_ref_urlencode.html" target="_blank" rel="noopener">http://www.w3school.com.cn/tags/html_ref_urlencode.html</a></p><p>在报错信息里面发现这个应用的整体架构：我们给php发出请求，php把请求发送给本地部署的django，然后得到结果。而且从报错页面发现了database信息：/opt/api/database.sqlite3</p><p>由于django本地部署，而且php使用的cURL组件，所以这里，我们使用前面讲的php的cURL文件上传，但需要以@开头。</p><p><img src="./cat1.png" alt="cat"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?url=@/opt/api/database.sqlite3</span><br></pre></td></tr></table></figure><p>然后在报错也没搜索CTF得到flag。</p>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;src-攻防世界-NewsCenter&quot;&gt;&lt;a href=&quot;#src-攻防世界-NewsCenter&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] NewsCenter&quot;&gt;&lt;/a&gt;[src = 攻防世界] NewsCenter&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;抓住那只猫&lt;br&gt;
+      &lt;h2 id=&quot;src-攻防世界-cat&quot;&gt;&lt;a href=&quot;#src-攻防世界-cat&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] cat&quot;&gt;&lt;/a&gt;[src = 攻防世界] cat&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;抓住那只猫&lt;br&gt;
     
     </summary>
     
@@ -111,13 +111,13 @@
     <link href="http://yoursite.com/2019/11/15/view-source/"/>
     <id>http://yoursite.com/2019/11/15/view-source/</id>
     <published>2019-11-15T10:42:08.000Z</published>
-    <updated>2019-11-15T11:02:59.576Z</updated>
+    <updated>2019-11-16T05:13:18.474Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="src-攻防世界-where-is-flag"><a href="#src-攻防世界-where-is-flag" class="headerlink" title="[src = 攻防世界] where is flag"></a>[src = 攻防世界] where is flag</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>X老师让小宁同学查看一个网页的源代码，但小宁同学发现鼠标右键好像不管用了。<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开题目，右键查看源代码失效。原因是js代码禁用了右键。<br>两种方法：</p><ol><li>使用F12查看；</li><li>在设置里面禁用js。</li></ol><p>以Chrome为例，在设置–&gt;隐私设置和安全性–&gt;网站设置–&gt;JavaScript设置为禁用，则就可以使用右键！查看到flag</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-view-source"><a href="#src-攻防世界-view-source" class="headerlink" title="[src = 攻防世界] view source"></a>[src = 攻防世界] view source</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>X老师让小宁同学查看一个网页的源代码，但小宁同学发现鼠标右键好像不管用了。<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开题目，右键查看源代码失效。原因是js代码禁用了右键。<br>两种方法：</p><ol><li>使用F12查看；</li><li>在设置里面禁用js。</li></ol><p>以Chrome为例，在设置–&gt;隐私设置和安全性–&gt;网站设置–&gt;JavaScript设置为禁用，则就可以使用右键！查看到flag</p>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;src-攻防世界-where-is-flag&quot;&gt;&lt;a href=&quot;#src-攻防世界-where-is-flag&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] where is flag&quot;&gt;&lt;/a&gt;[src = 攻防世界] where is flag&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;X老师让小宁同学查看一个网页的源代码，但小宁同学发现鼠标右键好像不管用了。&lt;br&gt;
+      &lt;h2 id=&quot;src-攻防世界-view-source&quot;&gt;&lt;a href=&quot;#src-攻防世界-view-source&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] view source&quot;&gt;&lt;/a&gt;[src = 攻防世界] view source&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;X老师让小宁同学查看一个网页的源代码，但小宁同学发现鼠标右键好像不管用了。&lt;br&gt;
     
     </summary>
     

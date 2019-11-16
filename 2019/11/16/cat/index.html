@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="[src = 攻防世界] NewsCenter题目描述抓住那只猫">
+<meta name="description" content="[src = 攻防世界] cat题目描述抓住那只猫">
 <meta name="keywords" content="BitSec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cat">
 <meta property="og:url" content="http://yoursite.com/2019/11/16/cat/index.html">
 <meta property="og:site_name" content="BitSec&#39;s Blog">
-<meta property="og:description" content="[src = 攻防世界] NewsCenter题目描述抓住那只猫">
+<meta property="og:description" content="[src = 攻防世界] cat题目描述抓住那只猫">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/11/16/cat/cat1.png">
-<meta property="og:updated_time" content="2019-11-16T04:25:51.850Z">
+<meta property="og:updated_time" content="2019-11-16T05:12:04.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cat">
-<meta name="twitter:description" content="[src = 攻防世界] NewsCenter题目描述抓住那只猫">
+<meta name="twitter:description" content="[src = 攻防世界] cat题目描述抓住那只猫">
 <meta name="twitter:image" content="http://yoursite.com/2019/11/16/cat/cat1.png">
 
 
@@ -354,7 +354,7 @@
       
 
       
-        <h2 id="src-攻防世界-NewsCenter"><a href="#src-攻防世界-NewsCenter" class="headerlink" title="[src = 攻防世界] NewsCenter"></a>[src = 攻防世界] NewsCenter</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>抓住那只猫<br> <a id="more"></a></p>
+        <h2 id="src-攻防世界-cat"><a href="#src-攻防世界-cat" class="headerlink" title="[src = 攻防世界] cat"></a>[src = 攻防世界] cat</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>抓住那只猫<br> <a id="more"></a></p>
 <h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>首先按照题目要求，输入一个任意域名，发现没有反应，输入一个IP地址，显示了PING命令对结果。初步考虑命令执行。<br>输入“127.0.0.1|ls”，提示“Invalid URL”，看来增加了过滤，直接执行命令不可行。</p>
 <p>在URL的传参处?url=这里，我们传递个%79发现传递之后变成了?url=w，看来是可以传递url编码，系统会接受并进行解析，于是我们传递%80会出现报错，url编码使用的是16进制，80也就是128，ASCII码是从0-127，所以这个时候会报错。url编码表可以参考<a href="http://www.w3school.com.cn/tags/html_ref_urlencode.html" target="_blank" rel="noopener">http://www.w3school.com.cn/tags/html_ref_urlencode.html</a></p>
 <p>在报错信息里面发现这个应用的整体架构：我们给php发出请求，php把请求发送给本地部署的django，然后得到结果。而且从报错页面发现了database信息：/opt/api/database.sqlite3</p>
@@ -569,7 +569,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#src-攻防世界-NewsCenter"><span class="nav-number">1.</span> <span class="nav-text">[src = 攻防世界] NewsCenter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WP"><span class="nav-number">1.2.</span> <span class="nav-text">WP</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#src-攻防世界-cat"><span class="nav-number">1.</span> <span class="nav-text">[src = 攻防世界] cat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WP"><span class="nav-number">1.2.</span> <span class="nav-text">WP</span></a></li></ol></li></ol></div>
             
 
           </div>
