@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-17T04:11:50.972Z</updated>
+  <updated>2019-11-18T02:08:01.564Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>bug</title>
+    <link href="http://yoursite.com/2019/11/18/bug/"/>
+    <id>http://yoursite.com/2019/11/18/bug/</id>
+    <published>2019-11-18T01:23:02.000Z</published>
+    <updated>2019-11-18T02:08:01.564Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-bug"><a href="#src-攻防世界-bug" class="headerlink" title="[src = 攻防世界] bug"></a>[src = 攻防世界] bug</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>进入弹窗提示“Please Login！”，然后显示登陆框。随便注册一个账号。如图：</p><p><img src="./bug1.PNG" alt="bug"></p><p>然后登录成功。但没有发现大的问题。重点关注首页对Findpwd功能，因为密码修改对逻辑错误经常导致安全问题，因此对修改密码过程进行抓包，如下图：</p><p><img src="./bug2.PNG" alt="bug"></p><p>点击reset后，进入burp抓包界面，如下图：</p><p><img src="./bug3.PNG" alt="bug"></p><p>将其中的username修改为admin，然后forward。发现密码修改成功。如图，基于admin账号登录成功。</p><p><img src="./bug4.PNG" alt="bug"></p><p>点击manage页面，但是页面显示“IP Not allowed！”。这应该是只允许在内网才能访问管理页面，现在是外网，该功能不能使用，因此通过修改X-Forwarded-For头为127.0.0.1，来欺骗系统，进入管理页面。显示</p><p><img src="./bug5.PNG" alt="bug"></p><p>查看源文件，发现页面对注释中包含：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.php?module=filemanage&amp;do=???--&gt;</span></span><br></pre></td></tr></table></figure><p>访问该网页：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:55218/index.php?module=filemanage&amp;do=upload</span><br></pre></td></tr></table></figure><p>发现文件上传页面，如图：</p><p><img src="./bug6.PNG" alt="bug"></p><p>提示只能上次image，上传php代码：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">"php"</span>&gt;</span>system('ls');<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><p>抓包后修改后缀为php5（直接修改为php不允许）。</p><p><img src="./bug7.PNG" alt="bug"></p><p>弹窗得到flag。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;src-攻防世界-bug&quot;&gt;&lt;a href=&quot;#src-攻防世界-bug&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] bug&quot;&gt;&lt;/a&gt;[src = 攻防世界] bug&lt;/h2&gt;&lt;h3 id=&quot;WP&quot;&gt;&lt;a href=&quot;#WP&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
+    
+    
+      <category term="逻辑错误" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>upload1</title>
@@ -495,29 +521,6 @@
       <category term="IDA" scheme="http://yoursite.com/tags/IDA/"/>
     
       <category term="Binary" scheme="http://yoursite.com/tags/Binary/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ping</title>
-    <link href="http://yoursite.com/2019/10/09/ping/"/>
-    <id>http://yoursite.com/2019/10/09/ping/</id>
-    <published>2019-10-09T08:48:34.000Z</published>
-    <updated>2019-11-15T06:43:59.072Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-ping"><a href="#src-hackme-ping" class="headerlink" title="[src = hackme] ping"></a>[src = hackme] ping</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Can you ping 127.0.0.1?</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>点击题目，跳转到题目页面。网页如下：</p><p><img src="./ping.PNG" alt="ping"></p><p>可以看到页面进行了黑名单过滤，常用的|管道符，cat，cp等命令都被过滤掉了，所以无法进行简单的命令执行，如输入“|ls”会显示：“| not allowed”；哪如何绕过黑名单哪？我们解释一下exec函数：</p><p>exec()  —执行外部程序</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">string <span class="built_in">exec</span> ( string <span class="variable">$command</span> [, array &amp;<span class="variable">$output</span> [, int &amp;<span class="variable">$return_var</span> ]] )</span><br><span class="line"></span><br><span class="line"><span class="variable">$command</span>   要执行的shell 命令</span><br><span class="line"></span><br><span class="line"><span class="variable">$output</span>    shell命令的输出填充此数组,每行输出填充数组中的一个元素。</span><br><span class="line"></span><br><span class="line"><span class="variable">$return_var</span>  命令执行后的返回状态，命令执行成功值是0</span><br><span class="line"></span><br><span class="line">2&gt;&amp;1      <span class="built_in">exec</span>不成功，调试方案一个技巧就是使用管道命令, 使用 2&gt;&amp;1, 命令就会输出shell执行时的错误到<span class="variable">$output</span>变量, 输出该变量即可分析。</span><br></pre></td></tr></table></figure><p>这时如果对Linux基本命令熟悉的话会想到反引号“`”，bash命令中的双引号(“)，单引号(‘)，反引号(`)区别:</p><p>反引号(``):  反引号作用相当于命令替换，Bash处理时引用的部分会被优先执行，执行结果被替换到外层的命令行文本中；反引号可以嵌套使用，但是嵌套时内部的反引号必须进行转义处理。</p><p>单引号(‘’):    在命令行中，单引号引用的部分的所有特殊字符均按照普通字符解释</p><p>双引号(“”):  双引号引用的部分，仅解释美元符号$、转义符\ 和反引号`，解释后的文本仅按照普通文字处理，即同单引号的处理。</p><p>要想得到flag，我们需要先看一下当前目录下有没有flag相关文件，可以用ls命令（本题并没有过滤ls），所以输入`ls`，页面输出：<br><img src="./ping1.PNG" alt="ping1"></p><p>可以看到目录下有flag.php，index.php两个文件，flag.php里面应该包含了flag。常见的思路是使用cat命令查看该文件的内容，但是黑名单过滤了cat命令。那就需要考虑linux系统还有哪些可以查看文件内容，但又没有在黑名单的命令可用。其中sort就是其中一个。sort将文件的每一行作为一个单位，相互比较，比较原则是从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。其他可以用来显示文件内容对命令包括：</p><pre><code>tac命令 : 反序输出文件的内容，文件的最后一行显示在第一行head命令:   用于显示文件的开头的内容。在默认情况下，head命令显示文件的头10行内容。tail命令:  用于显示文件的结尾的内容。在默认情况下，taild命令显示文件的后10行内容。more命令： 按页来查看文件的内容。</code></pre><p>但是sort命令后面需要跟文件名，但flag被过滤，所以`sort flag.php`行不通。</p><p>哪这么办哪？可以想到Linux系统的通配符。输入`sort ????????`，可以得到flag。<br><img src="./ping2.PNG" alt="ping2"></p><p>或者`tail f*`也可以得到flag。</p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考察了命令执行（Commnd Execution）漏洞的利用，主要考察了命令执行的基本原理，如何绕过过滤。其中一些常用的Linux系统命令的使用要熟悉，比如ls，cat，sort等。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-ping&quot;&gt;&lt;a href=&quot;#src-hackme-ping&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] ping&quot;&gt;&lt;/a&gt;[src = hackme] ping&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;Can you ping 127.0.0.1?&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
-    
-    
-      <category term="Commnd Execution" scheme="http://yoursite.com/tags/Commnd-Execution/"/>
     
   </entry>
   
