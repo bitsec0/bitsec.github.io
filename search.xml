@@ -95,7 +95,9 @@
       
         <tags>
             
-            <tag> SQL注入，逻辑错误 </tag>
+            <tag> SQLi </tag>
+            
+            <tag> 逻辑错误 </tag>
             
         </tags>
       
@@ -172,7 +174,11 @@
       
         <tags>
             
-            <tag> 文件上传，一句话木马，webshell </tag>
+            <tag> 文件上传 </tag>
+            
+            <tag> 一句话木马 </tag>
+            
+            <tag> webshell </tag>
             
         </tags>
       
@@ -197,7 +203,9 @@
       
         <tags>
             
-            <tag> 信息泄露，URL编码与解码 </tag>
+            <tag> 信息泄露 </tag>
+            
+            <tag> URL编码与解码 </tag>
             
         </tags>
       
@@ -247,7 +255,9 @@
       
         <tags>
             
-            <tag> 代码审计，源码泄露 </tag>
+            <tag> 代码审计 </tag>
+            
+            <tag> 源码泄露 </tag>
             
         </tags>
       
@@ -294,6 +304,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 编码 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -673,7 +689,7 @@
       
         <tags>
             
-            <tag> Commnd Execution </tag>
+            <tag> 命令执行 </tag>
             
         </tags>
       
@@ -776,6 +792,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
       
     </entry>
     

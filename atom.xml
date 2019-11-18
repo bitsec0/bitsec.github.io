@@ -90,7 +90,7 @@
     <link href="http://yoursite.com/2019/11/18/ics04/"/>
     <id>http://yoursite.com/2019/11/18/ics04/</id>
     <published>2019-11-18T11:21:08.000Z</published>
-    <updated>2019-11-18T12:06:11.801Z</updated>
+    <updated>2019-11-18T13:19:55.196Z</updated>
     
     <content type="html"><![CDATA[<h2 id="src-攻防世界-ics-04"><a href="#src-攻防世界-ics-04" class="headerlink" title="[src = 攻防世界] ics-04"></a>[src = 攻防世界] ics-04</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>工控云管理系统新添加的登录和注册页面存在漏洞，请找出flag。<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>题目提示登录和注册页面存在漏洞，随便注册一个账号登录，提示“普通用户登录成功,没什么用”。那就看看存不存在SQL注入吧。</p><p>对注册页面和登录页面使用sqlmap进行测试，对于POST方法对测试可以按照如下方法进行，首先使用burp抓包，然后使用“copy to file”功能将请求保存，然后sqlmap -r 文件名即可。比如保存对文件为sq.txt，则使用的sqlmap命令为sqlmap -r sq.txt.</p><p>或者对于POST数据使用–data参数，比如POST数据为username=bitsec，则可以使用如下sqlmap命令：<br>sqlmap -u “***” –data=”username=bitsec”.</p><p>测试所有页面，发现找回密码处有注入,并得到user表里面对数据为：</p><p><img src="./ics041.PNG" alt="isc04"><br>但是无法爆破出来密码。</p><p>但是我们发现注册页面可以重新注册用户，且没有任何验证。所以我们重新注册该用户c3tlwDmIn23，并登录得到flag。</p>]]></content>
     
@@ -104,7 +104,9 @@
       <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
     
     
-      <category term="SQL注入，逻辑错误" scheme="http://yoursite.com/tags/SQL%E6%B3%A8%E5%85%A5%EF%BC%8C%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF/"/>
+      <category term="SQLi" scheme="http://yoursite.com/tags/SQLi/"/>
+    
+      <category term="逻辑错误" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF/"/>
     
   </entry>
   
@@ -168,7 +170,7 @@
     <link href="http://yoursite.com/2019/11/17/upload1/"/>
     <id>http://yoursite.com/2019/11/17/upload1/</id>
     <published>2019-11-17T03:21:43.000Z</published>
-    <updated>2019-11-17T04:11:50.972Z</updated>
+    <updated>2019-11-18T13:21:19.891Z</updated>
     
     <content type="html"><![CDATA[<h2 id="src-攻防世界-upload1"><a href="#src-攻防世界-upload1" class="headerlink" title="[src = 攻防世界] upload1"></a>[src = 攻防世界] upload1</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>明显的文件上传漏洞。本题是基于js的前段校验。代码如下：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">upfile = <span class="built_in">document</span>.getElementById(<span class="string">"upfile"</span>);</span><br><span class="line">submit = <span class="built_in">document</span>.getElementById(<span class="string">"submit"</span>);</span><br><span class="line">name = upfile.value;</span><br><span class="line">ext = name.replace(<span class="regexp">/^.+\./</span>,<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>([<span class="string">'jpg'</span>,<span class="string">'png'</span>].contains(ext))&#123;</span><br><span class="line">    submit.disabled = <span class="literal">false</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    submit.disabled = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    alert(<span class="string">'请选择一张图片文件上传!'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>只允许jpg和png格式，但是我们知道前段校验可以非常容易对绕过。我们首先写一个一句话木马：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_POST[<span class="string">'bitsec'</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure><p>然后将文件后缀改为jpg，然后设置代理，通过burp进行抓包，如图</p><p><img src="./upload11.PNG" alt="upload1"></p><p>将其中的后缀改为php，然后forward即可上传成功，如图。</p><p><img src="./upload12.PNG" alt="upload1"></p><p>页面回显：upload success : upload/1573961293.123.php </p><p>通过中国菜刀等webshell工具连接成功，如图：</p><p><img src="./upload13.PNG" alt="upload1"></p><p>访问目录，发现flag.php文件，打开就得到flag：</p><p><img src="./upload14.PNG" alt="upload1"></p>]]></content>
     
@@ -185,7 +187,11 @@
       <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
     
     
-      <category term="文件上传，一句话木马，webshell" scheme="http://yoursite.com/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%8C%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%EF%BC%8Cwebshell/"/>
+      <category term="文件上传" scheme="http://yoursite.com/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
+    
+      <category term="一句话木马" scheme="http://yoursite.com/tags/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC/"/>
+    
+      <category term="webshell" scheme="http://yoursite.com/tags/webshell/"/>
     
   </entry>
   
@@ -194,7 +200,7 @@
     <link href="http://yoursite.com/2019/11/17/PHP2/"/>
     <id>http://yoursite.com/2019/11/17/PHP2/</id>
     <published>2019-11-17T02:55:46.000Z</published>
-    <updated>2019-11-17T03:22:20.623Z</updated>
+    <updated>2019-11-18T13:21:19.891Z</updated>
     
     <content type="html"><![CDATA[<h2 id="src-攻防世界-PHP2"><a href="#src-攻防世界-PHP2" class="headerlink" title="[src = 攻防世界] PHP2"></a>[src = 攻防世界] PHP2</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>熟悉php的应该知道phps文件可以用来读取php代码，这里就是可以看到此问题导致对源码泄露，直接访问index.phps，得到源码：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="string">"admin"</span>===$_GET[id]) &#123;</span><br><span class="line">  <span class="keyword">echo</span>(<span class="string">"&lt;p&gt;not allowed!&lt;/p&gt;"</span>);</span><br><span class="line">  <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$_GET[id] = urldecode($_GET[id]);</span><br><span class="line"><span class="keyword">if</span>($_GET[id] == <span class="string">"admin"</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"&lt;p&gt;Access granted!&lt;/p&gt;"</span>;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"&lt;p&gt;Key: xxxxxxx &lt;/p&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">Can you anthenticate to this website?</span><br></pre></td></tr></table></figure><p>需要满足两个条件：<br>第一步，要使得”admin”===$_GET[id]不成立</p><p>第二步，经过$_GET[id] = urldecode($_GET[id]);，使得$_GET[id] == “admin”成立。</p><p>看似矛盾，关键在理解urldecode函数的行为，其解释为解码给出的已编码字符串中的任何 %##。 加号（’+’）被解码成一个空格字符。</p><p>因为当将URL传递给$_GET[id]时，会进行第一次url解码，这时要求不能解码得到admin，然后再次交给urldecode进行url解码，这次要得到admin。<br>所以构造下面对payload：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=%<span class="number">2561</span>dmin</span><br></pre></td></tr></table></figure><p>第一次url解码得到（将%25解码成%）：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=%<span class="number">61</span>dmin</span><br></pre></td></tr></table></figure><p>此时满足了第一步的条件。然后第二次交给urldecode函数，这次将%61解码成字符a，变为：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=admin</span><br></pre></td></tr></table></figure><p>满足第二步条件，得到flag。</p>]]></content>
     
@@ -211,7 +217,9 @@
       <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
     
     
-      <category term="信息泄露，URL编码与解码" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%EF%BC%8CURL%E7%BC%96%E7%A0%81%E4%B8%8E%E8%A7%A3%E7%A0%81/"/>
+      <category term="信息泄露" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/"/>
+    
+      <category term="URL编码与解码" scheme="http://yoursite.com/tags/URL%E7%BC%96%E7%A0%81%E4%B8%8E%E8%A7%A3%E7%A0%81/"/>
     
   </entry>
   
@@ -246,7 +254,7 @@
     <link href="http://yoursite.com/2019/11/16/lottery/"/>
     <id>http://yoursite.com/2019/11/16/lottery/</id>
     <published>2019-11-16T04:48:50.000Z</published>
-    <updated>2019-11-16T05:11:20.871Z</updated>
+    <updated>2019-11-18T13:21:19.891Z</updated>
     
     <content type="html"><![CDATA[<h2 id="src-攻防世界-lottery"><a href="#src-攻防世界-lottery" class="headerlink" title="[src = 攻防世界] lottery"></a>[src = 攻防世界] lottery</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3> <a id="more"></a><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开界面我们知道，要拿到flag，就要赢到足够的钱，其实一开始我以为可以找到一个地方直接修改余额什么的，把网页源代码中的文件看了几个都没发现突破口……</p><p>尝试了一下robots.txt，想看看有没有什么文件，然后发现了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: /.git/</span><br></pre></td></tr></table></figure><p>应该是git源码泄露，下载GitHack（<a href="https://github.com/lijiejie/GitHack）" target="_blank" rel="noopener">https://github.com/lijiejie/GitHack）</a>，并进行源码下载。（其实本题还提供了源码附件，直接下载就可以了）</p><p>发现在源码api.php中买彩票对关键代码：</p><p><img src="./lottery2.PNG" alt="lottery"></p><p>可以看到$numbers 来自用户json输入 {“action”:”buy”,”numbers”:”1122334”}，没有检查数据类型。 $win_numbers 是随机生成的数字字符串。</p><p>使用 PHP 弱类型松散比较，以”1”为例，和TRUE,1,”1”相等。 由于 json 支持布尔型数据，因此可以抓包改包，构造数据：</p><p>原来数据包为：</p><p><img src="./lottery3.PNG" alt="lottery"></p><p>修改后为：</p><p><img src="./lottery4.PNG" alt="lottery"></p><p>经过2-3次对购买彩票，就可以达到购买flag的余额。直接购买就得到flag：</p><p><img src="./lottery5.PNG" alt="lottery"></p>]]></content>
     
@@ -260,7 +268,9 @@
       <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
     
     
-      <category term="代码审计，源码泄露" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%EF%BC%8C%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/"/>
+      <category term="代码审计" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
+    
+      <category term="源码泄露" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/"/>
     
   </entry>
   
@@ -292,7 +302,7 @@
     <link href="http://yoursite.com/2019/11/16/cat/"/>
     <id>http://yoursite.com/2019/11/16/cat/</id>
     <published>2019-11-16T03:43:40.000Z</published>
-    <updated>2019-11-16T05:12:04.380Z</updated>
+    <updated>2019-11-18T13:21:19.891Z</updated>
     
     <content type="html"><![CDATA[<h2 id="src-攻防世界-cat"><a href="#src-攻防世界-cat" class="headerlink" title="[src = 攻防世界] cat"></a>[src = 攻防世界] cat</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>抓住那只猫<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>首先按照题目要求，输入一个任意域名，发现没有反应，输入一个IP地址，显示了PING命令对结果。初步考虑命令执行。<br>输入“127.0.0.1|ls”，提示“Invalid URL”，看来增加了过滤，直接执行命令不可行。</p><p>在URL的传参处?url=这里，我们传递个%79发现传递之后变成了?url=w，看来是可以传递url编码，系统会接受并进行解析，于是我们传递%80会出现报错，url编码使用的是16进制，80也就是128，ASCII码是从0-127，所以这个时候会报错。url编码表可以参考<a href="http://www.w3school.com.cn/tags/html_ref_urlencode.html" target="_blank" rel="noopener">http://www.w3school.com.cn/tags/html_ref_urlencode.html</a></p><p>在报错信息里面发现这个应用的整体架构：我们给php发出请求，php把请求发送给本地部署的django，然后得到结果。而且从报错页面发现了database信息：/opt/api/database.sqlite3</p><p>由于django本地部署，而且php使用的cURL组件，所以这里，我们使用前面讲的php的cURL文件上传，但需要以@开头。</p><p><img src="./cat1.png" alt="cat"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?url=@/opt/api/database.sqlite3</span><br></pre></td></tr></table></figure><p>然后在报错也没搜索CTF得到flag。</p>]]></content>
     
@@ -305,6 +315,8 @@
     
       <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
     
+    
+      <category term="编码" scheme="http://yoursite.com/tags/%E7%BC%96%E7%A0%81/"/>
     
   </entry>
   
@@ -413,7 +425,7 @@
     <link href="http://yoursite.com/2019/10/15/whereisflag/"/>
     <id>http://yoursite.com/2019/10/15/whereisflag/</id>
     <published>2019-10-15T06:46:09.000Z</published>
-    <updated>2019-10-15T06:50:41.551Z</updated>
+    <updated>2019-11-18T13:21:15.641Z</updated>
     
     <content type="html"><![CDATA[<h2 id="src-hackme-where-is-flag"><a href="#src-hackme-where-is-flag" class="headerlink" title="[src = hackme] where is flag"></a>[src = hackme] where is flag</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Do you know regular expression?<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开题目，下载一个压缩包，解压得到一个flag文件，打开发现大量字符，其中包含大量FLAG。根据题目提示，应该是要进行正则表达式匹配。</p><p><img src="./whereisflag.PNG" alt="flag"></p><h3 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h3><p>本题考察正则表达式的使用。</p>]]></content>
     
