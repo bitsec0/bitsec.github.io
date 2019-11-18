@@ -374,10 +374,10 @@
 
 <p>发现文件上传页面，如图：</p>
 <p><img src="./bug6.PNG" alt="bug"></p>
-<p>提示只能上次image，上传php代码：</p>
+<p>提示只能上次image，上传下面的php代码（这是文件内容绕过，所以不能使用”&lt;?php ?&gt;”）：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">"php"</span>&gt;</span>system('ls');<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>抓包后修改后缀为php5（直接修改为php不允许）。</p>
+<p>抓包后修改后缀为php5（php4也可以，但是直接修改为php不允许）。</p>
 <p><img src="./bug7.PNG" alt="bug"></p>
 <p>弹窗得到flag。</p>
 

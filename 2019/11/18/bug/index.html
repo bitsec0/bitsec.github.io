@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/11/18/bug/bug5.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/11/18/bug/bug6.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/11/18/bug/bug7.PNG">
-<meta property="og:updated_time" content="2019-11-18T02:08:01.564Z">
+<meta property="og:updated_time" content="2019-11-18T02:43:31.387Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bug">
 <meta name="twitter:description" content="[src = 攻防世界] bugWP进入弹窗提示“Please Login！”，然后显示登陆框。随便注册一个账号。如图：  然后登录成功。但没有发现大的问题。重点关注首页对Findpwd功能，因为密码修改对逻辑错误经常导致安全问题，因此对修改密码过程进行抓包，如下图：  点击reset后，进入burp抓包界面，如下图：  将其中的username修改为admin，然后forward。发现密码修改成">
@@ -378,10 +378,10 @@
 
 <p>发现文件上传页面，如图：</p>
 <p><img src="./bug6.PNG" alt="bug"></p>
-<p>提示只能上次image，上传php代码：</p>
+<p>提示只能上次image，上传下面的php代码（这是文件内容绕过，所以不能使用”&lt;?php ?&gt;”）：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">"php"</span>&gt;</span>system('ls');<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>抓包后修改后缀为php5（直接修改为php不允许）。</p>
+<p>抓包后修改后缀为php5（php4也可以，但是直接修改为php不允许）。</p>
 <p><img src="./bug7.PNG" alt="bug"></p>
 <p>弹窗得到flag。</p>
 
