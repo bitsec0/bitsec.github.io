@@ -4,6 +4,81 @@
   
     
     <entry>
+      <title>giveyouflag</title>
+      <link href="/2019/11/18/giveyouflag/"/>
+      <url>/2019/11/18/giveyouflag/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-攻防世界-give-you-flag"><a href="#src-攻防世界-give-you-flag" class="headerlink" title="[src = 攻防世界] give_you_flag"></a>[src = 攻防世界] give_you_flag</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>菜狗找到了文件中的彩蛋很开心，给菜猫发了个表情包<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开图片，发现似乎有个二维码。通过工具（gif分离器）将各帧分离。得到52张图片，其中第49张包含一个二维码，但是缺少了3个定位符。手动添加，扫码即可。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MISC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 信息隐藏 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ext3</title>
+      <link href="/2019/11/18/ext3/"/>
+      <url>/2019/11/18/ext3/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-攻防世界-ext3"><a href="#src-攻防世界-ext3" class="headerlink" title="[src = 攻防世界] ext3"></a>[src = 攻防世界] ext3</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>今天是菜狗的生日，他收到了一个linux系统光盘<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>将下载附件放到linux系统查看file格式，如下：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># file 630a886233764ec2a63f305f318c8baa </span></span><br><span class="line">630a886233764ec2a63f305f318c8baa: Linux rev 1.0 ext3 filesystem data, UUID=cf6d7bff-c377-403f-84ae-956ce3c99aaa</span><br></pre></td></tr></table></figure><p>再strings查看一下有没有flag这样的字符串：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># strings 630a886233764ec2a63f305f318c8baa |grep flag</span></span><br><span class="line">.flag.txt.swp</span><br><span class="line">flag.txtt.swx</span><br><span class="line">~root/Desktop/file/O7avZhikgKgbF/flag.txt</span><br><span class="line">.flag.txt.swp</span><br><span class="line">flag.txtt.swx</span><br><span class="line">.flag.txt.swp</span><br><span class="line">flag.txtt.swx</span><br></pre></td></tr></table></figure><p>flag应该在flag.txt中。</p><p>挂载光盘：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># mount 630a886233764ec2a63f305f318c8baa /mnt</span></span><br><span class="line">root@kali:~/Downloads<span class="comment"># cd /mnt</span></span><br><span class="line">root@kali:/mnt<span class="comment"># ls</span></span><br><span class="line">02CdWGSxGPX.bin  0Xs    4A           8HhWfV9nK1  gtj        i             KxEQM           LvuGM       n              OOoOs      Q          rhZE1LZ6g   SPaK8l2sYN</span><br><span class="line">0GY1l            1      6JR3         8nwg        h          imgLDPt4BY    LG6F            lWIRfzP     NgzQPW         orcA       qkCN8      Ruc9        SrZznhSAj</span><br><span class="line">0h3a5            2X     6wUaZE1vbsW  8RxQG4bvd   H          ix1EMRHRpIc2  Lh              m           Nv             oSx2p      QmUY1d     RZTOGd      t</span><br><span class="line">0l               3      7H7geLlS5    FinD        H2Zj8FNbu  j6uLMX        LlC6Z0zrgy.bin  m9V0lIaElz  o              OT         QQY3sF63w  scripts     T</span><br><span class="line">0qsd             3J     8A2MFawD4    fm          hdi7       jE            LO0J8           MiU         O7avZhikgKgbF  poiuy7Xdb  r          sdb.cramfs  TFGVOSwYd.txt</span><br><span class="line">0wDq5            44aAm  8DQFirm0D    g           hYuPvID    jj            lost+found      Mnuc        o8             px6u       Raf3SYj    sn</span><br><span class="line">root@kali:/mnt<span class="comment"># cd O7avZhikgKgbF/</span></span><br><span class="line">root@kali:/mnt/O7avZhikgKgbF<span class="comment"># ls</span></span><br><span class="line">flag.txt</span><br><span class="line">root@kali:/mnt/O7avZhikgKgbF<span class="comment"># cat flag.txt</span></span><br><span class="line">ZmxhZ3tzYWpiY2lienNrampjbmJoc2J2Y2pianN6Y3N6Ymt6an0=</span><br></pre></td></tr></table></figure><p>一串base64，解码即可得到flag。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MISC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ext3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ics04</title>
+      <link href="/2019/11/18/ics04/"/>
+      <url>/2019/11/18/ics04/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-攻防世界-ics-04"><a href="#src-攻防世界-ics-04" class="headerlink" title="[src = 攻防世界] ics-04"></a>[src = 攻防世界] ics-04</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>工控云管理系统新添加的登录和注册页面存在漏洞，请找出flag。<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>题目提示登录和注册页面存在漏洞，随便注册一个账号登录，提示“普通用户登录成功,没什么用”。那就看看存不存在SQL注入吧。</p><p>对注册页面和登录页面使用sqlmap进行测试，对于POST方法对测试可以按照如下方法进行，首先使用burp抓包，然后使用“copy to file”功能将请求保存，然后sqlmap -r 文件名即可。比如保存对文件为sq.txt，则使用的sqlmap命令为sqlmap -r sq.txt.</p><p>或者对于POST数据使用–data参数，比如POST数据为username=bitsec，则可以使用如下sqlmap命令：<br>sqlmap -u “***” –data=”username=bitsec”.</p><p>测试所有页面，发现找回密码处有注入,并得到user表里面对数据为：</p><p><img src="./ics041.PNG" alt="isc04"><br>但是无法爆破出来密码。</p><p>但是我们发现注册页面可以重新注册用户，且没有任何验证。所以我们重新注册该用户c3tlwDmIn23，并登录得到flag。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WEB </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SQL注入，逻辑错误 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>http-header</title>
       <link href="/2019/11/18/http-header/"/>
       <url>/2019/11/18/http-header/</url>
@@ -698,9 +773,9 @@
       
         <tags>
             
-            <tag> AES </tag>
-            
             <tag> python </tag>
+            
+            <tag> AES </tag>
             
         </tags>
       
@@ -781,9 +856,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> base64 </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
@@ -891,9 +966,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> base64 </tag>
+            
+            <tag> python </tag>
             
         </tags>
       

