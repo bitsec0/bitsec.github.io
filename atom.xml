@@ -47,7 +47,7 @@
     <link href="http://yoursite.com/2019/11/20/embarss/"/>
     <id>http://yoursite.com/2019/11/20/embarss/</id>
     <published>2019-11-20T11:05:47.000Z</published>
-    <updated>2019-11-20T12:39:07.389Z</updated>
+    <updated>2019-11-20T12:42:29.686Z</updated>
     
     <content type="html"><![CDATA[<h2 id="src-攻防世界-embarrass-amp-Cephalopod"><a href="#src-攻防世界-embarrass-amp-Cephalopod" class="headerlink" title="[src = 攻防世界] embarrass &amp; Cephalopod"></a>[src = 攻防世界] embarrass &amp; Cephalopod</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><h3 id="embarrass"><a href="#embarrass" class="headerlink" title="embarrass"></a>embarrass</h3><p>解压得到misc_02.pcapng。</p><ol><li><p>思路1：用wireshark打开，追踪TCP流，发现流数量很多，一直翻到第35个流，发现这个流是最大的，包含了8059个分组，可疑。将流保存为文本文件，然后使用查找功能，查找flag字符串，得到flag。</p></li><li><p>思路2：直接拿到linux下，对misc_02.pcapng进行字符串检索，得到flag。</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings misc_02.pcapng | grep flag</span><br></pre></td></tr></table></figure><p>其实还有更为直接对第三种方法，直接使用wireshark的字符串搜索功能，得到flag，如下图：</p><p><img src="./embrrass.PNG" alt="embarrass"></p><h3 id="Cephalopod"><a href="#Cephalopod" class="headerlink" title="Cephalopod"></a>Cephalopod</h3><p>同样得到pcapng文件。</p><ol><li><p>思路1：用wireshark打开，追踪TCP流，在第1流中发现flag.png.</p></li><li><p>思路2：直接拿到linux下，对misc_02.pcapng进行字符串检索，发现flag.png</p></li></ol><p>下一步找到flag.png图片。</p><ol><li><p>通过追踪流，然后利用十六进制编辑器保存数据得到图片，包含flag</p></li><li><p>使用tcpxtract 直接提取其中的图片，读取包含的flag。</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># tcpxtract -f 66b7f39d97364ca5a2f928a4e61b46ee.pcap</span></span><br></pre></td></tr></table></figure><p>如果没有安装，可以通过apt install tcpxtract安装即可。</p>]]></content>
     
@@ -255,9 +255,9 @@
       <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
     
     
-      <category term="SQLi" scheme="http://yoursite.com/tags/SQLi/"/>
-    
       <category term="逻辑错误" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF/"/>
+    
+      <category term="SQLi" scheme="http://yoursite.com/tags/SQLi/"/>
     
   </entry>
   
