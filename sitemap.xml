@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/11/20/gongfu/</loc>
+    
+    <lastmod>2019-11-20T01:54:02.263Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/11/20/xianzhuozi/</loc>
+    
+    <lastmod>2019-11-20T00:44:54.997Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/09/30/hide-and-seek/</loc>
     
     <lastmod>2019-11-18T13:21:19.905Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/11/16/lottery/</loc>
+    
+    <lastmod>2019-11-18T13:21:19.891Z</lastmod>
     
   </url>
   
@@ -16,14 +37,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/11/17/PHP2/</loc>
-    
-    <lastmod>2019-11-18T13:21:19.891Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/11/16/lottery/</loc>
+    <loc>http://yoursite.com/2019/09/30/classic-cipher-1/</loc>
     
     <lastmod>2019-11-18T13:21:19.891Z</lastmod>
     
@@ -44,7 +58,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/09/30/classic-cipher-1/</loc>
+    <loc>http://yoursite.com/2019/11/17/PHP2/</loc>
     
     <lastmod>2019-11-18T13:21:19.891Z</lastmod>
     
