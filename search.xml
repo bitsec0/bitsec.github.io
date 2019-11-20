@@ -4,6 +4,83 @@
   
     
     <entry>
+      <title>glance-50</title>
+      <link href="/2019/11/20/glance-50/"/>
+      <url>/2019/11/20/glance-50/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-攻防世界-glance-50"><a href="#src-攻防世界-glance-50" class="headerlink" title="[src = 攻防世界] glance-50"></a>[src = 攻防世界] glance-50</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>下载得到一张gif 图片，先用工具分离。</p><ol><li><p>使用gif逐帧提取工具“gif分离器”分离得到200张图片，都是窄条；</p></li><li><p>KALI下的convert工具分离得到200张窄条图片：</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert glance.gif flag.png</span><br></pre></td></tr></table></figure><p>看来需要进行拼接，都是窄条，考虑横向拼接，使用KALI下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">montage flag*.png -tile x1 -geometry +0+0 flag.png</span><br></pre></td></tr></table></figure><p>其中：<br>-tile是拼接时每行和每列的图片数，这里用x1，就是只一行</p><p>-geometry是首选每个图和边框尺寸，我们边框为0，图照原始尺寸即可</p><p>拼接完成得到flag。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MISC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 信息隐藏 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>embarss &amp; Cephalopod</title>
+      <link href="/2019/11/20/embarss/"/>
+      <url>/2019/11/20/embarss/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-攻防世界-embarrass-amp-Cephalopod"><a href="#src-攻防世界-embarrass-amp-Cephalopod" class="headerlink" title="[src = 攻防世界] embarrass &amp; Cephalopod"></a>[src = 攻防世界] embarrass &amp; Cephalopod</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><h3 id="embarrass"><a href="#embarrass" class="headerlink" title="embarrass"></a>embarrass</h3><p>解压得到misc_02.pcapng。</p><ol><li><p>思路1：用wireshark打开，追踪TCP流，发现流数量很多，一直翻到第35个流，发现这个流是最大的，包含了8059个分组，可疑。将流保存为文本文件，然后使用查找功能，查找flag字符串，得到flag。</p></li><li><p>思路2：直接拿到linux下，对misc_02.pcapng进行字符串检索，得到flag。</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings misc_02.pcapng | grep flag</span><br></pre></td></tr></table></figure><p>其实还有更为直接对第三种方法，直接使用wireshark的字符串搜索功能，得到flag，如下图：</p><p><img src="./embrrass.PNG" alt="embarrass"></p><h3 id="Cephalopod"><a href="#Cephalopod" class="headerlink" title="Cephalopod"></a>Cephalopod</h3><p>同样得到pcapng文件。</p><ol><li><p>思路1：用wireshark打开，追踪TCP流，在第1流中发现flag.png.</p></li><li><p>思路2：直接拿到linux下，对misc_02.pcapng进行字符串检索，发现flag.png</p></li></ol><p>下一步找到flag.png图片。</p><ol><li><p>通过追踪流，然后利用十六进制编辑器保存数据得到图片，包含flag</p></li><li><p>使用tcpxtract 直接提取其中的图片，读取包含的flag。</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># tcpxtract -f 66b7f39d97364ca5a2f928a4e61b46ee.pcap</span></span><br></pre></td></tr></table></figure><p>如果没有安装，可以通过apt install tcpxtract安装即可。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MISC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 信息隐藏 </tag>
+            
+            <tag> Wireshark </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>getthekeytxt</title>
+      <link href="/2019/11/20/getthekeytxt/"/>
+      <url>/2019/11/20/getthekeytxt/</url>
+      
+        <content type="html"><![CDATA[<h2 id="src-攻防世界-Get-the-key-txt"><a href="#src-攻防世界-Get-the-key-txt" class="headerlink" title="[src = 攻防世界] Get-the-key.txt"></a>[src = 攻防世界] Get-the-key.txt</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>下载一个压缩包，解压得到forensic100。在KALI里面用file命令查看发现是一个文件系统。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># file forensic100 </span></span><br><span class="line">forensic100: Linux rev 1.0 ext2 filesystem data, UUID=0b92a753-7ec9-4b20-8c0b-79c1fa140869</span><br></pre></td></tr></table></figure><p>然后用strings命令发现大量类似flag的字符串。一个个试会累死的。也同时发现了很多txt文件，尝试分离这些文件。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads/output/zip<span class="comment"># binwalk forensic100 </span></span><br><span class="line"></span><br><span class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">0             0x0             Linux EXT filesystem, rev 1.0, ext2 filesystem data, UUID=0b92a753-7ec9-4b20-8c0b-79c1fa14fa14</span><br><span class="line">1049600       0x100400        gzip compressed data, has original file name: <span class="string">"key.txt"</span>, from Unix, last modified: 2014-10-01 06:00:52</span><br><span class="line">1050624       0x100800        gzip compressed data, has original file name: <span class="string">"key1.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br><span class="line">1051648       0x100C00        gzip compressed data, has original file name: <span class="string">"key10.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br><span class="line">1052672       0x101000        gzip compressed data, has original file name: <span class="string">"key100.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br><span class="line">1053696       0x101400        gzip compressed data, has original file name: <span class="string">"key101.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br><span class="line">1054720       0x101800        gzip compressed data, has original file name: <span class="string">"key102.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br><span class="line">1055744       0x101C00        gzip compressed data, has original file name: <span class="string">"key103.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br></pre></td></tr></table></figure><p>发现了大量分离的key文件,每一个里面都有大量flag。<br>根据题目提示，我们选择key.txt中的第一个flag提交成功。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MISC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 信息隐藏 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>crypto-info</title>
       <link href="/2019/11/20/crypto-info/"/>
       <url>/2019/11/20/crypto-info/</url>

