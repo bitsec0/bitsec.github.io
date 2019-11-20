@@ -8,9 +8,21 @@
       <link href="/2019/11/20/crypto-info/"/>
       <url>/2019/11/20/crypto-info/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>密码学在线解码网站收集<br> <a id="more"></a><br><a href="https://www.qqxiuzi.cn" target="_blank" rel="noopener">https://www.qqxiuzi.cn</a><br><a href="https://quipqiup.com/" target="_blank" rel="noopener">https://quipqiup.com/</a><br><a href="https://www.guballa.de/vigenere-solver" target="_blank" rel="noopener">https://www.guballa.de/vigenere-solver</a>  vigenere解密</p>]]></content>
       
       
+      <categories>
+          
+          <category> CRYPTO </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 密码学在线解码网站收集 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -474,11 +486,9 @@
             
             <tag> python </tag>
             
-            <tag> PWN </tag>
+            <tag> 栈溢出 </tag>
             
             <tag> ROP </tag>
-            
-            <tag> Overflow </tag>
             
         </tags>
       
@@ -502,8 +512,6 @@
       
       
         <tags>
-            
-            <tag> MISC </tag>
             
             <tag> regular expression </tag>
             
@@ -557,8 +565,6 @@
             
             <tag> python </tag>
             
-            <tag> RE </tag>
-            
         </tags>
       
     </entry>
@@ -585,8 +591,6 @@
             <tag> python </tag>
             
             <tag> IDA </tag>
-            
-            <tag> RE </tag>
             
         </tags>
       
@@ -615,8 +619,6 @@
             
             <tag> IDA </tag>
             
-            <tag> RE </tag>
-            
         </tags>
       
     </entry>
@@ -642,11 +644,9 @@
             
             <tag> nc </tag>
             
-            <tag> cat </tag>
-            
             <tag> python </tag>
             
-            <tag> stack overflow </tag>
+            <tag> 栈溢出 </tag>
             
         </tags>
       
@@ -672,8 +672,6 @@
         <tags>
             
             <tag> nc </tag>
-            
-            <tag> cat </tag>
             
         </tags>
       
@@ -860,7 +858,7 @@
       
         <tags>
             
-            <tag> 源码 </tag>
+            <tag> 代码审计 </tag>
             
         </tags>
       
@@ -914,7 +912,7 @@
             
             <tag> 古典密码 </tag>
             
-            <tag> substitution cipher </tag>
+            <tag> 替换密码 </tag>
             
             <tag> vigenere </tag>
             
@@ -943,7 +941,7 @@
             
             <tag> 古典密码 </tag>
             
-            <tag> substitution cipher </tag>
+            <tag> 替换密码 </tag>
             
         </tags>
       
@@ -995,9 +993,7 @@
       
         <tags>
             
-            <tag> 图片信息隐藏 </tag>
-            
-            <tag> 010 Editor </tag>
+            <tag> 信息隐藏 </tag>
             
         </tags>
       
@@ -1024,10 +1020,6 @@
             
             <tag> 信息隐藏 </tag>
             
-            <tag> pkcrack </tag>
-            
-            <tag> APCHPR </tag>
-            
         </tags>
       
     </entry>
@@ -1050,8 +1042,6 @@
       
       
         <tags>
-            
-            <tag> CRYPTO </tag>
             
             <tag> 凯撒 </tag>
             
@@ -1105,11 +1095,9 @@
       
         <tags>
             
-            <tag> 图片信息隐藏 </tag>
+            <tag> 信息隐藏 </tag>
             
             <tag> StegSolve </tag>
-            
-            <tag> MISC </tag>
             
         </tags>
       
