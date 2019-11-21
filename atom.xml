@@ -195,9 +195,9 @@
     <link href="http://yoursite.com/2019/11/18/giveyouflag/"/>
     <id>http://yoursite.com/2019/11/18/giveyouflag/</id>
     <published>2019-11-18T12:14:46.000Z</published>
-    <updated>2019-11-18T12:35:35.484Z</updated>
+    <updated>2019-11-21T02:16:01.962Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="src-攻防世界-give-you-flag"><a href="#src-攻防世界-give-you-flag" class="headerlink" title="[src = 攻防世界] give_you_flag"></a>[src = 攻防世界] give_you_flag</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>菜狗找到了文件中的彩蛋很开心，给菜猫发了个表情包<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>打开图片，发现似乎有个二维码。通过工具（gif分离器）将各帧分离。得到52张图片，其中第49张包含一个二维码，但是缺少了3个定位符。手动添加，扫码即可。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="src-攻防世界-give-you-flag"><a href="#src-攻防世界-give-you-flag" class="headerlink" title="[src = 攻防世界] give_you_flag"></a>[src = 攻防世界] give_you_flag</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>菜狗找到了文件中的彩蛋很开心，给菜猫发了个表情包<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><ol><li><p>打开图片，发现似乎有个二维码。通过工具（gif分离器）将各帧分离。得到52张图片，其中第49张包含一个二维码，但是缺少了3个定位符。手动添加，扫码即可。</p></li><li><p>使用KALI的命令进行分离，命令格式如下：</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert ggg.gif hh.jpg</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -255,9 +255,9 @@
       <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
     
     
-      <category term="逻辑错误" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF/"/>
-    
       <category term="SQLi" scheme="http://yoursite.com/tags/SQLi/"/>
+    
+      <category term="逻辑错误" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF/"/>
     
   </entry>
   
