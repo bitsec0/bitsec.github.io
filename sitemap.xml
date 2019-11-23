@@ -4,7 +4,7 @@
   <url>
     <loc>http://yoursite.com/2019/11/23/ptes1/</loc>
     
-    <lastmod>2019-11-23T07:34:18.788Z</lastmod>
+    <lastmod>2019-11-23T07:37:05.089Z</lastmod>
     
   </url>
   
@@ -128,14 +128,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/09/30/classic-cipher-1/</loc>
+    <loc>http://yoursite.com/2019/09/30/classic-cipher-2/</loc>
     
     <lastmod>2019-11-20T03:02:25.192Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/09/30/classic-cipher-2/</loc>
+    <loc>http://yoursite.com/2019/09/30/classic-cipher-1/</loc>
     
     <lastmod>2019-11-20T03:02:25.192Z</lastmod>
     
@@ -170,7 +170,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/11/17/PHP2/</loc>
+    <loc>http://yoursite.com/2019/11/16/cat/</loc>
+    
+    <lastmod>2019-11-18T13:21:19.891Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/10/09/ping/</loc>
     
     <lastmod>2019-11-18T13:21:19.891Z</lastmod>
     
@@ -184,7 +191,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/11/16/cat/</loc>
+    <loc>http://yoursite.com/2019/11/17/PHP2/</loc>
     
     <lastmod>2019-11-18T13:21:19.891Z</lastmod>
     
@@ -192,13 +199,6 @@
   
   <url>
     <loc>http://yoursite.com/2019/11/17/upload1/</loc>
-    
-    <lastmod>2019-11-18T13:21:19.891Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/10/09/ping/</loc>
     
     <lastmod>2019-11-18T13:21:19.891Z</lastmod>
     
