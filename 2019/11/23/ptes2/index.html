@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="源码泄露,渗透测试,后台弱口令,文件上传,WebShell,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="拿到题目，首先御剑扫描，发现后台地址，还有一个www.zip。  疑似源码泄露，下载www.zip。解压发现网站源码，浏览文件发现有一个flag.html。  直接访问页面会跳转，直接文本编辑器代开看源码得到第一个flag。  然后访问后台，用burp爆破密码。发现密码为password。  利用密码登陆后台，发现第二个flag。  查看后台，发现在网站配置里面有上传文件设置，还允许上传asp文件">
+<meta name="keywords" content="源码泄露,渗透测试,后台弱口令,文件上传,WebShell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ptes2">
+<meta property="og:url" content="http://yoursite.com/2019/11/23/ptes2/index.html">
+<meta property="og:site_name" content="BitSec&#39;s Blog">
+<meta property="og:description" content="拿到题目，首先御剑扫描，发现后台地址，还有一个www.zip。  疑似源码泄露，下载www.zip。解压发现网站源码，浏览文件发现有一个flag.html。  直接访问页面会跳转，直接文本编辑器代开看源码得到第一个flag。  然后访问后台，用burp爆破密码。发现密码为password。  利用密码登陆后台，发现第二个flag。  查看后台，发现在网站配置里面有上传文件设置，还允许上传asp文件">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes21.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes22.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes23.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes24.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes25.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes26.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes27.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes28.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes29.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes30.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes32.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes33.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes37.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes39.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes38.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes2/ptes40.PNG">
+<meta property="og:updated_time" content="2019-11-23T11:11:35.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ptes2">
+<meta name="twitter:description" content="拿到题目，首先御剑扫描，发现后台地址，还有一个www.zip。  疑似源码泄露，下载www.zip。解压发现网站源码，浏览文件发现有一个flag.html。  直接访问页面会跳转，直接文本编辑器代开看源码得到第一个flag。  然后访问后台，用burp爆破密码。发现密码为password。  利用密码登陆后台，发现第二个flag。  查看后台，发现在网站配置里面有上传文件设置，还允许上传asp文件">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/23/ptes2/ptes21.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/23/ptes2/">
+
+
+
+
+
+  <title>ptes2 | BitSec's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BitSec's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天道酬勤，厚德载物</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/23/ptes2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BitSec">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BitSec's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ptes2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-23T15:44:16+08:00">
+                2019-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PTES/" itemprop="url" rel="index">
+                    <span itemprop="name">PTES</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>拿到题目，首先御剑扫描，发现后台地址，还有一个<a href="http://www.zip。" target="_blank" rel="noopener">www.zip。</a></p>
+<p><img src="./ptes21.PNG" alt="ptes01"></p>
+<p>疑似源码泄露，下载<a href="http://www.zip。解压发现网站源码，浏览文件发现有一个flag.html。" target="_blank" rel="noopener">www.zip。解压发现网站源码，浏览文件发现有一个flag.html。</a></p>
+<p><img src="./ptes22.PNG" alt="ptes01"></p>
+<p>直接访问页面会跳转，直接文本编辑器代开看源码得到第一个flag。</p>
+<p><img src="./ptes23.PNG" alt="ptes01"></p>
+<p>然后访问后台，用burp爆破密码。发现密码为password。</p>
+<p><img src="./ptes24.PNG" alt="ptes01"></p>
+<p>利用密码登陆后台，发现第二个flag。</p>
+<p><img src="./ptes25.PNG" alt="ptes01"></p>
+<p>查看后台，发现在网站配置里面有上传文件设置，还允许上传asp文件</p>
+<p><img src="./ptes26.PNG" alt="ptes01"></p>
+<p>那就上传asp木马。如图</p>
+<p><img src="./ptes27.PNG" alt="ptes02"></p>
+<p>同样蚁剑连接，访问系统C盘根目录得到第三个flag。</p>
+<p><img src="./ptes28.PNG" alt="ptes02"></p>
+<p><img src="./ptes29.PNG" alt="ptes02"></p>
+<p>上面拿到webshell之后首先用虚拟终端看一下系统信息以及所拥有的权限。</p>
+<p><img src="./ptes30.PNG" alt="ptes02"></p>
+<p>通过蚁剑的虚拟终端，执行whoami发现仅仅是nt authority\network service权限，因此需要提权。通过systeminfo， netstat -ano等命令查看信息，如下：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">windows</span>\<span class="title">system32</span>\<span class="title">inetsrv</span>&gt; <span class="title">whoami</span></span></span><br><span class="line"><span class="function"><span class="title">nt</span> <span class="title">authority</span>\<span class="title">network</span> <span class="title">service</span></span></span><br><span class="line"><span class="function"><span class="title">c</span>:\<span class="title">windows</span>\<span class="title">system32</span>\<span class="title">inetsrv</span>&gt; <span class="title">systeminfo</span></span></span><br><span class="line"><span class="function">主机名:           <span class="title">HA_WEB2</span></span></span><br><span class="line"><span class="function"><span class="title">OS</span> 名称:          <span class="title">Microsoft</span>(<span class="title">R</span>) <span class="title">Windows</span>(<span class="title">R</span>) <span class="title">Server</span> 2003, <span class="title">Enterprise</span> <span class="title">Edition</span></span></span><br><span class="line"><span class="function"><span class="title">OS</span> 版本:          5.2.3790 <span class="title">Service</span> <span class="title">Pack</span> 2 <span class="title">Build</span> 3790</span></span><br><span class="line"><span class="function"><span class="title">OS</span> 制造商:        <span class="title">Microsoft</span> <span class="title">Corporation</span></span></span><br><span class="line"><span class="function"><span class="title">OS</span> 配置:          独立服务器</span></span><br><span class="line"><span class="function"><span class="title">OS</span> 构件类型:      <span class="title">Uniprocessor</span> <span class="title">Free</span></span></span><br><span class="line"><span class="function">注册的所有人:     <span class="title">Thinkpad</span></span></span><br><span class="line"><span class="function">注册的组织:       </span></span><br><span class="line"><span class="function">产品 <span class="title">ID</span>:          69813-640-9722366-45823</span></span><br><span class="line"><span class="function">初始安装日期:     2016-10-24, 8:57:06</span></span><br><span class="line"><span class="function">系统启动时间:     0 天 2 小时 1 分 5 秒</span></span><br><span class="line"><span class="function">系统制造商:       <span class="title">VMware</span>, <span class="title">Inc</span>.</span></span><br><span class="line"><span class="function">系统型号:         <span class="title">VMware</span> <span class="title">Virtual</span> <span class="title">Platform</span></span></span><br><span class="line"><span class="function">系统类型:         <span class="title">X86</span>-<span class="title">based</span> <span class="title">PC</span></span></span><br><span class="line"><span class="function">处理器:           安装了 1 个处理器。</span></span><br><span class="line"><span class="function">                  [01]: <span class="title">x86</span> <span class="title">Family</span> 6 <span class="title">Model</span> 142 <span class="title">Stepping</span> 11 <span class="title">GenuineIntel</span> ~1992 <span class="title">Mhz</span></span></span><br><span class="line"><span class="function"><span class="title">BIOS</span> 版本:        <span class="title">INTEL</span>  - 6040000</span></span><br><span class="line"><span class="function"><span class="title">Windows</span> 目录:     <span class="title">C</span>:\<span class="title">WINDOWS</span></span></span><br><span class="line"><span class="function">系统目录:         <span class="title">C</span>:\<span class="title">WINDOWS</span>\<span class="title">system32</span></span></span><br><span class="line"><span class="function">启动设备:         \<span class="title">Device</span>\<span class="title">HarddiskVolume1</span></span></span><br><span class="line"><span class="function">系统区域设置:     <span class="title">zh</span>-<span class="title">cn</span>;中文(中国)</span></span><br><span class="line"><span class="function">输入法区域设置:   <span class="title">zh</span>-<span class="title">cn</span>;中文(中国)</span></span><br><span class="line"><span class="function">时区:             (<span class="title">GMT</span>+08:00) 北京，重庆，香港特别行政区，乌鲁木齐</span></span><br><span class="line"><span class="function">物理内存总量:     1,023 <span class="title">MB</span></span></span><br><span class="line"><span class="function">可用的物理内存:   773 <span class="title">MB</span></span></span><br><span class="line"><span class="function">页面文件: 最大值: 1,510 <span class="title">MB</span></span></span><br><span class="line"><span class="function">页面文件: 可用:   1,356 <span class="title">MB</span></span></span><br><span class="line"><span class="function">页面文件: 使用中: 154 <span class="title">MB</span></span></span><br><span class="line"><span class="function">页面文件位置:     <span class="title">C</span>:\<span class="title">pagefile.sys</span></span></span><br><span class="line"><span class="function">域:               <span class="title">WORKGROUP</span></span></span><br><span class="line"><span class="function">登录服务器:       暂缺</span></span><br><span class="line"><span class="function">修补程序:         安装了 1 个修补程序。</span></span><br><span class="line"><span class="function">                  [01]: <span class="title">Q147222</span></span></span><br><span class="line"><span class="function">网卡:             暂缺</span></span><br><span class="line"><span class="function"><span class="title">c</span>:\<span class="title">windows</span>\<span class="title">system32</span>\<span class="title">inetsrv</span>&gt; <span class="title">netstat</span> -<span class="title">ano</span></span></span><br><span class="line"><span class="function"><span class="title">Active</span> <span class="title">Connections</span></span></span><br><span class="line"><span class="function">  <span class="title">Proto</span>  <span class="title">Local</span> <span class="title">Address</span>          <span class="title">Foreign</span> <span class="title">Address</span>        <span class="title">State</span>           <span class="title">PID</span></span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:21             0.0.0.0:0              <span class="title">LISTENING</span>       1256</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:80             0.0.0.0:0              <span class="title">LISTENING</span>       4</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:135            0.0.0.0:0              <span class="title">LISTENING</span>       692</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:445            0.0.0.0:0              <span class="title">LISTENING</span>       4</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:1025           0.0.0.0:0              <span class="title">LISTENING</span>       436</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    0.0.0.0:3389           0.0.0.0:0              <span class="title">LISTENING</span>       1752</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    127.0.0.1:43958        0.0.0.0:0              <span class="title">LISTENING</span>       1256</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9032       <span class="title">TIME_WAIT</span>       0</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9034       <span class="title">TIME_WAIT</span>       0</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9035       <span class="title">TIME_WAIT</span>       0</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9043       <span class="title">TIME_WAIT</span>       0</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9045       <span class="title">TIME_WAIT</span>       0</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:80       192.168.1.1:9046       <span class="title">ESTABLISHED</span>     4</span></span><br><span class="line"><span class="function">  <span class="title">TCP</span>    192.168.1.241:139      0.0.0.0:0              <span class="title">LISTENING</span>       4</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    0.0.0.0:445            *:*                                    4</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    0.0.0.0:500            *:*                                    436</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    0.0.0.0:1026           *:*                                    752</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    0.0.0.0:4500           *:*                                    436</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    127.0.0.1:123          *:*                                    780</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    127.0.0.1:1027         *:*                                    780</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    192.168.1.241:123      *:*                                    780</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    192.168.1.241:137      *:*                                    4</span></span><br><span class="line"><span class="function">  <span class="title">UDP</span>    192.168.1.241:138      *:*                                    4</span></span><br></pre></td></tr></table></figure>
+
+<p>发现开启了3389端口，gihub上面找的ms11-046的exp（包含MS11_46_k8.exe和ms11-046.exe两个程序）。<br>exp地址：<a href="https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS11-046" target="_blank" rel="noopener">https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS11-046</a><br>用蚁剑上传失败，换成中国菜刀上传，上传成功：</p>
+<p><img src="./ptes32.PNG" alt="ptes02"></p>
+<p>先运行MS11_46_k8.exe，可以看到成功创建了一个k8team/k8team的用户：</p>
+<p><img src="./ptes33.PNG" alt="ptes02"></p>
+<p>用远程桌面连接目标服务器。可以使用Windows自带的远程桌面连接，我们使用KALI下的rdesktop命令进行远程连接，如下：</p>
+<p><img src="./ptes37.PNG" alt="ptes02"></p>
+<p>进入执行执行第二个exp程序MS11_46_k8.exe，如下：</p>
+<p><img src="./ptes39.PNG" alt="ptes02"></p>
+<p>然后通过whoami查看，发现已经是system权限。直接使用dir C:\admin.txt /s /b 命令（该命令用于查找C盘下所有对amdin.txt文件）查找admin.txt文件的位置。</p>
+<p><img src="./ptes38.PNG" alt="ptes02"></p>
+<p>然后到相应的位置查看该文件得到flag。</p>
+<p><img src="./ptes40.PNG" alt="ptes02"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/源码泄露/" rel="tag"># 源码泄露</a>
+          
+            <a href="/tags/渗透测试/" rel="tag"># 渗透测试</a>
+          
+            <a href="/tags/后台弱口令/" rel="tag"># 后台弱口令</a>
+          
+            <a href="/tags/文件上传/" rel="tag"># 文件上传</a>
+          
+            <a href="/tags/WebShell/" rel="tag"># WebShell</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/23/ptes1/" rel="next" title="ptes1">
+                <i class="fa fa-chevron-left"></i> ptes1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">BitSec</p>
+              <p class="site-description motion-element" itemprop="description">天道酬勤，厚德载物</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/bitsec0" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:bitsec@aliyun.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://skysec.top" title="一叶飘零" target="_blank">一叶飘零</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://pupiles.com/" title="Pupil" target="_blank">Pupil</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cyto.top/" title="Cytosine" target="_blank">Cytosine</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BitSec</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
