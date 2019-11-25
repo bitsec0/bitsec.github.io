@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="修改HTTP头的方法 使用浏览器插件，比如Firefox的Tamper Data。如图：    CURL（KALI内置）添加修改头部信息，比如添加文件头：  1root@kali:~# curl -H &apos;x-Forwarded-For: 123.123.123.123&apos; -H &apos;referer: https://www.google.com&apos; http://111.198.29.45/  添加Re">
+<meta name="description" content="修改HTTP头的方法 使用浏览器插件，比如Firefox的Tamper Data。如图：    CURL（KALI内置）添加修改头部信息，比如添加文件头：  1root@kali:~# curl -H &apos;x-Forwarded-For: 123.123.123.123&apos; -H &apos;referer: https://www.google.com&apos; http://111.198.29.45/   添加R">
 <meta name="keywords" content="HTTP,HEADER">
 <meta property="og:type" content="article">
 <meta property="og:title" content="http-header">
 <meta property="og:url" content="http://yoursite.com/2019/11/18/http-header/index.html">
 <meta property="og:site_name" content="BitSec&#39;s Blog">
-<meta property="og:description" content="修改HTTP头的方法 使用浏览器插件，比如Firefox的Tamper Data。如图：    CURL（KALI内置）添加修改头部信息，比如添加文件头：  1root@kali:~# curl -H &apos;x-Forwarded-For: 123.123.123.123&apos; -H &apos;referer: https://www.google.com&apos; http://111.198.29.45/  添加Re">
+<meta property="og:description" content="修改HTTP头的方法 使用浏览器插件，比如Firefox的Tamper Data。如图：    CURL（KALI内置）添加修改头部信息，比如添加文件头：  1root@kali:~# curl -H &apos;x-Forwarded-For: 123.123.123.123&apos; -H &apos;referer: https://www.google.com&apos; http://111.198.29.45/   添加R">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/11/18/http-header/httpheader1.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/11/18/http-header/httpheader2.PNG">
-<meta property="og:updated_time" content="2019-11-21T05:44:57.631Z">
+<meta property="og:updated_time" content="2019-11-25T03:23:09.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http-header">
-<meta name="twitter:description" content="修改HTTP头的方法 使用浏览器插件，比如Firefox的Tamper Data。如图：    CURL（KALI内置）添加修改头部信息，比如添加文件头：  1root@kali:~# curl -H &apos;x-Forwarded-For: 123.123.123.123&apos; -H &apos;referer: https://www.google.com&apos; http://111.198.29.45/  添加Re">
+<meta name="twitter:description" content="修改HTTP头的方法 使用浏览器插件，比如Firefox的Tamper Data。如图：    CURL（KALI内置）添加修改头部信息，比如添加文件头：  1root@kali:~# curl -H &apos;x-Forwarded-For: 123.123.123.123&apos; -H &apos;referer: https://www.google.com&apos; http://111.198.29.45/   添加R">
 <meta name="twitter:image" content="http://yoursite.com/2019/11/18/http-header/httpheader1.PNG">
 
 
@@ -356,20 +356,19 @@
 
       
         <h2 id="修改HTTP头的方法"><a href="#修改HTTP头的方法" class="headerlink" title="修改HTTP头的方法"></a>修改HTTP头的方法</h2><ol>
-<li>使用浏览器插件，比如Firefox的Tamper Data。如图：</li>
-</ol>
-<p><img src="./httpheader1.PNG" alt="http-head"></p>
-<ol start="2">
-<li>CURL（KALI内置）添加修改头部信息，比如添加文件头：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># curl -H 'x-Forwarded-For: 123.123.123.123' -H 'referer: https://www.google.com' http://111.198.29.45/</span></span><br></pre></td></tr></table></figure>
+<li><p>使用浏览器插件，比如Firefox的Tamper Data。如图：</p>
+<p> <img src="./httpheader1.PNG" alt="http-head"></p>
+</li>
+<li><p>CURL（KALI内置）添加修改头部信息，比如添加文件头：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># curl -H 'x-Forwarded-For: 123.123.123.123' -H 'referer: https://www.google.com' http://111.198.29.45/</span></span><br></pre></td></tr></table></figure>
 
-<p>添加Referrer头可以直接使用-e参数，所以上面的命令可以等同于</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># curl -H 'x-Forwarded-For: 123.123.123.123' -e 'https://www.google.com' http://111.198.29.45/</span></span><br></pre></td></tr></table></figure>
+<p> 添加Referrer头可以直接使用-e参数，所以上面的命令可以等同于</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># curl -H 'x-Forwarded-For: 123.123.123.123' -e 'https://www.google.com' http://111.198.29.45/</span></span><br></pre></td></tr></table></figure>
 
-<p>关于CURL使用参考：<a href="https://catonmat.net/cookbooks/curl" target="_blank" rel="noopener">https://catonmat.net/cookbooks/curl</a></p>
-<ol start="3">
-<li>基于Burp抓包修改：</li>
+<p> 关于CURL使用参考：<a href="https://catonmat.net/cookbooks/curl" target="_blank" rel="noopener">https://catonmat.net/cookbooks/curl</a></p>
+</li>
+<li><p>基于Burp抓包修改：</p>
+</li>
 </ol>
 <p><img src="./httpheader2.PNG" alt="http-head"></p>
 
@@ -515,7 +514,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

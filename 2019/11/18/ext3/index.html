@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="BitSec&#39;s Blog">
 <meta property="og:description" content="[src = 攻防世界] ext3题目描述今天是菜狗的生日，他收到了一个linux系统光盘">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-21T05:44:52.049Z">
+<meta property="og:updated_time" content="2019-11-25T03:23:09.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ext3">
 <meta name="twitter:description" content="[src = 攻防世界] ext3题目描述今天是菜狗的生日，他收到了一个linux系统光盘">
@@ -354,26 +354,25 @@
       
         <h2 id="src-攻防世界-ext3"><a href="#src-攻防世界-ext3" class="headerlink" title="[src = 攻防世界] ext3"></a>[src = 攻防世界] ext3</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>今天是菜狗的生日，他收到了一个linux系统光盘<br> <a id="more"></a></p>
 <h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>将下载附件放到linux系统查看file格式，如下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># file 630a886233764ec2a63f305f318c8baa </span></span><br><span class="line">630a886233764ec2a63f305f318c8baa: Linux rev 1.0 ext3 filesystem data, UUID=cf6d7bff-c377-403f-84ae-956ce3c99aaa</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># file 630a886233764ec2a63f305f318c8baa</span></span><br><span class="line">630a886233764ec2a63f305f318c8baa: Linux rev 1.0 ext3 filesystem data, UUID=cf6d7bff-c377-403f-84ae-956ce3c99aaa</span><br></pre></td></tr></table></figure>
 
 <p>再strings查看一下有没有flag这样的字符串：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># strings 630a886233764ec2a63f305f318c8baa |grep flag</span></span><br><span class="line">.flag.txt.swp</span><br><span class="line">flag.txtt.swx</span><br><span class="line">~root/Desktop/file/O7avZhikgKgbF/flag.txt</span><br><span class="line">.flag.txt.swp</span><br><span class="line">flag.txtt.swx</span><br><span class="line">.flag.txt.swp</span><br><span class="line">flag.txtt.swx</span><br></pre></td></tr></table></figure>
 
 <p>flag应该在flag.txt中。</p>
 <ol>
-<li>挂载光盘：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># mount 630a886233764ec2a63f305f318c8baa /mnt</span></span><br><span class="line">root@kali:~/Downloads<span class="comment"># cd /mnt</span></span><br><span class="line">root@kali:/mnt<span class="comment"># ls</span></span><br><span class="line">02CdWGSxGPX.bin  0Xs    4A           8HhWfV9nK1  gtj        i             KxEQM           LvuGM       n              OOoOs      Q          rhZE1LZ6g   SPaK8l2sYN</span><br><span class="line">0GY1l            1      6JR3         8nwg        h          imgLDPt4BY    LG6F            lWIRfzP     NgzQPW         orcA       qkCN8      Ruc9        SrZznhSAj</span><br><span class="line">0h3a5            2X     6wUaZE1vbsW  8RxQG4bvd   H          ix1EMRHRpIc2  Lh              m           Nv             oSx2p      QmUY1d     RZTOGd      t</span><br><span class="line">0l               3      7H7geLlS5    FinD        H2Zj8FNbu  j6uLMX        LlC6Z0zrgy.bin  m9V0lIaElz  o              OT         QQY3sF63w  scripts     T</span><br><span class="line">0qsd             3J     8A2MFawD4    fm          hdi7       jE            LO0J8           MiU         O7avZhikgKgbF  poiuy7Xdb  r          sdb.cramfs  TFGVOSwYd.txt</span><br><span class="line">0wDq5            44aAm  8DQFirm0D    g           hYuPvID    jj            lost+found      Mnuc        o8             px6u       Raf3SYj    sn</span><br><span class="line">root@kali:/mnt<span class="comment"># cd O7avZhikgKgbF/</span></span><br><span class="line">root@kali:/mnt/O7avZhikgKgbF<span class="comment"># ls</span></span><br><span class="line">flag.txt</span><br><span class="line">root@kali:/mnt/O7avZhikgKgbF<span class="comment"># cat flag.txt</span></span><br><span class="line">ZmxhZ3tzYWpiY2lienNrampjbmJoc2J2Y2pianN6Y3N6Ymt6an0=</span><br></pre></td></tr></table></figure>
+<li><p>挂载光盘：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># mount 630a886233764ec2a63f305f318c8baa /mnt</span></span><br><span class="line">root@kali:~/Downloads<span class="comment"># cd /mnt</span></span><br><span class="line">root@kali:/mnt<span class="comment"># ls</span></span><br><span class="line">02CdWGSxGPX.bin  0Xs    4A           8HhWfV9nK1  gtj        i             KxEQM           LvuGM       n              OOoOs      Q          rhZE1LZ6g   SPaK8l2sYN</span><br><span class="line">0GY1l            1      6JR3         8nwg        h          imgLDPt4BY    LG6F            lWIRfzP     NgzQPW         orcA       qkCN8      Ruc9        SrZznhSAj</span><br><span class="line">0h3a5            2X     6wUaZE1vbsW  8RxQG4bvd   H          ix1EMRHRpIc2  Lh              m           Nv             oSx2p      QmUY1d     RZTOGd      t</span><br><span class="line">0l               3      7H7geLlS5    FinD        H2Zj8FNbu  j6uLMX        LlC6Z0zrgy.bin  m9V0lIaElz  o              OT         QQY3sF63w  scripts     T</span><br><span class="line">0qsd             3J     8A2MFawD4    fm          hdi7       jE            LO0J8           MiU         O7avZhikgKgbF  poiuy7Xdb  r          sdb.cramfs  TFGVOSwYd.txt</span><br><span class="line">0wDq5            44aAm  8DQFirm0D    g           hYuPvID    jj            lost+found      Mnuc        o8             px6u       Raf3SYj    sn</span><br><span class="line">root@kali:/mnt<span class="comment"># cd O7avZhikgKgbF/</span></span><br><span class="line">root@kali:/mnt/O7avZhikgKgbF<span class="comment"># ls</span></span><br><span class="line">flag.txt</span><br><span class="line">root@kali:/mnt/O7avZhikgKgbF<span class="comment"># cat flag.txt</span></span><br><span class="line">ZmxhZ3tzYWpiY2lienNrampjbmJoc2J2Y2pianN6Y3N6Ymt6an0=</span><br></pre></td></tr></table></figure>
 
-<p>一串base64，解码即可得到flag。</p>
-<ol start="2">
-<li>使用binwalk命令提取文件：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># binwalk -e 630a886233764ec2a63f305f318c8baa</span></span><br></pre></td></tr></table></figure>
+<p> 一串base64，解码即可得到flag。</p>
+</li>
+<li><p>使用binwalk命令提取文件：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Downloads<span class="comment"># binwalk -e 630a886233764ec2a63f305f318c8baa</span></span><br></pre></td></tr></table></figure>
 
-<p>找到flag.txt，发现base64编码，I解码得到flag。</p>
-<ol start="3">
-<li>直接将文件后缀改为zip，解压，找到flag.txt，发现base64编码，I解码得到flag。</li>
+<p> 找到flag.txt，发现base64编码，I解码得到flag。</p>
+</li>
+<li><p>直接将文件后缀改为zip，解压，找到flag.txt，发现base64编码，I解码得到flag。</p>
+</li>
 </ol>
 
       
@@ -516,7 +515,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

