@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-25T03:23:09.550Z</updated>
+  <updated>2019-11-29T03:01:53.853Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ctf-practice-site</title>
+    <link href="http://yoursite.com/2019/11/29/ctf-practice-site/"/>
+    <id>http://yoursite.com/2019/11/29/ctf-practice-site/</id>
+    <published>2019-11-29T02:53:01.000Z</published>
+    <updated>2019-11-29T03:01:53.853Z</updated>
+    
+    <content type="html"><![CDATA[<img src="/2019/11/29/ctf-practice-site/ctf.PNG" title="CTF image">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;img src=&quot;/2019/11/29/ctf-practice-site/ctf.PNG&quot; title=&quot;CTF image&quot;&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+      <category term="CTF" scheme="http://yoursite.com/tags/CTF/"/>
+    
+  </entry>
   
   <entry>
     <title>ptes2</title>
@@ -505,29 +530,6 @@
     
     
       <category term="爆破" scheme="http://yoursite.com/tags/%E7%88%86%E7%A0%B4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cat</title>
-    <link href="http://yoursite.com/2019/11/16/cat/"/>
-    <id>http://yoursite.com/2019/11/16/cat/</id>
-    <published>2019-11-16T03:43:40.000Z</published>
-    <updated>2019-11-18T13:21:19.891Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="src-攻防世界-cat"><a href="#src-攻防世界-cat" class="headerlink" title="[src = 攻防世界] cat"></a>[src = 攻防世界] cat</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>抓住那只猫<br> <a id="more"></a></p><h3 id="WP"><a href="#WP" class="headerlink" title="WP"></a>WP</h3><p>首先按照题目要求，输入一个任意域名，发现没有反应，输入一个IP地址，显示了PING命令对结果。初步考虑命令执行。<br>输入“127.0.0.1|ls”，提示“Invalid URL”，看来增加了过滤，直接执行命令不可行。</p><p>在URL的传参处?url=这里，我们传递个%79发现传递之后变成了?url=w，看来是可以传递url编码，系统会接受并进行解析，于是我们传递%80会出现报错，url编码使用的是16进制，80也就是128，ASCII码是从0-127，所以这个时候会报错。url编码表可以参考<a href="http://www.w3school.com.cn/tags/html_ref_urlencode.html" target="_blank" rel="noopener">http://www.w3school.com.cn/tags/html_ref_urlencode.html</a></p><p>在报错信息里面发现这个应用的整体架构：我们给php发出请求，php把请求发送给本地部署的django，然后得到结果。而且从报错页面发现了database信息：/opt/api/database.sqlite3</p><p>由于django本地部署，而且php使用的cURL组件，所以这里，我们使用前面讲的php的cURL文件上传，但需要以@开头。</p><p><img src="./cat1.png" alt="cat"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?url=@/opt/api/database.sqlite3</span><br></pre></td></tr></table></figure><p>然后在报错也没搜索CTF得到flag。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;src-攻防世界-cat&quot;&gt;&lt;a href=&quot;#src-攻防世界-cat&quot; class=&quot;headerlink&quot; title=&quot;[src = 攻防世界] cat&quot;&gt;&lt;/a&gt;[src = 攻防世界] cat&lt;/h2&gt;&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;抓住那只猫&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
-    
-    
-      <category term="编码" scheme="http://yoursite.com/tags/%E7%BC%96%E7%A0%81/"/>
     
   </entry>
   
